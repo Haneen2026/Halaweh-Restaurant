@@ -28,7 +28,7 @@ const content = {
         isActive: true,
         dishes: [
           {
-            name: "الكبسة",
+            name: "الكبسة السعودية",
             image: "assests/kabsa.jpg",
             ingredients: ["أرز بسمتي", "لحم ضأن طري", "خضار مشوي", "بهارات عربية"]
           },
@@ -38,12 +38,12 @@ const content = {
             ingredients: ["لحم ضأن", "أرز مطبوخ", "لبن عربي", "مكسرات محمصة"]
           },
           {
-            name: "شاورما",
+            name: "الشاورما السورية",
             image: "assests/shawarma.jpg",
             ingredients: ["لحم مشوي", "خضار طازجة", "خبز عربي", "صلصة الطحينة"]
           },
           {
-            name: "البرياني",
+            name: "البرياني الهندي",
             image: "assests/biryani.jpg",
             ingredients: ["أرز بسمتي", "دجاج طري", "خضار موسمية", "توابل هندية"]
           },
@@ -63,17 +63,17 @@ const content = {
             ingredients: ["سمك طازج", "ليمون", "ثوم", "زيت زيتون"]
           },
           {
-            name: "كباب تركي",
+            name: "الكرزية التركية",
             image: "assests/turkish-kebab.jpg",
             ingredients: ["لحم ضأن", "بصل", "فلفل", "توابل تركية"]
           },
           {
-            name: "الملوخية",
+            name: "الملوخية المصرية",
             image: "assests/mulukhiyah.jpg",
             ingredients: ["ملوخية", "دجاج", "ثوم", "كمون"]
           },
           {
-            name: "فاصولياء",
+            name: "الفاصولياء اللبنانية",
             image: "assests/lebanese-beans.jpg",
             ingredients: ["فاصولياء حمراء", "طحينة", "ليمون", "ثوم"]
           },
@@ -105,12 +105,12 @@ const content = {
             ingredients: ["سمك طازج", "ليمون", "ثوم", "زيت زيتون"]
           },
           {
-            name: "كباب تركي",
+            name: "الكرزية التركية",
             image: "assests/turkish-kebab.jpg",
             ingredients: ["لحم ضأن", "بصل", "فلفل", "توابل تركية"]
           },
           {
-            name: "فاصولياء",
+            name: "الفاصولياء اللبنانية",
             image: "assests/lebanese-beans.jpg",
             ingredients: ["فاصولياء حمراء", "طحينة", "ليمون", "ثوم"]
           },
@@ -135,7 +135,7 @@ const content = {
             ingredients: ["عجينة", "جبنة", "لحم", "خضار"]
           },
           {
-            name: "مقلوبة",
+            name: "المقلوبة الفلسطينية",
             image: "assests/maqluba.jpg",
             ingredients: ["أرز", "باذنجان", "لحم", "مكسرات"]
           },
@@ -189,17 +189,17 @@ const content = {
             ingredients: ["عجينة كنافة", "جبنة طرية", "قطر", "فستق"]
           },
           {
-            name: "البقلاوة",
+            name: "البقلاوة التركية",
             image: "assests/baklava.jpg",
             ingredients: ["فستق", "عسل", "زبدة", "عجينة رقاق"]
           },
           {
-            name: "المعمول",
+            name: "المعمول العراقي",
             image: "assests/maamoul.jpg",
             ingredients: ["دقيق", "سمن", "تمر", "فستق"]
           },
           {
-            name: "القطايف",
+            name: "القطايف المصرية",
             image: "assests/qatayef.jpg",
             ingredients: ["قطايف", "جبنة", "قطر", "فستق مطحون"]
           },
@@ -247,7 +247,7 @@ const content = {
         isActive: true,
         dishes: [
           {
-            name: "Kabsa",
+            name: "Saudi Kabsa",
             image: "assests/kabsa.jpg",
             ingredients: ["Basmati rice", "Tender lamb", "Roasted vegetables", "Arabic spices"]
           },
@@ -257,12 +257,12 @@ const content = {
             ingredients: ["Lamb meat", "Cooked rice", "Arabic yogurt", "Roasted nuts"]
           },
           {
-            name: "Shawarma",
+            name: "Syrian Shawarma",
             image: "assests/shawarma.jpg",
             ingredients: ["Grilled meat", "Fresh vegetables", "Arabic bread", "Tahini sauce"]
           },
           {
-            name: "Biryani",
+            name: "Indian Biryani",
             image: "assests/biryani.jpg",
             ingredients: ["Basmati rice", "Tender chicken", "Seasonal vegetables", "Indian spices"]
           },
@@ -287,12 +287,12 @@ const content = {
             ingredients: ["Lamb meat", "Onions", "Peppers", "Turkish spices"]
           },
           {
-            name: "Mulukhiyah",
+            name: "Egyptian Mulukhiyah",
             image: "assests/mulukhiyah.jpg",
             ingredients: ["Mulukhiyah leaves", "Chicken", "Garlic", "Cumin"]
           },
           {
-            name: "Beans",
+            name: "Lebanese Beans",
             image: "assests/lebanese-beans.jpg",
             ingredients: ["Red beans", "Tahini", "Lemon", "Garlic"]
           },
@@ -309,7 +309,7 @@ const content = {
         isActive: false,
         dishes: [
           {
-            name: "Kabsa",
+            name: "Chicken Kabsa",
             image: "assests/chicken-kabsa.jpg",
             ingredients: ["Grilled chicken", "Basmati rice", "Fresh vegetables", "Arabic spices"]
           },
@@ -329,7 +329,7 @@ const content = {
             ingredients: ["Lamb meat", "Onions", "Peppers", "Turkish spices"]
           },
           {
-            name: "Beans",
+            name: "Lebanese Beans",
             image: "assests/lebanese-beans.jpg",
             ingredients: ["Red beans", "Tahini", "Lemon", "Garlic"]
           },
@@ -354,7 +354,7 @@ const content = {
             ingredients: ["Dough", "Cheese", "Meat", "Vegetables"]
           },
           {
-            name: "Maqluba",
+            name: "Palestinian Maqluba",
             image: "assests/maqluba.jpg",
             ingredients: ["Rice", "Eggplant", "Meat", "Nuts"]
           },
@@ -408,17 +408,17 @@ const content = {
             ingredients: ["Knafa dough", "Soft cheese", "Syrup", "Pistachios"]
           },
           {
-            name: "Baklava",
+            name: "Turkish Baklava",
             image: "assests/baklava.jpg",
             ingredients: ["Pistachios", "Honey", "Butter", "Phyllo dough"]
           },
           {
-            name: "Maamoul",
+            name: "Iraqi Maamoul",
             image: "assests/maamoul.jpg",
             ingredients: ["Flour", "Clarified butter", "Dates", "Pistachios"]
           },
           {
-            name: "Qatayef",
+            name: "Egyptian Qatayef",
             image: "assests/qatayef.jpg",
             ingredients: ["Qatayef pancakes", "Cheese", "Syrup", "Ground pistachios"]
           },
