@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مطعم ومقهى عربي - Arabic Restaurant & Cafe</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=3">
     <link rel="icon" href="assests/Ar.png" type="image/png">
 </head>
 <body>
@@ -73,6 +73,27 @@
         </div>
     </section>
 
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <div class="team-header">
+                <h2 class="section-title" data-key="teamTitle"></h2>
+                <p class="team-subtitle" data-key="teamSubtitle"></p>
+            </div>
+            <div class="team-carousel-container">
+                <div class="team-carousel" id="teamCarousel">
+                    <div class="team-carousel-track" id="teamCarouselTrack">
+                        <!-- Team members will be populated by JavaScript -->
+                    </div>
+                </div>
+                <div class="team-carousel-nav">
+                    <button class="team-carousel-btn prev-btn" id="teamPrevBtn">‹</button>
+                    <button class="team-carousel-btn next-btn" id="teamNextBtn">›</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact">
         <div class="container">
@@ -95,7 +116,7 @@
     </section>
 
     <!-- Scripts -->
-    <script src="content.js?v=2"></script>
-    <script src="script.js?v=2"></script>
+    <script src="content.js?v=3"></script>
+    <script src="script.js?v=3"></script>
 </body>
 </html>

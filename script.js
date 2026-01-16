@@ -28,9 +28,12 @@ class LanguageManager {
         this.updateContent();
         this.updateDirection();
         this.updateLogo();
+        this.updateTeamCarouselArrows();
+        this.initializeTeamCarousel();
         setTimeout(() => {
             this.matchVideoHeight();
             this.matchAboutImageHeight();
+            this.matchTeamImageHeight();
         }, 200);
     }
 
@@ -93,7 +96,11 @@ class LanguageManager {
 
         // Populate menu showcase
         this.populateMenuShowcase();
-        
+
+        // Populate team section
+        this.populateTeam();
+        this.updateTeamCarouselArrows();
+
         // Match video height after content update
         setTimeout(() => {
             this.matchVideoHeight();
@@ -165,6 +172,148 @@ class LanguageManager {
 
         this.bindMenuShowcaseEvents();
         setTimeout(() => this.updateCarouselButtons(), 100);
+    }
+
+    populateTeam() {
+        const teamCarouselTrack = document.getElementById('teamCarouselTrack');
+        if (!teamCarouselTrack) {
+            console.error('Team carousel track not found!');
+            return;
+        }
+
+        const teamMembers = content[this.currentLanguage].teamMembers;
+        console.log('Populating team with', teamMembers.length, 'members in language:', this.currentLanguage);
+        teamCarouselTrack.innerHTML = '';
+
+        teamMembers.forEach(member => {
+            const memberCard = document.createElement('div');
+            memberCard.className = 'team-card';
+            memberCard.innerHTML = `
+                <div class="team-image-container">
+                    <img src="${member.image}" alt="${member.name}" class="team-image">
+                    ${member.award ? `<div class="team-award">${member.award}</div>` : ''}
+                </div>
+                <div class="team-info">
+                    <h3 class="team-name">${member.name}</h3>
+                    <p class="team-role">${member.role}</p>
+                    <p class="team-bio">${member.bio}</p>
+                </div>
+            `;
+            teamCarouselTrack.appendChild(memberCard);
+        });
+
+        console.log('Team cards created:', document.querySelectorAll('.team-card').length);
+        this.bindTeamCarouselEvents();
+        this.initializeTeamCarousel();
+    }
+
+    updateTeamCarouselArrows() {
+        const prevBtn = document.getElementById('teamPrevBtn');
+        const nextBtn = document.getElementById('teamNextBtn');
+
+        if (prevBtn && nextBtn) {
+            prevBtn.textContent = this.currentLanguage === 'ar' ? '›' : '‹';
+            nextBtn.textContent = this.currentLanguage === 'ar' ? '‹' : '›';
+        }
+    }
+
+    bindTeamCarouselEvents() {
+        const prevBtn = document.getElementById('teamPrevBtn');
+        const nextBtn = document.getElementById('teamNextBtn');
+
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => this.navigateTeamCarousel('prev'));
+        }
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => this.navigateTeamCarousel('next'));
+        }
+    }
+
+    initializeTeamCarousel() {
+        const track = document.getElementById('teamCarouselTrack');
+        if (track) {
+            track.style.transform = 'translateX(0)';
+        }
+        this.updateTeamCarouselButtons();
+    }
+
+    navigateTeamCarousel(direction) {
+        console.log('navigateTeamCarousel called with direction:', direction);
+        const track = document.getElementById('teamCarouselTrack');
+        const cards = document.querySelectorAll('.team-card');
+        const isRTL = document.documentElement.getAttribute('dir') === 'rtl';
+
+        console.log('Track found:', !!track, 'Cards found:', cards.length, 'isRTL:', isRTL);
+
+        if (!track || cards.length === 0) {
+            console.error('Track or cards not found');
+            return;
+        }
+
+        const cardWidth = cards[0].offsetWidth + 32; // 32px gap
+        const visibleCards = 3; // Show 3 cards at a time on desktop
+        const scrollAmount = cardWidth * visibleCards;
+
+        console.log('Card width:', cardWidth, 'Scroll amount:', scrollAmount);
+
+        // Get current position (how many sets of 3 cards we've scrolled)
+        let currentPosition = 0;
+        if (track.style.transform) {
+            const transformValue = parseFloat(track.style.transform.match(/translateX\(([^)]+)\)/)[1]);
+            currentPosition = Math.abs(transformValue) / scrollAmount;
+            console.log('Current transform:', transformValue, 'Current position:', currentPosition);
+        }
+
+        if (direction === 'next') {
+            // Calculate max position (total cards - cards to show, divided by cards per scroll)
+            const maxPosition = Math.ceil(cards.length / visibleCards) - 1;
+            currentPosition = Math.min(currentPosition + 1, maxPosition);
+            console.log('Moving next, max position:', maxPosition, 'new position:', currentPosition);
+        } else {
+            currentPosition = Math.max(currentPosition - 1, 0);
+            console.log('Moving prev, new position:', currentPosition);
+        }
+
+        // In RTL, we need to reverse the direction of movement
+        const translateX = isRTL ? (currentPosition * scrollAmount) : -(currentPosition * scrollAmount);
+        console.log('Final translateX:', translateX);
+        track.style.transform = `translateX(${translateX}px)`;
+
+        this.updateTeamCarouselButtons();
+    }
+
+    updateTeamCarouselButtons() {
+        const track = document.getElementById('teamCarouselTrack');
+        const prevBtn = document.getElementById('teamPrevBtn');
+        const nextBtn = document.getElementById('teamNextBtn');
+        const cards = document.querySelectorAll('.team-card');
+
+        console.log('updateTeamCarouselButtons called');
+
+        if (!track || !prevBtn || !nextBtn) {
+            console.error('Missing elements:', {track: !!track, prevBtn: !!prevBtn, nextBtn: !!nextBtn});
+            return;
+        }
+
+        // Get current position (how many sets of 3 cards we've scrolled)
+        let currentPosition = 0;
+        if (track.style.transform) {
+            const transformValue = parseFloat(track.style.transform.match(/translateX\(([^)]+)\)/)[1]);
+            currentPosition = Math.abs(transformValue) / ((cards[0]?.offsetWidth + 32) * 3);
+            console.log('Button update - transform:', transformValue, 'position:', currentPosition);
+        }
+
+        const maxPosition = Math.ceil(cards.length / 3) - 1;
+        console.log('Total cards:', cards.length, 'Max position:', maxPosition);
+
+        if (prevBtn) {
+            prevBtn.disabled = currentPosition <= 0;
+            console.log('Prev button disabled:', prevBtn.disabled);
+        }
+        if (nextBtn) {
+            nextBtn.disabled = currentPosition >= maxPosition;
+            console.log('Next button disabled:', nextBtn.disabled);
+        }
     }
 
     bindMenuShowcaseEvents() {
@@ -359,6 +508,19 @@ class LanguageManager {
             aboutImageSection.style.height = 'auto';
             aboutImage.style.height = 'auto';
         }
+    }
+
+    matchTeamImageHeight() {
+        const teamCards = document.querySelectorAll('.team-card');
+        teamCards.forEach(card => {
+            const teamImage = card.querySelector('.team-image');
+            if (teamImage) {
+                // Reset height first
+                teamImage.style.height = 'auto';
+                // Set to fixed height for circular display
+                teamImage.style.height = '150px';
+            }
+        });
     }
 
     bindResizeEvent() {

@@ -28,8 +28,18 @@ const content = {
         isActive: true,
         dishes: [
           {
+            name: "شاورما",
+            image: "assests/shawarma.jpg",
+            ingredients: ["لحم مشوي", "خضار طازجة", "خبز عربي", "صلصة الطحينة"]
+          },
+          {
+            name: "كباب تركي",
+            image: "assests/kebab.jpg",
+            ingredients: ["لحم ضأن", "بصل", "فلفل", "توابل تركية"]
+          },
+           {
             name: "الكبسة",
-            image: "assests/kabsa.jpg",
+            image: "assests/chicken-kabsa.jpg",
             ingredients: ["أرز بسمتي", "لحم ضأن طري", "خضار مشوي", "بهارات عربية"]
           },
           {
@@ -37,11 +47,7 @@ const content = {
             image: "assests/mansaf.jpg",
             ingredients: ["لحم ضأن", "أرز مطبوخ", "لبن عربي", "مكسرات محمصة"]
           },
-          {
-            name: "شاورما",
-            image: "assests/shawarma.jpg",
-            ingredients: ["لحم مشوي", "خضار طازجة", "خبز عربي", "صلصة الطحينة"]
-          },
+    
           {
             name: "البرياني",
             image: "assests/biryani.jpg",
@@ -53,20 +59,11 @@ const content = {
             ingredients: ["لحم غنم", "أرز مطبوخ", "بصل محمر", "بهارات يمنية"]
           },
           {
-            name: "المزات اللبنانية",
-            image: "assests/mezze.jpg",
-            ingredients: ["تبولة", "حمص", "متبل", "زيت زيتون"]
-          },
-          {
             name: "السمك الطازج",
             image: "assests/fresh-fish.jpg",
             ingredients: ["سمك طازج", "ليمون", "ثوم", "زيت زيتون"]
           },
-          {
-            name: "كباب تركي",
-            image: "assests/turkish-kebab.jpg",
-            ingredients: ["لحم ضأن", "بصل", "فلفل", "توابل تركية"]
-          },
+
           {
             name: "الملوخية",
             image: "assests/mulukhiyah.jpg",
@@ -75,7 +72,7 @@ const content = {
           {
             name: "فاصولياء",
             image: "assests/lebanese-beans.jpg",
-            ingredients: ["فاصولياء حمراء", "طحينة", "ليمون", "ثوم"]
+            ingredients: ["فاصولياء ", "ليمون", "ثوم"]
           },
           {
             name: "كبة بلبن",
@@ -106,13 +103,13 @@ const content = {
           },
           {
             name: "كباب تركي",
-            image: "assests/turkish-kebab.jpg",
+            image: "assests/kebab.jpg",
             ingredients: ["لحم ضأن", "بصل", "فلفل", "توابل تركية"]
           },
           {
             name: "فاصولياء",
             image: "assests/lebanese-beans.jpg",
-            ingredients: ["فاصولياء حمراء", "طحينة", "ليمون", "ثوم"]
+            ingredients: ["فاصولياء ", "ليمون", "ثوم"]
           },
           {
             name: "الكرنب المشوي",
@@ -120,7 +117,7 @@ const content = {
             ingredients: ["كرنب", "زيت زيتون", "توابل", "ليمون"]
           },
           {
-            name: "البرجر اللحم",
+            name: "برجر اللحم",
             image: "assests/meat-burger.jpg",
             ingredients: ["لحم مطحون", "خضار", "توابل", "خبز عربي"]
           },
@@ -204,11 +201,87 @@ const content = {
             ingredients: ["قطايف", "جبنة", "قطر", "فستق مطحون"]
           },
           {
-            name: "حلوى الورقية",
-            image: "assests/warqa.jpg",
-            ingredients: ["ورق العجين", "لوز", "عسل", "قرفة"]
+            name: "رز بحليب",
+            image: "assests/rice-milk.jpg",
+            ingredients: ["أرز", "حليب", "سكر", "قرفة"]
           }
         ]
+        }
+      ],
+
+    // Team Section
+    teamTitle: "فريقنا",
+    teamSubtitle: "تعرف على الفريق الدافئ الذي يجعل تجربة الطعام لدينا مميزة",
+    teamMembers: [
+      {
+        name: "أحمد محمد",
+        role: "شيف تنفيذي",
+        image: "assests/ahmed.jpg",
+        bio: "خبير في الطبخ العربي التقليدي مع خبرة 15 عاماً",
+        award: "موظف الشهر - مارس 2025"
+      },
+      {
+        name: "فاطمة علي",
+        role: "رئيسة الطهاة",
+        image: "assests/fatma.jpg",
+        bio: "متخصصة في الحلويات العربية والمطبخ الشرقي",
+        award: null
+      },
+      {
+        name: "محمد حسن",
+        role: "سقاك",
+        image: "assests/mohamed.jpg",
+        bio: "خبير في تحضير القهوة العربية والمشروبات التقليدية",
+        award: "موظف الشهر - فبراير 2025"
+      },
+      {
+        name: "سارة أحمد",
+        role: "نادلة رئيسية",
+        image: "assests/sara.jpg",
+        bio: "مسؤولة عن خدمة العملاء وإدارة قاعة الطعام",
+        award: null
+      },
+      {
+        name: "علي محمود",
+        role: "طباخ مساعد",
+        image: "assests/ali.jpg",
+        bio: "متخصص في الطبخ السريع والمأكولات البحرية",
+        award: "موظف الشهر - يناير 2025"
+      },
+      {
+        name: "لينا خالد",
+        role: "مدربة قهوة",
+        image: "assests/lina.jpg",
+        bio: "خبيرة في تحضير المشروبات الساخنة والعصائر الطازجة",
+        award: null
+      },
+      {
+        name: "كريم يوسف",
+        role: "نادل",
+        image: "assests/karim.jpg",
+        bio: "مسؤول عن خدمة العملاء في قسم المطعم",
+        award: null
+      },
+      {
+        name: "نورا سالم",
+        role: "مسؤولة المخابز",
+        image: "assests/nora.jpg",
+        bio: "متخصصة في إعداد الخبز العربي والمعجنات",
+        award: "موظف الشهر - أبريل 2025"
+      },
+      {
+        name: "عمر عبدالله",
+        role: "طباخ",
+        image: "assests/omar.jpg",
+        bio: "خبير في الطبخ التركي واللبناني",
+        award: null
+      },
+      {
+        name: "مريم حسن",
+        role: "نادلة",
+        image: "assests/mariam.jpg",
+        bio: "مسؤولة عن خدمة العائلات والأطفال",
+        award: null
       }
     ],
 
@@ -248,7 +321,7 @@ const content = {
         dishes: [
           {
             name: "Kabsa",
-            image: "assests/kabsa.jpg",
+            image: "assests/chicken-kabsa.jpg",
             ingredients: ["Basmati rice", "Tender lamb", "Roasted vegetables", "Arabic spices"]
           },
           {
@@ -272,18 +345,13 @@ const content = {
             ingredients: ["Lamb meat", "Cooked rice", "Fried onions", "Yemeni spices"]
           },
           {
-            name: "Lebanese Mezze",
-            image: "assests/mezze.jpg",
-            ingredients: ["Tabbouleh", "Hummus", "Baba ganoush", "Olive oil"]
-          },
-          {
             name: "Fresh Fish",
             image: "assests/fresh-fish.jpg",
             ingredients: ["Fresh fish", "Lemon", "Garlic", "Olive oil"]
           },
           {
             name: "Turkish Kebab",
-            image: "assests/turkish-kebab.jpg",
+            image: "assests/kebab.jpg",
             ingredients: ["Lamb meat", "Onions", "Peppers", "Turkish spices"]
           },
           {
@@ -325,7 +393,7 @@ const content = {
           },
           {
             name: "Turkish Kebab",
-            image: "assests/turkish-kebab.jpg",
+            image: "assests/kebab.jpg",
             ingredients: ["Lamb meat", "Onions", "Peppers", "Turkish spices"]
           },
           {
@@ -423,11 +491,87 @@ const content = {
             ingredients: ["Qatayef pancakes", "Cheese", "Syrup", "Ground pistachios"]
           },
           {
-            name: "Warqa Pastry",
-            image: "assests/warqa.jpg",
-            ingredients: ["Phyllo dough", "Almonds", "Honey", "Cinnamon"]
+            name: "Rice with Milk",
+            image: "assests/rice-milk.jpg",
+            ingredients: ["Rice", "Milk", "Sugar", "Cinnamon"]
           }
         ]
+        }
+      ],
+
+    // Team Section
+    teamTitle: "Our Team",
+    teamSubtitle: "Meet the warm team that makes our dining experience special",
+    teamMembers: [
+      {
+        name: "Ahmed Mohamed",
+        role: "Executive Chef",
+        image: "assests/ahmed.jpg",
+        bio: "Expert in traditional Arabic cooking with 15 years of experience",
+        award: "Employee of the Month - March 2025"
+      },
+      {
+        name: "Fatma Ali",
+        role: "Head Chef",
+        image: "assests/fatma.jpg",
+        bio: "Specialist in Arabic desserts and oriental cuisine",
+        award: null
+      },
+      {
+        name: "Mohamed Hassan",
+        role: "Barista",
+        image: "assests/mohamed.jpg",
+        bio: "Expert in preparing Arabic coffee and traditional beverages",
+        award: "Employee of the Month - February 2025"
+      },
+      {
+        name: "Sara Ahmed",
+        role: "Head Waitress",
+        image: "assests/sara.jpg",
+        bio: "Responsible for customer service and dining room management",
+        award: null
+      },
+      {
+        name: "Ali Mahmoud",
+        role: "Assistant Cook",
+        image: "assests/ali.jpg",
+        bio: "Specialist in fast cooking and seafood dishes",
+        award: "Employee of the Month - January 2025"
+      },
+      {
+        name: "Lina Khaled",
+        role: "Coffee Trainer",
+        image: "assests/lina.jpg",
+        bio: "Expert in preparing hot drinks and fresh juices",
+        award: null
+      },
+      {
+        name: "Karim Youssef",
+        role: "Waiter",
+        image: "assests/karim.jpg",
+        bio: "Responsible for customer service in the restaurant section",
+        award: null
+      },
+      {
+        name: "Nora Salem",
+        role: "Bakery Manager",
+        image: "assests/nora.jpg",
+        bio: "Specialist in preparing Arabic bread and pastries",
+        award: "Employee of the Month - April 2025"
+      },
+      {
+        name: "Omar Abdullah",
+        role: "Cook",
+        image: "assests/omar.jpg",
+        bio: "Expert in Turkish and Lebanese cooking",
+        award: null
+      },
+      {
+        name: "Mariam Hassan",
+        role: "Waitress",
+        image: "assests/mariam.jpg",
+        bio: "Responsible for serving families and children",
+        award: null
       }
     ],
 
