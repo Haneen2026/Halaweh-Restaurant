@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطعم ومقهى عربي - Arabic Restaurant & Cafe</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="assests/Ar.png" type="image/png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <img src="assests/Ar.png" alt="مطعم ومقهى عربي" class="logo" id="logo">
+                <button class="language-toggle" id="languageToggle">EN</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title" data-key="heroTitle"></h1>
+            <div class="hero-subtitle-combined">
+                <span class="hero-buffet-times" data-key="heroBuffetTimes"></span>
+                <span class="hero-separator">|</span>
+                <span class="hero-description" data-key="heroDescription"></span>
+            </div>
+            <div class="hero-content">
+                <div class="hero-text-section">
+                    <p class="hero-story-text" data-key="heroStoryText"></p>
+                    <button class="hero-button" data-key="heroButton"></button>
+                </div>
+                <div class="hero-video-section">
+                    <video class="hero-video" autoplay muted loop playsinline>
+                        <source src="assests/analyzed_video_video_cece81e5601848e497f8d8c1f8bc6f3c_cece81e5601848e497f8d8c1f8bc6f3c_origin.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <h2 class="section-title" data-key="aboutTitle"></h2>
+            <div class="about-content">
+                <div class="about-image-section">
+                    <img src="" alt="" class="about-image" data-key-src="aboutImageSrc" data-key-alt="aboutImageAlt">
+                </div>
+                <div class="about-text-section">
+                    <p class="about-text" data-key="aboutText"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu">
+        <div class="container">
+            <h2 class="section-title" data-key="menuTitle"></h2>
+            <div class="menu-grid" id="menuGrid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <h2 class="section-title" data-key="contactTitle"></h2>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>العنوان</h3>
+                    <p data-key="contactAddress"></p>
+                </div>
+                <div class="contact-item">
+                    <h3>الهاتف</h3>
+                    <p data-key="contactPhone"></p>
+                </div>
+                <div class="contact-item">
+                    <h3>ساعات العمل</h3>
+                    <p data-key="contactHours"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="content.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
