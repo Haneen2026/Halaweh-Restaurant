@@ -9,7 +9,7 @@ const content = {
     heroTitle: "لمّتكم الدافية تبدأ من حلاوة",
     heroBuffetTimes: "بوفيه الغداء 3:00 مساءً • بوفيه العشاء 8:00 مساءً",
     heroDescription: "3 ساعات من الدفء والمذاق واللمة الحلوة",
-    heroWarning: "⚠️ المقاعد محدودة 200 كرسي",
+    heroWarning: "المقاعد محدودة 200 كرسي",
     heroStoryText: "الشتا يحكي حكايات دافية… وريحة البوفيه تفتح القلب قبل الشهية.\nفي مطعم حلاوة، بنجمع العيلة حول طاولة مليانة دفء وضحك وذكريات.\n\nضحكات الأطفال، لمّة الأحباب، وأطباق تهمس: استمتع بكل لقمة.\nوهون… الجو أنقى، بلا تدخين ولا أرجيلة، عشان تكتمل اللمة براحة وطمأنينة.\n\nفي حلاوة، لمّتكم معنا…\nمش بس أحلى، أحلى بألف مرة.",
     heroButton: "احجز الآن",
     heroPromotion: "تجربة شتوية بسعر 20 دينار للشخص\nابتداءً من 20 يناير 2026 –لمدة شهر واحد فقط ",
@@ -253,7 +253,7 @@ const content = {
       {
         name: "مريم خالد",
         role: "خبيرة قهوة",
-        image: "assests/maryam.png",
+        image: "assests/mariam.png",
         bio: "متخصصة في تحضير القهوة العربية والشاي التقليدي والمشروبات الدافئة",
         award: null
       },
@@ -281,7 +281,7 @@ const content = {
       {
         name: "نور محمد",
         role: "مساعدة خدمة",
-        image: "assests/noor.png",
+        image: "assests/nora.png",
         bio: "مخلصة في تقديم خدمة متميزة للعائلات والأطفال مع ابتسامة دافئة",
         award: null
       }
@@ -294,46 +294,63 @@ const content = {
       {
         name: "ناصر القصبي",
         title: "مغني وملحن سعودي",
-        image: "assests/ahmed.png",
+        image: "assests/Naser.png",
         quote: "تجربة فريدة من نوعها في مطعم حلاوة. الطعام يحمل مذاق التراث العربي الأصيل مع لمسة عصرية راقية. يستحق الزيارة مراراً وتكراراً.",
         rating: 5
       },
       {
         name: "هيفاء وهبي",
         title: "ممثلة ومغنية لبنانية",
-        image: "assests/fatma.png",
+        image: "assests/Haifa.png",
         quote: "مكان ساحر يجمع بين الدفء العائلي والأصالة العربية. الأطباق تذكرني بطفولتي في لبنان، والخدمة على أعلى مستوى من الكياسة والاحترافية.",
         rating: 5
       },
       {
         name: "عبدالله الرويشد",
         title: "إعلامي سعودي",
-        image: "assests/mohamed.png",
+        image: "assests/Abdullah.png",
         quote: "في زمن الوجبات السريعة، يقف مطعم حلاوة كواحة للطعام الحقيقي. كل لقمة تحمل قصة من تراثنا العربي الغني. شكراً للحفاظ على هذه التقاليد.",
         rating: 5
       },
       {
         name: "أحلام",
         title: "مغنية إماراتية",
-        image: "assests/sara.png",
+        image: "assests/Ahlam.png",
         quote: "الدفء في مطعم حلاوة ليس فقط في الأجواء، بل في كل طبق يقدمونه. يشعرك بالعودة إلى المنزل رغم أنك في مكان عام. تجربة لا تُنسى.",
         rating: 5
       },
       {
         name: "محمد العريفي",
         title: "داعية إسلامي",
-        image: "assests/ali.png",
+        image: "assests/Mohammad.png",
         quote: "مكان مبارك يحافظ على القيم العائلية والتقاليد العربية الأصيلة. الطعام حلال وشهي، والأجواء مناسبة للعائلات المسلمة التي تبحث عن الراحة والطمأنينة.",
         rating: 5
       },
       {
         name: "نجوى كرم",
         title: "مغنية لبنانية",
-        image: "assests/lina.png",
+        image: "assests/Najwa.png",
         quote: "عندما أريد العودة إلى جذوري، أذهب إلى مطعم حلاوة. كل تفصيل يذكرني بلبنان الأصيل، من رائحة القهوة العربية إلى دفء الضيافة العربية الأصيلة.",
         rating: 5
       }
     ],
+
+    // Booking Section
+    bookingTitle: "احجز طاولتك",
+    bookingSubtitle: "احجز طاولتك الآن واستمتع بتجربة طعام لا تُنسى",
+    bookingFullNameLabel: "الاسم الكامل",
+    bookingFullNamePlaceholder: "أدخل اسمك الكامل",
+    bookingPhoneLabel: "رقم الهاتف",
+    bookingPhonePlaceholder: "أدخل رقم هاتفك",
+    bookingGuestsLabel: "عدد الضيوف",
+    bookingGuestsPlaceholder: "عدد الضيوف",
+    bookingMealTypeLabel: "نوع الوجبة",
+    bookingMealTypeSelect: "اختر نوع الوجبة",
+    bookingMealTypeLunch: "بوفيه الغداء",
+    bookingMealTypeDinner: "بوفيه العشاء",
+    bookingDateLabel: "التاريخ",
+    bookingDateHelper: "التواريخ المتاحة: 22، 23، 24، 29، 30، 31 يناير و 5، 6، 7، 12، 13، 14، 19، 20 فبراير 2026",
+    bookingSubmitButton: "تأكيد الحجز",
 
     // Contact Section
     contactTitle: "تواصل معنا",
@@ -352,7 +369,7 @@ const content = {
     heroTitle: "Your Warm Gathering Starts with Sweetness",
     heroBuffetTimes: "Lunch Buffet 3:00 PM • Dinner Buffet 8:00 PM",
     heroDescription: "3 Hours of Warmth, Flavor, and Sweet Company",
-    heroWarning: "⚠️ Limited seats - 200 chairs",
+    heroWarning: "Limited seats - 200 chairs",
     heroStoryText: "Winter tells warm stories… and the aroma of the buffet opens the heart before the appetite.\nAt Halawa Restaurant, we gather the family around a table filled with warmth, laughter, and beautiful memories.\n\nChildren's laughter, loved ones together, and dishes that whisper: \"Savor every bite.\"\nAnd here… the air is purer, with no smoking and no hookah, so every gathering feels relaxed and safe.\n\nAt Halawa, your gathering with us…\nis not just delightful — it's a thousand times more delightful.",
     heroButton: "Book Now",
     heroPromotion: "A winter experience for 20 JOD per person\nStarting January 20, 2026 – for one month only",
@@ -594,7 +611,7 @@ const content = {
       {
         name: "Maryam Khaled",
         role: "Coffee Expert",
-        image: "assests/maryam.png",
+        image: "assests/mariam.png",
         bio: "Specialist in preparing Arabic coffee, traditional tea, and warm beverages",
         award: null
       },
@@ -622,7 +639,7 @@ const content = {
       {
         name: "Noor Mohamed",
         role: "Service Assistant",
-        image: "assests/noor.png",
+        image: "assests/nora.png",
         bio: "Dedicated to providing excellent service to families and children with a warm smile",
         award: null
       }
@@ -635,46 +652,63 @@ const content = {
       {
         name: "Nasser Al Qasabi",
         title: "Saudi Singer & Composer",
-        image: "assests/ahmed.png",
+        image: "assests/Naser.png",
         quote: "A unique experience at Halawa Restaurant. The food carries the authentic taste of Arab heritage with a modern and elegant touch. Worth visiting again and again.",
         rating: 5
       },
       {
         name: "Haifa Wehbe",
         title: "Lebanese Actress & Singer",
-        image: "assests/fatma.png",
+        image: "assests/Haifa.png",
         quote: "A magical place that combines family warmth and Arab authenticity. The dishes remind me of my childhood in Lebanon, and the service is of the highest level of courtesy and professionalism.",
         rating: 5
       },
       {
         name: "Abdullah Al Rousheed",
         title: "Saudi Media Personality",
-        image: "assests/mohamed.png",
+        image: "assests/Abdullah.png",
         quote: "In the age of fast food, Halawa Restaurant stands as an oasis for real food. Every bite carries a story from our rich Arab heritage. Thank you for preserving these traditions.",
         rating: 5
       },
       {
         name: "Ahlam",
         title: "Emirati Singer",
-        image: "assests/sara.png",
+        image: "assests/Ahlam.png",
         quote: "The warmth at Halawa Restaurant is not just in the atmosphere, but in every dish they serve. It makes you feel at home even in a public place. An unforgettable experience.",
         rating: 5
       },
       {
         name: "Mohammed Al Arifi",
         title: "Islamic Scholar",
-        image: "assests/ali.png",
+        image: "assests/Mohammad.png",
         quote: "A blessed place that preserves family values and authentic Arab traditions. The food is halal and delicious, and the atmosphere is suitable for Muslim families seeking comfort and peace of mind.",
         rating: 5
       },
       {
         name: "Najwa Karam",
         title: "Lebanese Singer",
-        image: "assests/lina.png",
+        image: "assests/Najwa.png",
         quote: "When I want to return to my roots, I go to Halawa Restaurant. Every detail reminds me of authentic Lebanon, from the aroma of Arabic coffee to the warmth of genuine Arab hospitality.",
         rating: 5
       }
     ],
+
+    // Booking Section
+    bookingTitle: "Book Your Table",
+    bookingSubtitle: "Reserve your table now and enjoy an unforgettable dining experience",
+    bookingFullNameLabel: "Full Name",
+    bookingFullNamePlaceholder: "Enter your full name",
+    bookingPhoneLabel: "Phone Number",
+    bookingPhonePlaceholder: "Enter your phone number",
+    bookingGuestsLabel: "Number of Guests",
+    bookingGuestsPlaceholder: "Number of guests",
+    bookingMealTypeLabel: "Meal Type",
+    bookingMealTypeSelect: "Select meal type",
+    bookingMealTypeLunch: "Lunch Buffet",
+    bookingMealTypeDinner: "Dinner Buffet",
+    bookingDateLabel: "Date",
+    bookingDateHelper: "Available dates: Jan 22, 23, 24, 29, 30, 31 and Feb 5, 6, 7, 12, 13, 14, 19, 20, 2026",
+    bookingSubmitButton: "Confirm Booking",
 
     // Contact Section
     contactTitle: "Contact Us",

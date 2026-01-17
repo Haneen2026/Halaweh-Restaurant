@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مطعم ومقهى عربي - Arabic Restaurant & Cafe</title>
     <link rel="stylesheet" href="style.css?v=43">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="icon" href="assests/Ar.png" type="image/png">
   </head>
   <body>
@@ -26,14 +27,22 @@
                 <span class="hero-buffet-times" data-key="heroBuffetTimes"></span>
                 <span class="hero-separator">|</span>
                 <span class="hero-description" data-key="heroDescription"></span>
-                <div class="hero-warning-corner" data-key="heroWarning"></div>
             </div>
             <div class="hero-content">
                 <div class="hero-text-section">
-                    <p class="hero-story-text" data-key="heroStoryText"></p>
+                    <div class="hero-story-wrapper">
+                        <div class="hero-warning-badge">
+                            <div class="warning-icon">⚠️</div>
+                            <div class="warning-content">
+                                <span class="warning-text" data-key="heroWarning"></span>
+                            </div>
+                            <div class="warning-pulse"></div>
+                        </div>
+                        <p class="hero-story-text" data-key="heroStoryText"></p>
+                    </div>
                     <div class="hero-cta-container">
                         <div class="hero-promotion" data-key="heroPromotion"></div>
-                        <button class="hero-button" data-key="heroButton"></button>
+                        <button class="hero-button" data-key="heroButton" onclick="document.getElementById('booking').scrollIntoView({behavior: 'smooth'})"></button>
                     </div>
                 </div>
                 <div class="hero-video-section">
@@ -103,6 +112,51 @@
         </div>
     </section>
 
+    <!-- Booking Section -->
+    <section class="booking" id="booking">
+        <div class="container">
+            <div class="booking-header">
+                <h2 class="section-title" data-key="bookingTitle"></h2>
+                <p class="booking-subtitle" data-key="bookingSubtitle"></p>
+            </div>
+            <form class="booking-form" id="bookingForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName" data-key="bookingFullNameLabel">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required data-key-placeholder="bookingFullNamePlaceholder">
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber" data-key="bookingPhoneLabel">Phone Number</label>
+                        <input type="tel" id="phoneNumber" name="phoneNumber" required data-key-placeholder="bookingPhonePlaceholder">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="numberOfGuests" data-key="bookingGuestsLabel">Number of Guests</label>
+                        <input type="number" id="numberOfGuests" name="numberOfGuests" min="1" max="20" required data-key-placeholder="bookingGuestsPlaceholder">
+                    </div>
+                    <div class="form-group">
+                        <label for="mealType" data-key="bookingMealTypeLabel">Meal Type</label>
+                        <select id="mealType" name="mealType" required>
+                            <option value="" data-key="bookingMealTypeSelect">Select meal type</option>
+                            <option value="lunch" data-key="bookingMealTypeLunch">Lunch Buffet</option>
+                            <option value="dinner" data-key="bookingMealTypeDinner">Dinner Buffet</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bookingDate" data-key="bookingDateLabel">Date</label>
+                        <input type="text" id="bookingDate" name="bookingDate" required readonly>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="booking-submit-btn" data-key="bookingSubmitButton">Confirm Booking</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact">
         <div class="container">
@@ -133,6 +187,7 @@
     </button>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="content.js?v=30"></script>
     <script src="script.js?v=43"></script>
 </body>

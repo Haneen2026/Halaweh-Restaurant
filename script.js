@@ -21,6 +21,7 @@ class LanguageManager {
         }, 300);
         setTimeout(() => this.matchAboutImageHeight(), 300);
         this.bindResizeEvent();
+        this.initializeDatePicker();
     }
 
     bindEvents() {
@@ -47,6 +48,7 @@ class LanguageManager {
         this.updateDirection();
         this.updateLogo();
         this.updateTeamCarouselArrows();
+        this.updateDatePickerLocale();
         setTimeout(() => {
             this.matchVideoHeight();
             this.matchAboutImageHeight();
@@ -61,6 +63,22 @@ class LanguageManager {
             const key = element.getAttribute('data-key');
             if (currentContent[key]) {
                 element.textContent = currentContent[key];
+            }
+        });
+
+        // Update elements with data-key-placeholder attributes
+        document.querySelectorAll('[data-key-placeholder]').forEach(element => {
+            const key = element.getAttribute('data-key-placeholder');
+            if (currentContent[key]) {
+                element.placeholder = currentContent[key];
+            }
+        });
+
+        // Update select option elements with data-key attributes
+        document.querySelectorAll('select option[data-key]').forEach(option => {
+            const key = option.getAttribute('data-key');
+            if (currentContent[key]) {
+                option.textContent = currentContent[key];
             }
         });
 
@@ -125,6 +143,7 @@ class LanguageManager {
             this.matchAboutImageHeight();
         }, 100);
     }
+
 
     updateDirection() {
         const html = document.documentElement;
@@ -193,28 +212,53 @@ class LanguageManager {
     }
 
     bindMenuShowcaseEvents() {
-        // Category name click handlers
-        document.querySelectorAll('.menu-category-name').forEach(name => {
-            name.addEventListener('click', (e) => {
-                const categoryElement = e.target.closest('.menu-category');
+        // Use event delegation for category name clicks to avoid duplicate listeners
+        const existingCategoryHandler = this._categoryClickHandler;
+        if (existingCategoryHandler) {
+            document.removeEventListener('click', existingCategoryHandler);
+        }
+        
+        // Create new handler for category clicks
+        this._categoryClickHandler = (e) => {
+            const categoryName = e.target.closest('.menu-category-name');
+            if (!categoryName) return;
+            
+            const categoryElement = categoryName.closest('.menu-category');
+            if (categoryElement) {
                 this.setActiveCategory(categoryElement.dataset.categoryId);
-            });
-        });
+            }
+        };
+        
+        // Use event delegation
+        document.addEventListener('click', this._categoryClickHandler);
 
         // Bind carousel navigation
         this.bindCarouselNavigation();
     }
 
     bindCarouselNavigation() {
-        // Carousel navigation buttons - bind to both menu and team carousels
-        document.querySelectorAll('.menu-carousel-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const isNext = e.target.classList.contains('next-btn');
-                // Detect if this button belongs to team carousel
-                const isTeamCarousel = e.target.closest('.team-carousel-container') !== null;
-                this.navigateCarousel(isNext, isTeamCarousel);
-            });
-        });
+        // Use event delegation to avoid duplicate listeners
+        // Remove existing delegated listener if any
+        const existingHandler = this._carouselNavHandler;
+        if (existingHandler) {
+            document.removeEventListener('click', existingHandler);
+        }
+        
+        // Create new handler
+        this._carouselNavHandler = (e) => {
+            // Check if clicked element is a carousel button
+            const btn = e.target.closest('.menu-carousel-btn');
+            if (!btn) return;
+            
+            const isNext = btn.classList.contains('next-btn');
+            // Detect if this button belongs to team carousel
+            const isTeamCarousel = btn.closest('.team-carousel-container') !== null || 
+                                   btn.closest('.team-carousel-nav') !== null;
+            this.navigateCarousel(isNext, isTeamCarousel);
+        };
+        
+        // Use event delegation on document
+        document.addEventListener('click', this._carouselNavHandler);
     }
 
     setActiveCategory(activeCategoryId) {
@@ -618,18 +662,200 @@ class LanguageManager {
         if (teamNextBtn) teamNextBtn.textContent = '›';
     }
 
+    initializeDatePicker() {
+        const dateInput = document.getElementById('bookingDate');
+        if (!dateInput || typeof flatpickr === 'undefined') return;
+
+        // Available dates: Jan 22, 23, 24, 29, 30, 31 and Feb 5, 6, 7, 12, 13, 14, 19, 20
+        const availableDates = [
+            '2026-01-22',
+            '2026-01-23',
+            '2026-01-24',
+            '2026-01-29',
+            '2026-01-30',
+            '2026-01-31',
+            '2026-02-05',
+            '2026-02-06',
+            '2026-02-07',
+            '2026-02-12',
+            '2026-02-13',
+            '2026-02-14',
+            '2026-02-19',
+            '2026-02-20'
+        ];
+
+        const isRTL = this.currentLanguage === 'ar';
+        
+        // Destroy existing instance if any
+        if (window.bookingDatePicker) {
+            window.bookingDatePicker.destroy();
+        }
+
+        // Initialize Flatpickr
+        window.bookingDatePicker = flatpickr(dateInput, {
+            dateFormat: 'Y-m-d',
+            enable: availableDates,
+            minDate: '2026-01-22',
+            maxDate: '2026-02-20',
+            locale: isRTL ? {
+                firstDayOfWeek: 6,
+                weekdays: {
+                    shorthand: ['أحد', 'إثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'],
+                    longhand: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت']
+                },
+                months: {
+                    shorthand: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+                    longhand: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر']
+                }
+            } : undefined,
+            disableMobile: false,
+            allowInput: false,
+            clickOpens: true
+        });
+    }
+
+    updateDatePickerLocale() {
+        if (!window.bookingDatePicker) return;
+        
+        const isRTL = this.currentLanguage === 'ar';
+        const availableDates = [
+            '2026-01-22',
+            '2026-01-23',
+            '2026-01-24',
+            '2026-01-29',
+            '2026-01-30',
+            '2026-01-31',
+            '2026-02-05',
+            '2026-02-06',
+            '2026-02-07',
+            '2026-02-12',
+            '2026-02-13',
+            '2026-02-14',
+            '2026-02-19',
+            '2026-02-20'
+        ];
+
+        // Re-initialize with new locale
+        window.bookingDatePicker.destroy();
+        const dateInput = document.getElementById('bookingDate');
+        window.bookingDatePicker = flatpickr(dateInput, {
+            dateFormat: 'Y-m-d',
+            enable: availableDates,
+            minDate: '2026-01-22',
+            maxDate: '2026-02-20',
+            locale: isRTL ? {
+                firstDayOfWeek: 6,
+                weekdays: {
+                    shorthand: ['أحد', 'إثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'],
+                    longhand: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت']
+                },
+                months: {
+                    shorthand: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+                    longhand: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر']
+                }
+            } : undefined,
+            disableMobile: false,
+            allowInput: false,
+            clickOpens: true
+        });
+    }
 
 }
 
 // Initialize the language manager when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new LanguageManager();
+    // Wait for Flatpickr to load if using CDN
+    const initApp = () => {
+        if (typeof flatpickr === 'undefined' && document.querySelector('script[src*="flatpickr"]')) {
+            // Wait a bit more for CDN to load
+            setTimeout(initApp, 100);
+            return;
+        }
+        
+        const languageManager = new LanguageManager();
+        
+        // Initialize booking form functionality after a short delay to ensure DOM is fully ready
+        setTimeout(() => {
+            initializeBookingForm();
+        }, 100);
+    };
+    
+    initApp();
 });
 
-// Smooth scrolling for hero button (placeholder functionality)
-document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('hero-button')) {
-        // You can add smooth scrolling to menu section or order functionality here
-        console.log('Order button clicked');
+// Booking form functionality
+let bookingFormInitialized = false;
+
+function initializeBookingForm() {
+    // Prevent duplicate initialization
+    if (bookingFormInitialized) return;
+    bookingFormInitialized = true;
+
+    const bookingForm = document.getElementById('bookingForm');
+    const phoneInput = document.getElementById('phoneNumber');
+
+    // Restrict phone input to numbers only
+    if (phoneInput) {
+        phoneInput.addEventListener('input', (e) => {
+            // Remove any non-numeric characters
+            e.target.value = e.target.value.replace(/[^0-9]/g, '');
+        });
+
+        phoneInput.addEventListener('keypress', (e) => {
+            // Prevent non-numeric keys
+            if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                e.preventDefault();
+            }
+        });
     }
-});
+
+    // Handle form submission
+    if (bookingForm) {
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Validate date before submission (Flatpickr already handles this, but double-check)
+            const dateInput = document.getElementById('bookingDate');
+            const selectedDate = dateInput.value;
+            
+            if (!selectedDate) {
+                const currentLanguage = localStorage.getItem('language') || 'ar';
+                const errorMessage = currentLanguage === 'ar' 
+                    ? 'يرجى اختيار تاريخ'
+                    : 'Please select a date';
+                
+                alert(errorMessage);
+                dateInput.focus();
+                return;
+            }
+            
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                phoneNumber: document.getElementById('phoneNumber').value,
+                numberOfGuests: document.getElementById('numberOfGuests').value,
+                mealType: document.getElementById('mealType').value,
+                bookingDate: document.getElementById('bookingDate').value
+            };
+
+            // Here you can add your booking logic (send to server, show confirmation, etc.)
+            console.log('Booking submitted:', formData);
+            
+            // Show success message (you can customize this)
+            const currentLanguage = localStorage.getItem('language') || 'ar';
+            const successMessage = currentLanguage === 'ar' 
+                ? 'شكراً لك! تم استلام طلب الحجز الخاص بك. سنتواصل معك قريباً.'
+                : 'Thank you! Your booking request has been received. We will contact you soon.';
+            
+            alert(successMessage);
+            
+            // Reset form
+            bookingForm.reset();
+            
+            // Clear Flatpickr instance after reset
+            if (window.bookingDatePicker) {
+                window.bookingDatePicker.clear();
+            }
+        });
+    }
+
+}
