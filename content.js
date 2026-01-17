@@ -11,7 +11,7 @@ const content = {
     heroDescription: "3 ساعات من الدفء والمذاق واللمة الحلوة",
     heroStoryText: "الشتا يحكي حكايات دافية… وريحة البوفيه تفتح القلب قبل الشهية.\nفي مطعم حلاوة، بنجمع العيلة حول طاولة مليانة دفء وضحك وذكريات.\n\nضحكات الأطفال، لمّة الأحباب، وأطباق تهمس: استمتع بكل لقمة.\nوهون… الجو أنقى، بلا تدخين ولا أرجيلة، عشان تكتمل اللمة براحة وطمأنينة.\n\nفي حلاوة، لمّتكم معنا…\nمش بس أحلى، أحلى بألف مرة.",
     heroButton: "احجز الآن",
-    heroPromotion: "تجربة شتوية بسعر 20 دينار للشخص\nابتداءً من 20 يناير 2026 – لفترة محدودة",
+    heroPromotion: "تجربة شتوية بسعر 20 دينار للشخص\nابتداءً من 20 يناير 2026 –لمدة شهر واحد فقط ",
 
     // About Section
     aboutTitle: "عن مطعمنا",
@@ -353,7 +353,7 @@ const content = {
     heroDescription: "3 Hours of Warmth, Flavor, and Sweet Company",
     heroStoryText: "Winter tells warm stories… and the aroma of the buffet opens the heart before the appetite.\nAt Halawa Restaurant, we gather the family around a table filled with warmth, laughter, and beautiful memories.\n\nChildren's laughter, loved ones together, and dishes that whisper: \"Savor every bite.\"\nAnd here… the air is purer, with no smoking and no hookah, so every gathering feels relaxed and safe.\n\nAt Halawa, your gathering with us…\nis not just delightful — it's a thousand times more delightful.",
     heroButton: "Book Now",
-    heroPromotion: "A winter experience for 20 JOD per person\nStarting January 20, 2026 – for a limited time",
+    heroPromotion: "A winter experience for 20 JOD per person\nStarting January 20, 2026 – for one month only",
 
     // About Section
     aboutTitle: "About Our Restaurant",
