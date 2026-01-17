@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مطعم ومقهى عربي - Arabic Restaurant & Cafe</title>
+    <link rel="stylesheet" href="style.css?v=43">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="icon" href="assests/Ar.png" type="image/png">
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <img src="assests/Ar.png" alt="مطعم ومقهى عربي" class="logo" id="logo">
+                <button class="language-toggle" id="languageToggle">EN</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title" data-key="heroTitle"></h1>
+            <div class="hero-subtitle-combined">
+                <span class="hero-buffet-times" data-key="heroBuffetTimes"></span>
+                <span class="hero-separator">|</span>
+                <span class="hero-description" data-key="heroDescription"></span>
+            </div>
+            <div class="hero-content">
+                <div class="hero-text-section">
+                    <div class="hero-story-wrapper">
+                        <div class="hero-warning-badge">
+                            <div class="warning-icon">⚠️</div>
+                            <div class="warning-content">
+                                <span class="warning-text" data-key="heroWarning"></span>
+                            </div>
+                            <div class="warning-pulse"></div>
+                        </div>
+                        <p class="hero-story-text" data-key="heroStoryText"></p>
+                    </div>
+                    <div class="hero-cta-container">
+                        <div class="hero-promotion" data-key="heroPromotion"></div>
+                        <button class="hero-button" data-key="heroButton" onclick="document.getElementById('booking').scrollIntoView({behavior: 'smooth'})"></button>
+                    </div>
+                </div>
+                <div class="hero-video-section">
+                    <video class="hero-video" autoplay muted loop playsinline>
+                        <source src="assests/analyzed_video_video_cece81e5601848e497f8d8c1f8bc6f3c_cece81e5601848e497f8d8c1f8bc6f3c_origin.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about">
+        <div class="container">
+            <h2 class="section-title" data-key="aboutTitle"></h2>
+            <div class="about-content">
+                <div class="about-image-section">
+                    <img src="" alt="" class="about-image" data-key-src="aboutImageSrc" data-key-alt="aboutImageAlt">
+                </div>
+                <div class="about-text-section">
+                    <p class="about-text" data-key="aboutText"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Showcase Section -->
+    <section class="menu-showcase">
+        <div class="container">
+            <div class="menu-showcase-header">
+                <h2 class="section-title" data-key="menuShowcaseTitle"></h2>
+                <p class="menu-showcase-subtitle" data-key="menuShowcaseSubtitle"></p>
+            </div>
+            <div class="menu-categories" id="menuCategories">
+                <!-- Menu category buttons will be populated by JavaScript -->
+            </div>
+            <div class="menu-carousel-container" id="menuCarouselContainer">
+                <!-- Menu carousel will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <div class="team-header">
+                <h2 class="section-title" data-key="teamTitle"></h2>
+                <p class="team-subtitle" data-key="teamSubtitle" style="font-size: 1.2rem !important; color: #8B4513 !important; margin-top: 1rem !important; opacity: 0.9 !important; font-weight: 400 !important; text-align: center !important;"></p>
+            </div>
+            <div class="team-carousel-container" id="teamCarouselContainer">
+                <!-- Team carousel will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="testimonials-header">
+                <h2 class="section-title" data-key="testimonialsTitle"></h2>
+                <p class="testimonials-subtitle" data-key="testimonialsSubtitle"></p>
+            </div>
+            <div class="testimonials-container" id="testimonialsContainer">
+                <!-- Testimonials will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="booking" id="booking">
+        <div class="container">
+            <div class="booking-header">
+                <h2 class="section-title" data-key="bookingTitle"></h2>
+                <p class="booking-subtitle" data-key="bookingSubtitle"></p>
+            </div>
+            <form class="booking-form" id="bookingForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fullName" data-key="bookingFullNameLabel">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required data-key-placeholder="bookingFullNamePlaceholder">
+                    </div>
+                    <div class="form-group">
+                        <label for="phoneNumber" data-key="bookingPhoneLabel">Phone Number</label>
+                        <input type="tel" id="phoneNumber" name="phoneNumber" required data-key-placeholder="bookingPhonePlaceholder">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="numberOfGuests" data-key="bookingGuestsLabel">Number of Guests</label>
+                        <input type="number" id="numberOfGuests" name="numberOfGuests" min="1" max="20" required data-key-placeholder="bookingGuestsPlaceholder">
+                    </div>
+                    <div class="form-group">
+                        <label for="mealType" data-key="bookingMealTypeLabel">Meal Type</label>
+                        <select id="mealType" name="mealType" required>
+                            <option value="" data-key="bookingMealTypeSelect">Select meal type</option>
+                            <option value="lunch" data-key="bookingMealTypeLunch">Lunch Buffet</option>
+                            <option value="dinner" data-key="bookingMealTypeDinner">Dinner Buffet</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="bookingDate" data-key="bookingDateLabel">Date</label>
+                        <input type="text" id="bookingDate" name="bookingDate" required readonly>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="booking-submit-btn" data-key="bookingSubmitButton">Confirm Booking</button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+        <div class="container">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h3>العنوان</h3>
+                    <p data-key="contactAddress"></p>
+                </div>
+                <div class="contact-item">
+                    <h3>الهاتف</h3>
+                    <p data-key="contactPhone"></p>
+                </div>
+                <div class="contact-item">
+                    <h3>ساعات العمل</h3>
+                    <p data-key="contactHours"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Theme Toggle Buttons -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+    </button>
+
+    <button class="color-toggle" id="colorToggle" aria-label="Toggle color scheme">
+        <span class="color-icon">🎨</span>
+    </button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="content.js?v=30"></script>
+    <script src="script.js?v=43"></script>
+</body>
+</html>

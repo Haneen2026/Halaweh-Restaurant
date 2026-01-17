@@ -1,0 +1,58 @@
+client requirements:
+
+1.  to build a responsive landing page includes:
+    a.  a booking form comprising the following inputs:
+        1. full name
+        2. phone number
+        3. # of the customers
+     4. booking date
+    b.  Thank You / Confirmation Page
+2.  delivery date: saturday at 11 P.M
+3.  one page ready for publish
+4.  managed code 
+5.  simple using instructions
+6.  light/dark mode and color mode
+7.  the footer must has a support link
+8.  english/Arabic (def)
+9.  لمة الشتوية مع العائلة
+
+
+features:
+1.  clear and easy customer experience
+2.  easy later amending
+
+
+purpose: booking all the restaurant tables in a predetermined dates (days)
+
+
+
+
+questions:
+1.  restaurant name
+حلاوة
+2.  restaurant logo/video
+من تصميمي
+3.  favourit colors 
+ألوان ترابية هادية من الطبيعة
+وألوان نارية لإضفاء شعوراً بالدفء
+4.  number of table (number of chairs)
+200 كرسي
+5. price 
+20 دينار لكل شخص
+6.  restaurant place
+عمان خلدا
+7.  is the restaurant includes outdoor tables
+كله داخلي
+8.  menu list or food type
+هو عبارة عن مطعم ومقهى يُقدم قائمة طعام وحلوى عربية بالكامل
+9.  is it for family??
+نعم للعائلات فقط
+10. prepaid or not?
+لا الدفع عند الذهاب وتلقي الخدمة
+11. dates
+كل خميس وجمعة وسبت لمدة شهر بدءاً من تاريخ 20-1
+12. ما تشتمل عليه الخدمة
+بوفيه غداء الساعة الثالثة وبوفيه العشاء يبدأ الساعة الثامنة
+تمتد كل منها لثلاث ساعات
+13. parking 
+نعم
