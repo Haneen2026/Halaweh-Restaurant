@@ -435,6 +435,45 @@ html[dir="ltr"] .hero-separator::after {
     line-height: 1.5;
 }
 
+.hero-warning-corner {
+    position: absolute;
+    top: -25px;
+    right: 50%;
+    transform: translateX(50%) rotate(2deg);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #FF6B35;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.95), rgba(255, 193, 7, 0.95));
+    padding: 0.4rem 0.6rem;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(255, 107, 53, 0.3);
+    border: 2px solid #FFD700;
+    animation: warningGlow 1.5s ease-in-out infinite;
+    z-index: 10;
+    white-space: nowrap;
+}
+
+.hero-subtitle-combined {
+    position: relative;
+    padding: 1rem 2rem;
+}
+
+@keyframes warningGlow {
+    0%, 100% {
+        box-shadow: 0 3px 10px rgba(255, 107, 53, 0.3);
+        transform: translateX(50%) rotate(2deg) scale(1);
+    }
+    50% {
+        box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        transform: translateX(50%) rotate(2deg) scale(1.02);
+    }
+}
+
+/* RTL adjustments for warning corner */
+html[dir="rtl"] .hero-warning-corner {
+    transform: translateX(-50%) rotate(-2deg);
+}
+
 .hero-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -493,19 +532,57 @@ html[dir="ltr"] .hero-text-section {
 .hero-story-text {
     font-size: 1.1rem;
     line-height: 2;
-    color: #5C4033;
-    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.9);
+    color: #4A3428;
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
     position: relative;
     z-index: 2;
     margin: 0;
-    padding: 1.5rem;
-    background: linear-gradient(135deg, rgba(255, 248, 240, 0.8) 0%, rgba(245, 230, 211, 0.8) 100%);
-    border-radius: 15px;
-    box-shadow: 0 3px 12px rgba(139, 69, 19, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-    border: 1px solid rgba(210, 105, 30, 0.15);
+    padding: 2rem 2.5rem;
+    background: linear-gradient(135deg, rgba(255, 248, 240, 0.95) 0%, rgba(245, 230, 211, 0.95) 50%, rgba(222, 184, 135, 0.9) 100%);
+    border-radius: 20px;
+    box-shadow:
+        0 8px 25px rgba(139, 69, 19, 0.15),
+        inset 0 2px 4px rgba(255, 255, 255, 0.8),
+        inset 0 -2px 4px rgba(139, 69, 19, 0.1);
+    border: 3px solid #D4AF37;
     white-space: pre-line;
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(8px);
     letter-spacing: 0.2px;
+    overflow: hidden;
+}
+
+.hero-story-text::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #D4AF37, #F4E4BC, #D4AF37);
+    border-radius: 20px 20px 0 0;
+}
+
+.hero-story-text::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 40px;
+    height: 40px;
+    background: radial-gradient(circle, rgba(212, 175, 55, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: storyGlow 4s ease-in-out infinite;
+}
+
+@keyframes storyGlow {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: scale(1.2);
+    }
 }
 
 .hero-description {
@@ -1358,10 +1435,22 @@ html[dir="rtl"] .menu-carousel-nav {
         font-size: 0.95rem;
     }
 
+    .hero-warning-corner {
+        font-size: 0.7rem;
+        padding: 0.3rem 0.5rem;
+        top: -15px;
+        right: 50%;
+        transform: translateX(50%) rotate(1deg);
+    }
+
+    .hero-subtitle-combined {
+        padding: 1rem 1.5rem;
+    }
+
     .hero-story-text {
         font-size: 1rem;
         line-height: 1.8;
-        padding: 1.2rem;
+        padding: 1.8rem 2rem;
     }
 
     .hero-content {
@@ -1862,8 +1951,9 @@ html[dir="rtl"] .team-info {
     .hero-story-text {
         font-size: 0.9rem;
         line-height: 1.75;
-        padding: 1rem;
-        border-radius: 12px;
+        padding: 1.5rem;
+        border-radius: 15px;
+        border-width: 2px;
     }
 
     .hero-separator {
