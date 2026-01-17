@@ -2,6 +2,8 @@
 class LanguageManager {
     constructor() {
         this.currentLanguage = localStorage.getItem('language') || 'ar'; // Default to Arabic
+        this.currentTheme = localStorage.getItem('theme') || 'light'; // Default to light
+        this.currentColorScheme = localStorage.getItem('colorScheme') || 'default'; // Default to default colors
         this.init();
     }
 
@@ -10,7 +12,13 @@ class LanguageManager {
         this.updateContent();
         this.updateDirection();
         this.updateLogo();
+        this.applyTheme();
+        this.applyColorScheme();
+        this.updateThemeIcon();
         this.matchVideoHeight();
+        setTimeout(() => {
+            this.matchAboutImageHeight();
+        }, 300);
         setTimeout(() => this.matchAboutImageHeight(), 300);
         this.bindResizeEvent();
     }
@@ -19,6 +27,16 @@ class LanguageManager {
         const languageToggle = document.getElementById('languageToggle');
         if (languageToggle) {
             languageToggle.addEventListener('click', () => this.toggleLanguage());
+        }
+
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => this.toggleTheme());
+        }
+
+        const colorToggle = document.getElementById('colorToggle');
+        if (colorToggle) {
+            colorToggle.addEventListener('click', () => this.toggleColorScheme());
         }
     }
 
@@ -29,11 +47,9 @@ class LanguageManager {
         this.updateDirection();
         this.updateLogo();
         this.updateTeamCarouselArrows();
-        this.initializeTeamCarousel();
         setTimeout(() => {
             this.matchVideoHeight();
             this.matchAboutImageHeight();
-            this.matchTeamImageHeight();
         }, 200);
     }
 
@@ -99,7 +115,9 @@ class LanguageManager {
 
         // Populate team section
         this.populateTeam();
-        this.updateTeamCarouselArrows();
+
+        // Populate testimonials section
+        this.populateTestimonials();
 
         // Match video height after content update
         setTimeout(() => {
@@ -163,8 +181,8 @@ class LanguageManager {
                         `).join('')}
                     </div>
                     <div class="menu-carousel-nav">
-                        <button class="menu-carousel-btn prev-btn">${this.currentLanguage === 'ar' ? '›' : '‹'}</button>
-                        <button class="menu-carousel-btn next-btn">${this.currentLanguage === 'ar' ? '‹' : '›'}</button>
+                        <button class="menu-carousel-btn prev-btn">‹</button>
+                        <button class="menu-carousel-btn next-btn">›</button>
                     </div>
                 </div>
             `;
@@ -172,148 +190,6 @@ class LanguageManager {
 
         this.bindMenuShowcaseEvents();
         setTimeout(() => this.updateCarouselButtons(), 100);
-    }
-
-    populateTeam() {
-        const teamCarouselTrack = document.getElementById('teamCarouselTrack');
-        if (!teamCarouselTrack) {
-            console.error('Team carousel track not found!');
-            return;
-        }
-
-        const teamMembers = content[this.currentLanguage].teamMembers;
-        console.log('Populating team with', teamMembers.length, 'members in language:', this.currentLanguage);
-        teamCarouselTrack.innerHTML = '';
-
-        teamMembers.forEach(member => {
-            const memberCard = document.createElement('div');
-            memberCard.className = 'team-card';
-            memberCard.innerHTML = `
-                <div class="team-image-container">
-                    <img src="${member.image}" alt="${member.name}" class="team-image">
-                    ${member.award ? `<div class="team-award">${member.award}</div>` : ''}
-                </div>
-                <div class="team-info">
-                    <h3 class="team-name">${member.name}</h3>
-                    <p class="team-role">${member.role}</p>
-                    <p class="team-bio">${member.bio}</p>
-                </div>
-            `;
-            teamCarouselTrack.appendChild(memberCard);
-        });
-
-        console.log('Team cards created:', document.querySelectorAll('.team-card').length);
-        this.bindTeamCarouselEvents();
-        this.initializeTeamCarousel();
-    }
-
-    updateTeamCarouselArrows() {
-        const prevBtn = document.getElementById('teamPrevBtn');
-        const nextBtn = document.getElementById('teamNextBtn');
-
-        if (prevBtn && nextBtn) {
-            prevBtn.textContent = this.currentLanguage === 'ar' ? '›' : '‹';
-            nextBtn.textContent = this.currentLanguage === 'ar' ? '‹' : '›';
-        }
-    }
-
-    bindTeamCarouselEvents() {
-        const prevBtn = document.getElementById('teamPrevBtn');
-        const nextBtn = document.getElementById('teamNextBtn');
-
-        if (prevBtn) {
-            prevBtn.addEventListener('click', () => this.navigateTeamCarousel('prev'));
-        }
-        if (nextBtn) {
-            nextBtn.addEventListener('click', () => this.navigateTeamCarousel('next'));
-        }
-    }
-
-    initializeTeamCarousel() {
-        const track = document.getElementById('teamCarouselTrack');
-        if (track) {
-            track.style.transform = 'translateX(0)';
-        }
-        this.updateTeamCarouselButtons();
-    }
-
-    navigateTeamCarousel(direction) {
-        console.log('navigateTeamCarousel called with direction:', direction);
-        const track = document.getElementById('teamCarouselTrack');
-        const cards = document.querySelectorAll('.team-card');
-        const isRTL = document.documentElement.getAttribute('dir') === 'rtl';
-
-        console.log('Track found:', !!track, 'Cards found:', cards.length, 'isRTL:', isRTL);
-
-        if (!track || cards.length === 0) {
-            console.error('Track or cards not found');
-            return;
-        }
-
-        const cardWidth = cards[0].offsetWidth + 32; // 32px gap
-        const visibleCards = 3; // Show 3 cards at a time on desktop
-        const scrollAmount = cardWidth * visibleCards;
-
-        console.log('Card width:', cardWidth, 'Scroll amount:', scrollAmount);
-
-        // Get current position (how many sets of 3 cards we've scrolled)
-        let currentPosition = 0;
-        if (track.style.transform) {
-            const transformValue = parseFloat(track.style.transform.match(/translateX\(([^)]+)\)/)[1]);
-            currentPosition = Math.abs(transformValue) / scrollAmount;
-            console.log('Current transform:', transformValue, 'Current position:', currentPosition);
-        }
-
-        if (direction === 'next') {
-            // Calculate max position (total cards - cards to show, divided by cards per scroll)
-            const maxPosition = Math.ceil(cards.length / visibleCards) - 1;
-            currentPosition = Math.min(currentPosition + 1, maxPosition);
-            console.log('Moving next, max position:', maxPosition, 'new position:', currentPosition);
-        } else {
-            currentPosition = Math.max(currentPosition - 1, 0);
-            console.log('Moving prev, new position:', currentPosition);
-        }
-
-        // In RTL, we need to reverse the direction of movement
-        const translateX = isRTL ? (currentPosition * scrollAmount) : -(currentPosition * scrollAmount);
-        console.log('Final translateX:', translateX);
-        track.style.transform = `translateX(${translateX}px)`;
-
-        this.updateTeamCarouselButtons();
-    }
-
-    updateTeamCarouselButtons() {
-        const track = document.getElementById('teamCarouselTrack');
-        const prevBtn = document.getElementById('teamPrevBtn');
-        const nextBtn = document.getElementById('teamNextBtn');
-        const cards = document.querySelectorAll('.team-card');
-
-        console.log('updateTeamCarouselButtons called');
-
-        if (!track || !prevBtn || !nextBtn) {
-            console.error('Missing elements:', {track: !!track, prevBtn: !!prevBtn, nextBtn: !!nextBtn});
-            return;
-        }
-
-        // Get current position (how many sets of 3 cards we've scrolled)
-        let currentPosition = 0;
-        if (track.style.transform) {
-            const transformValue = parseFloat(track.style.transform.match(/translateX\(([^)]+)\)/)[1]);
-            currentPosition = Math.abs(transformValue) / ((cards[0]?.offsetWidth + 32) * 3);
-            console.log('Button update - transform:', transformValue, 'position:', currentPosition);
-        }
-
-        const maxPosition = Math.ceil(cards.length / 3) - 1;
-        console.log('Total cards:', cards.length, 'Max position:', maxPosition);
-
-        if (prevBtn) {
-            prevBtn.disabled = currentPosition <= 0;
-            console.log('Prev button disabled:', prevBtn.disabled);
-        }
-        if (nextBtn) {
-            nextBtn.disabled = currentPosition >= maxPosition;
-            console.log('Next button disabled:', nextBtn.disabled);
-        }
     }
 
     bindMenuShowcaseEvents() {
@@ -330,11 +206,13 @@ class LanguageManager {
     }
 
     bindCarouselNavigation() {
-        // Carousel navigation buttons
+        // Carousel navigation buttons - bind to both menu and team carousels
         document.querySelectorAll('.menu-carousel-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const isNext = e.target.classList.contains('next-btn');
-                this.navigateCarousel(isNext);
+                // Detect if this button belongs to team carousel
+                const isTeamCarousel = e.target.closest('.team-carousel-container') !== null;
+                this.navigateCarousel(isNext, isTeamCarousel);
             });
         });
     }
@@ -384,8 +262,8 @@ class LanguageManager {
                     `).join('')}
                 </div>
                     <div class="menu-carousel-nav">
-                        <button class="menu-carousel-btn prev-btn">${this.currentLanguage === 'ar' ? '›' : '‹'}</button>
-                        <button class="menu-carousel-btn next-btn">${this.currentLanguage === 'ar' ? '‹' : '›'}</button>
+                        <button class="menu-carousel-btn prev-btn">‹</button>
+                        <button class="menu-carousel-btn next-btn">›</button>
                     </div>
             </div>
         `;
@@ -410,15 +288,20 @@ class LanguageManager {
         });
     }
 
-    navigateCarousel(isNext) {
-        const track = document.querySelector('.menu-carousel-track');
-        const cards = document.querySelectorAll('.menu-card');
+    navigateCarousel(isNext, isTeamCarousel = false) {
+        // Target the appropriate carousel track
+        const trackSelector = isTeamCarousel
+            ? '.menu-carousel-track[data-category="team"]'
+            : '.menu-carousel-track:not([data-category="team"])';
+
+        const track = document.querySelector(trackSelector);
+        const cards = track ? track.querySelectorAll('.menu-card') : [];
         const isRTL = document.documentElement.getAttribute('dir') === 'rtl';
 
         if (!track || cards.length === 0) return;
 
-        const cardWidth = cards[0].offsetWidth + 32; // 32px gap (card width + gap)
-        const cardsToShow = 2; // Always show 2 cards
+        const cardWidth = cards[0].offsetWidth + 16; // 16px gap (reduced gap)
+        const cardsToShow = 3; // Always show 3 cards
         const scrollAmount = cardWidth * cardsToShow; // Scroll by 2 cards at a time
 
         // Get current position (how many sets of 2 cards we've scrolled)
@@ -440,18 +323,31 @@ class LanguageManager {
         const translateX = isRTL ? (currentPosition * scrollAmount) : -(currentPosition * scrollAmount);
         track.style.transform = `translateX(${translateX}px)`;
 
-        // Update button states
-        const prevBtn = document.querySelector('.prev-btn');
-        const nextBtn = document.querySelector('.next-btn');
+        // Update button states - different logic for team carousel
+        if (isTeamCarousel) {
+            // For team carousel, use team-specific button selectors
+            const teamPrevBtn = document.getElementById('teamPrevBtn');
+            const teamNextBtn = document.getElementById('teamNextBtn');
 
-        if (prevBtn) prevBtn.disabled = currentPosition <= 0;
-        if (nextBtn) nextBtn.disabled = currentPosition >= Math.ceil(cards.length / cardsToShow) - 1;
+            if (teamPrevBtn) teamPrevBtn.disabled = currentPosition <= 0;
+            if (teamNextBtn) teamNextBtn.disabled = currentPosition >= Math.ceil(cards.length / cardsToShow) - 1;
+        } else {
+            // For menu carousel, use existing logic
+            const carouselContainer = track.closest('.menu-carousel-container');
+            const prevBtn = carouselContainer ? carouselContainer.querySelector('.prev-btn') : document.querySelector('.prev-btn');
+            const nextBtn = carouselContainer ? carouselContainer.querySelector('.next-btn') : document.querySelector('.next-btn');
+
+            if (prevBtn) prevBtn.disabled = currentPosition <= 0;
+            if (nextBtn) nextBtn.disabled = currentPosition >= Math.ceil(cards.length / cardsToShow) - 1;
+        }
     }
 
     updateCarouselButtons() {
-        const cards = document.querySelectorAll('.menu-card');
-        const prevBtn = document.querySelector('.prev-btn');
-        const nextBtn = document.querySelector('.next-btn');
+        const track = document.querySelector('.menu-carousel-track[data-category="team"]') || document.querySelector('.menu-carousel-track');
+        const cards = track ? track.querySelectorAll('.menu-card') : [];
+        const carouselContainer = track ? track.closest('.menu-carousel-container') : null;
+        const prevBtn = carouselContainer ? carouselContainer.querySelector('.prev-btn') : document.querySelector('.prev-btn');
+        const nextBtn = carouselContainer ? carouselContainer.querySelector('.next-btn') : document.querySelector('.next-btn');
 
         // Always enable prev button initially (at position 0)
         if (prevBtn) prevBtn.disabled = true;
@@ -510,19 +406,6 @@ class LanguageManager {
         }
     }
 
-    matchTeamImageHeight() {
-        const teamCards = document.querySelectorAll('.team-card');
-        teamCards.forEach(card => {
-            const teamImage = card.querySelector('.team-image');
-            if (teamImage) {
-                // Reset height first
-                teamImage.style.height = 'auto';
-                // Set to fixed height for circular display
-                teamImage.style.height = '150px';
-            }
-        });
-    }
-
     bindResizeEvent() {
         let resizeTimeout;
         window.addEventListener('resize', () => {
@@ -533,6 +416,209 @@ class LanguageManager {
             }, 250);
         });
     }
+
+    // Theme Toggle Functions
+    toggleTheme() {
+        this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
+        localStorage.setItem('theme', this.currentTheme);
+        this.applyTheme();
+        this.updateThemeIcon();
+    }
+
+    applyTheme() {
+        const body = document.body;
+        if (this.currentTheme === 'dark') {
+            body.classList.add('dark-mode');
+        } else {
+            body.classList.remove('dark-mode');
+        }
+    }
+
+    updateThemeIcon() {
+        const themeIcon = document.querySelector('.theme-icon');
+        if (themeIcon) {
+            themeIcon.textContent = this.currentTheme === 'light' ? '🌙' : '☀️';
+        }
+    }
+
+    // Color Scheme Functions
+    toggleColorScheme() {
+        this.currentColorScheme = this.currentColorScheme === 'default' ? 'warm' : 'default';
+        localStorage.setItem('colorScheme', this.currentColorScheme);
+        this.applyColorScheme();
+    }
+
+    applyColorScheme() {
+        const body = document.body;
+        if (this.currentColorScheme === 'warm') {
+            body.classList.add('warm-mode');
+        } else {
+            body.classList.remove('warm-mode');
+        }
+    }
+
+    // Team Section - Following menu design pattern with creative adaptations
+    populateTeam() {
+        const teamCarouselContainer = document.getElementById('teamCarouselContainer');
+        if (!teamCarouselContainer) return;
+
+        const teamMembers = content[this.currentLanguage].teamMembers;
+
+        // Create creative team showcase following menu pattern
+        teamCarouselContainer.innerHTML = `
+            <div class="menu-carousel">
+                <div class="menu-carousel-track" data-category="team">
+                    ${teamMembers.map(member => `
+                        <div class="menu-card team-member-card">
+                            <div class="menu-card-image team-member-image">
+                                <img src="${member.image}" alt="${member.name}" class="team-member-photo">
+                                ${member.award ? `<div class="team-member-award">${member.award}</div>` : ''}
+                            </div>
+                            <div class="menu-card-content team-member-content">
+                                <h3 class="menu-card-title team-member-name">${member.name}</h3>
+                                <p class="team-member-role">${member.role}</p>
+                                <p class="team-member-bio">${member.bio}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="team-carousel-nav">
+                    <button class="menu-carousel-btn prev-btn" id="teamPrevBtn">‹</button>
+                    <button class="menu-carousel-btn next-btn" id="teamNextBtn">›</button>
+                </div>
+            </div>
+        `;
+
+        // Reset carousel position
+        const teamTrack = document.querySelector('.menu-carousel-track[data-category="team"]');
+        if (teamTrack) {
+            teamTrack.style.transform = 'translateX(0)';
+        }
+
+        // Bind navigation events (reusing menu carousel functions for team)
+        this.bindMenuShowcaseEvents();
+        setTimeout(() => this.updateCarouselButtons(), 100);
+    }
+
+    // Testimonials Section
+    populateTestimonials() {
+        const testimonialsContainer = document.getElementById('testimonialsContainer');
+        if (!testimonialsContainer) return;
+
+        const testimonials = content[this.currentLanguage].testimonials;
+
+        // Create testimonials grid
+        testimonialsContainer.innerHTML = `
+            <div class="testimonials-grid">
+                ${testimonials.map(testimonial => `
+                    <div class="testimonial-card">
+                        <div class="testimonial-header">
+                            <div class="testimonial-image">
+                                <img src="${testimonial.image}" alt="${testimonial.name}" class="testimonial-photo">
+                            </div>
+                            <div class="testimonial-info">
+                                <h4 class="testimonial-name">${testimonial.name}</h4>
+                                <p class="testimonial-title">${testimonial.title}</p>
+                                <div class="testimonial-rating">
+                                    ${'★'.repeat(testimonial.rating)}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-content">
+                            <blockquote class="testimonial-quote">
+                                ${testimonial.quote}
+                            </blockquote>
+                        </div>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    // Team-specific carousel navigation functions
+    bindTeamCarouselEvents() {
+        const teamPrevBtn = document.getElementById('teamPrevBtn');
+        const teamNextBtn = document.getElementById('teamNextBtn');
+
+        if (teamPrevBtn) {
+            teamPrevBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.navigateTeamCarousel('prev');
+            });
+        }
+
+        if (teamNextBtn) {
+            teamNextBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                this.navigateTeamCarousel('next');
+            });
+        }
+    }
+
+    navigateTeamCarousel(direction) {
+        const track = document.getElementById('teamCarouselTrack');
+        const cards = track ? track.querySelectorAll('.team-card') : [];
+        const isRTL = document.documentElement.getAttribute('dir') === 'rtl';
+
+        if (!track || cards.length === 0) return;
+
+        const cardsToShow = 3; // number of cards to scroll at a time
+        const cardWidth = cards[0].offsetWidth + 16; // 16px gap
+        const scrollAmount = cardWidth * cardsToShow;
+
+        let currentPosition = 0;
+        if (track.style.transform) {
+            const transformValue = parseFloat(track.style.transform.match(/translateX\(([^)]+)\)/)[1]);
+            currentPosition = Math.abs(transformValue) / scrollAmount;
+        }
+
+        const maxPosition = Math.ceil(cards.length / cardsToShow) - 1;
+
+        if (direction === 'next') {
+            currentPosition = Math.min(currentPosition + 1, maxPosition);
+        } else {
+            currentPosition = Math.max(currentPosition - 1, 0);
+        }
+
+        const translateX = isRTL ? currentPosition * scrollAmount : -currentPosition * scrollAmount;
+        track.style.transform = `translateX(${translateX}px)`;
+
+        this.updateTeamCarouselButtons();
+    }
+
+    updateTeamCarouselButtons() {
+        const track = document.getElementById('teamCarouselTrack');
+        const cards = track ? track.querySelectorAll('.team-card') : [];
+        const teamPrevBtn = document.getElementById('teamPrevBtn');
+        const teamNextBtn = document.getElementById('teamNextBtn');
+
+        if (!track || !cards.length) return;
+
+        const cardsToShow = 3;
+        const cardWidth = cards[0].offsetWidth + 16;
+        const scrollAmount = cardWidth * cardsToShow;
+
+        let currentPosition = 0;
+        if (track.style.transform) {
+            const transformValue = parseFloat(track.style.transform.match(/translateX\(([^)]+)\)/)[1]);
+            currentPosition = Math.abs(transformValue) / scrollAmount;
+        }
+
+        const maxPosition = Math.ceil(cards.length / cardsToShow) - 1;
+
+        if (teamPrevBtn) teamPrevBtn.disabled = currentPosition <= 0;
+        if (teamNextBtn) teamNextBtn.disabled = currentPosition >= maxPosition;
+    }
+
+    updateTeamCarouselArrows() {
+        const teamPrevBtn = document.getElementById('teamPrevBtn');
+        const teamNextBtn = document.getElementById('teamNextBtn');
+
+        if (teamPrevBtn) teamPrevBtn.textContent = '‹';
+        if (teamNextBtn) teamNextBtn.textContent = '›';
+    }
+
+
 }
 
 // Initialize the language manager when DOM is loaded

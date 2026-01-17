@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مطعم ومقهى عربي - Arabic Restaurant & Cafe</title>
-    <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="style.css?v=43">
     <link rel="icon" href="assests/Ar.png" type="image/png">
-</head>
-<body>
+  </head>
+  <body>
     <!-- Header -->
     <header class="header">
         <div class="container">
@@ -30,7 +30,10 @@
             <div class="hero-content">
                 <div class="hero-text-section">
                     <p class="hero-story-text" data-key="heroStoryText"></p>
-                    <button class="hero-button" data-key="heroButton"></button>
+                    <div class="hero-cta-container">
+                        <div class="hero-promotion" data-key="heroPromotion"></div>
+                        <button class="hero-button" data-key="heroButton"></button>
+                    </div>
                 </div>
                 <div class="hero-video-section">
                     <video class="hero-video" autoplay muted loop playsinline>
@@ -78,18 +81,23 @@
         <div class="container">
             <div class="team-header">
                 <h2 class="section-title" data-key="teamTitle"></h2>
-                <p class="team-subtitle" data-key="teamSubtitle"></p>
+                <p class="team-subtitle" data-key="teamSubtitle" style="font-size: 1.2rem !important; color: #8B4513 !important; margin-top: 1rem !important; opacity: 0.9 !important; font-weight: 400 !important; text-align: center !important;"></p>
             </div>
-            <div class="team-carousel-container">
-                <div class="team-carousel" id="teamCarousel">
-                    <div class="team-carousel-track" id="teamCarouselTrack">
-                        <!-- Team members will be populated by JavaScript -->
-                    </div>
-                </div>
-                <div class="team-carousel-nav">
-                    <button class="team-carousel-btn prev-btn" id="teamPrevBtn">‹</button>
-                    <button class="team-carousel-btn next-btn" id="teamNextBtn">›</button>
-                </div>
+            <div class="team-carousel-container" id="teamCarouselContainer">
+                <!-- Team carousel will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="testimonials-header">
+                <h2 class="section-title" data-key="testimonialsTitle"></h2>
+                <p class="testimonials-subtitle" data-key="testimonialsSubtitle"></p>
+            </div>
+            <div class="testimonials-container" id="testimonialsContainer">
+                <!-- Testimonials will be populated by JavaScript -->
             </div>
         </div>
     </section>
@@ -97,7 +105,6 @@
     <!-- Contact Section -->
     <section class="contact">
         <div class="container">
-            <h2 class="section-title" data-key="contactTitle"></h2>
             <div class="contact-info">
                 <div class="contact-item">
                     <h3>العنوان</h3>
@@ -115,8 +122,17 @@
         </div>
     </section>
 
+    <!-- Theme Toggle Buttons -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <span class="theme-icon">🌙</span>
+    </button>
+
+    <button class="color-toggle" id="colorToggle" aria-label="Toggle color scheme">
+        <span class="color-icon">🎨</span>
+    </button>
+
     <!-- Scripts -->
-    <script src="content.js?v=3"></script>
-    <script src="script.js?v=3"></script>
+    <script src="content.js?v=30"></script>
+    <script src="script.js?v=43"></script>
 </body>
 </html>

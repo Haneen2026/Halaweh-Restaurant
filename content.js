@@ -11,6 +11,7 @@ const content = {
     heroDescription: "3 ساعات من الدفء والمذاق واللمة الحلوة",
     heroStoryText: "الشتا يحكي حكايات دافية… وريحة البوفيه تفتح القلب قبل الشهية.\nفي مطعم حلاوة، بنجمع العيلة حول طاولة مليانة دفء وضحك وذكريات.\n\nضحكات الأطفال، لمّة الأحباب، وأطباق تهمس: استمتع بكل لقمة.\nوهون… الجو أنقى، بلا تدخين ولا أرجيلة، عشان تكتمل اللمة براحة وطمأنينة.\n\nفي حلاوة، لمّتكم معنا…\nمش بس أحلى، أحلى بألف مرة.",
     heroButton: "احجز الآن",
+    heroPromotion: "تجربة شتوية بسعر 20 دينار للشخص\nابتداءً من 20 يناير 2026 – لفترة محدودة",
 
     // About Section
     aboutTitle: "عن مطعمنا",
@@ -206,8 +207,8 @@ const content = {
             ingredients: ["أرز", "حليب", "سكر", "قرفة"]
           }
         ]
-        }
-      ],
+      }
+    ],
 
     // Team Section
     teamTitle: "فريقنا",
@@ -216,80 +217,129 @@ const content = {
       {
         name: "أحمد محمد",
         role: "شيف تنفيذي",
-        image: "assests/ahmed.jpg",
-        bio: "خبير في الطبخ العربي التقليدي مع خبرة 15 عاماً",
-        award: "موظف الشهر - مارس 2025"
+        image: "assests/ahmed.png",
+        bio: "خبير في الطبخ العربي التقليدي مع خبرة 15 عاماً في المطبخ الشرق أوسطي",
+        award: "موظف الشهر - نوفمبر 2025"
       },
       {
         name: "فاطمة علي",
-        role: "رئيسة الطهاة",
-        image: "assests/fatma.jpg",
-        bio: "متخصصة في الحلويات العربية والمطبخ الشرقي",
+        role: "مديرة المطبخ",
+        image: "assests/fatma.png",
+        bio: "متخصصة في المطبخ العربي والحلويات التقليدية مع شغف للنكهات الأصيلة",
         award: null
       },
       {
         name: "محمد حسن",
-        role: "سقاك",
-        image: "assests/mohamed.jpg",
-        bio: "خبير في تحضير القهوة العربية والمشروبات التقليدية",
-        award: "موظف الشهر - فبراير 2025"
+        role: "شيف رئيسي",
+        image: "assests/mohamed.png",
+        bio: "خبير في الطبخ الشرق أوسطي مع جوائز دولية وخبرة 12 عاماً",
+        award: "موظف الشهر - اكتوبر 2025"
       },
       {
         name: "سارة أحمد",
-        role: "نادلة رئيسية",
-        image: "assests/sara.jpg",
-        bio: "مسؤولة عن خدمة العملاء وإدارة قاعة الطعام",
+        role: "مديرة الخدمة",
+        image: "assests/sara.png",
+        bio: "مختصة في خدمة العملاء مع خبرة 10 سنوات في إدارة الضيافة",
         award: null
       },
       {
         name: "علي محمود",
-        role: "طباخ مساعد",
-        image: "assests/ali.jpg",
-        bio: "متخصص في الطبخ السريع والمأكولات البحرية",
-        award: "موظف الشهر - يناير 2025"
+        role: "مساعد شيف",
+        image: "assests/ali.png",
+        bio: "شغوف بالطبخ العربي والأطباق التقليدية مع تركيز على الجودة والنكهة",
+        award: "موظف الشهر - ديسمبر 2025"
       },
       {
-        name: "لينا خالد",
-        role: "مدربة قهوة",
-        image: "assests/lina.jpg",
-        bio: "خبيرة في تحضير المشروبات الساخنة والعصائر الطازجة",
+        name: "مريم خالد",
+        role: "خبيرة قهوة",
+        image: "assests/maryam.png",
+        bio: "متخصصة في تحضير القهوة العربية والشاي التقليدي والمشروبات الدافئة",
         award: null
       },
       {
-        name: "كريم يوسف",
-        role: "نادل",
-        image: "assests/karim.jpg",
-        bio: "مسؤول عن خدمة العملاء في قسم المطعم",
+        name: "حسن عبدالله",
+        role: "مدير المطعم",
+        image: "assests/hassan.png",
+        bio: "مدير ذو خبرة في إدارة المطاعم العائلية وخدمة العملاء المتميزة",
         award: null
       },
       {
-        name: "نورا سالم",
-        role: "مسؤولة المخابز",
-        image: "assests/nora.jpg",
-        bio: "متخصصة في إعداد الخبز العربي والمعجنات",
-        award: "موظف الشهر - أبريل 2025"
+        name: "لينا عمر",
+        role: "مضيفة رئيسية",
+        image: "assests/lina.png",
+        bio: "مختصة في خدمة العملاء والضيافة العربية مع تركيز على رضا العائلات",
+        award: "موظف الشهر - سبتمبر 2025"
       },
       {
-        name: "عمر عبدالله",
-        role: "طباخ",
-        image: "assests/omar.jpg",
-        bio: "خبير في الطبخ التركي واللبناني",
+        name: "عمر سالم",
+        role: "مسؤول المشروبات",
+        image: "assests/omar.png",
+        bio: "خبير في تحضير المشروبات التقليدية والعصائر الطازجة والمختصرات",
         award: null
       },
       {
-        name: "مريم حسن",
-        role: "نادلة",
-        image: "assests/mariam.jpg",
-        bio: "مسؤولة عن خدمة العائلات والأطفال",
+        name: "نور محمد",
+        role: "مساعدة خدمة",
+        image: "assests/noor.png",
+        bio: "مخلصة في تقديم خدمة متميزة للعائلات والأطفال مع ابتسامة دافئة",
         award: null
+      }
+    ],
+
+    // Testimonials Section
+    testimonialsTitle: "آراء العملاء المميزين",
+    testimonialsSubtitle: "شرفنا أن نستضيف شخصيات بارزة في عالمنا العربي",
+    testimonials: [
+      {
+        name: "ناصر القصبي",
+        title: "مغني وملحن سعودي",
+        image: "assests/ahmed.png",
+        quote: "تجربة فريدة من نوعها في مطعم حلاوة. الطعام يحمل مذاق التراث العربي الأصيل مع لمسة عصرية راقية. يستحق الزيارة مراراً وتكراراً.",
+        rating: 5
+      },
+      {
+        name: "هيفاء وهبي",
+        title: "ممثلة ومغنية لبنانية",
+        image: "assests/fatma.png",
+        quote: "مكان ساحر يجمع بين الدفء العائلي والأصالة العربية. الأطباق تذكرني بطفولتي في لبنان، والخدمة على أعلى مستوى من الكياسة والاحترافية.",
+        rating: 5
+      },
+      {
+        name: "عبدالله الرويشد",
+        title: "إعلامي سعودي",
+        image: "assests/mohamed.png",
+        quote: "في زمن الوجبات السريعة، يقف مطعم حلاوة كواحة للطعام الحقيقي. كل لقمة تحمل قصة من تراثنا العربي الغني. شكراً للحفاظ على هذه التقاليد.",
+        rating: 5
+      },
+      {
+        name: "أحلام",
+        title: "مغنية إماراتية",
+        image: "assests/sara.png",
+        quote: "الدفء في مطعم حلاوة ليس فقط في الأجواء، بل في كل طبق يقدمونه. يشعرك بالعودة إلى المنزل رغم أنك في مكان عام. تجربة لا تُنسى.",
+        rating: 5
+      },
+      {
+        name: "محمد العريفي",
+        title: "داعية إسلامي",
+        image: "assests/ali.png",
+        quote: "مكان مبارك يحافظ على القيم العائلية والتقاليد العربية الأصيلة. الطعام حلال وشهي، والأجواء مناسبة للعائلات المسلمة التي تبحث عن الراحة والطمأنينة.",
+        rating: 5
+      },
+      {
+        name: "نجوى كرم",
+        title: "مغنية لبنانية",
+        image: "assests/lina.png",
+        quote: "عندما أريد العودة إلى جذوري، أذهب إلى مطعم حلاوة. كل تفصيل يذكرني بلبنان الأصيل، من رائحة القهوة العربية إلى دفء الضيافة العربية الأصيلة.",
+        rating: 5
       }
     ],
 
     // Contact Section
     contactTitle: "تواصل معنا",
-    contactAddress: "شارع الملك فيصل، الرياض، المملكة العربية السعودية",
-    contactPhone: "+966 50 123 4567",
-    contactHours: "يومياً من 8:00 صباحاً إلى 12:00 منتصف الليل"
+    contactAddress: "خلدا، عمان، الأردن",
+    contactPhone: "+962 77 123 4567",
+    contactHours: "يومياً من 8:00 صباحاً إلى 12:00 منتصف الليل",
+
   },
 
   en: {
@@ -496,8 +546,8 @@ const content = {
             ingredients: ["Rice", "Milk", "Sugar", "Cinnamon"]
           }
         ]
-        }
-      ],
+      }
+    ],
 
     // Team Section
     teamTitle: "Our Team",
@@ -506,79 +556,127 @@ const content = {
       {
         name: "Ahmed Mohamed",
         role: "Executive Chef",
-        image: "assests/ahmed.jpg",
-        bio: "Expert in traditional Arabic cooking with 15 years of experience",
-        award: "Employee of the Month - March 2025"
+        image: "assests/ahmed.png",
+        bio: "Expert in traditional Arabic cooking with 15 years of experience in Middle Eastern cuisine",
+        award: "Employee of the Month - November 2025"
       },
       {
         name: "Fatma Ali",
         role: "Head Chef",
-        image: "assests/fatma.jpg",
-        bio: "Specialist in Arabic desserts and oriental cuisine",
+        image: "assests/fatma.png",
+        bio: "Specialist in Arabic cuisine and traditional desserts with passion for authentic flavors",
         award: null
       },
       {
         name: "Mohamed Hassan",
-        role: "Barista",
-        image: "assests/mohamed.jpg",
-        bio: "Expert in preparing Arabic coffee and traditional beverages",
-        award: "Employee of the Month - February 2025"
+        role: "Master Chef",
+        image: "assests/mohamed.png",
+        bio: "Expert in Middle Eastern cooking with international awards and 12 years of experience",
+        award: "Employee of the Month - October 2025"
       },
       {
         name: "Sara Ahmed",
-        role: "Head Waitress",
-        image: "assests/sara.jpg",
-        bio: "Responsible for customer service and dining room management",
+        role: "Service Manager",
+        image: "assests/sara.png",
+        bio: "Customer service specialist with 10 years of experience in hospitality management",
         award: null
       },
       {
         name: "Ali Mahmoud",
-        role: "Assistant Cook",
-        image: "assests/ali.jpg",
-        bio: "Specialist in fast cooking and seafood dishes",
-        award: "Employee of the Month - January 2025"
+        role: "Sous Chef",
+        image: "assests/ali.png",
+        bio: "Passionate about Arabic cooking and traditional dishes with focus on quality and flavor",
+        award: "Employee of the Month - December 2025"
       },
       {
-        name: "Lina Khaled",
-        role: "Coffee Trainer",
-        image: "assests/lina.jpg",
-        bio: "Expert in preparing hot drinks and fresh juices",
+        name: "Maryam Khaled",
+        role: "Coffee Expert",
+        image: "assests/maryam.png",
+        bio: "Specialist in preparing Arabic coffee, traditional tea, and warm beverages",
         award: null
       },
       {
-        name: "Karim Youssef",
-        role: "Waiter",
-        image: "assests/karim.jpg",
-        bio: "Responsible for customer service in the restaurant section",
+        name: "Hassan Abdullah",
+        role: "Restaurant Manager",
+        image: "assests/hassan.png",
+        bio: "Experienced manager in family restaurants and exceptional customer service",
         award: null
       },
       {
-        name: "Nora Salem",
-        role: "Bakery Manager",
-        image: "assests/nora.jpg",
-        bio: "Specialist in preparing Arabic bread and pastries",
-        award: "Employee of the Month - April 2025"
+        name: "Lina Omar",
+        role: "Head Waitress",
+        image: "assests/lina.png",
+        bio: "Specialist in customer service and Arabic hospitality with focus on family satisfaction",
+        award: "Employee of the Month - November 2025"
       },
       {
-        name: "Omar Abdullah",
-        role: "Cook",
-        image: "assests/omar.jpg",
-        bio: "Expert in Turkish and Lebanese cooking",
+        name: "Omar Salem",
+        role: "Beverage Manager",
+        image: "assests/omar.png",
+        bio: "Expert in preparing traditional beverages, fresh juices, and specialty drinks",
         award: null
       },
       {
-        name: "Mariam Hassan",
-        role: "Waitress",
-        image: "assests/mariam.jpg",
-        bio: "Responsible for serving families and children",
+        name: "Noor Mohamed",
+        role: "Service Assistant",
+        image: "assests/noor.png",
+        bio: "Dedicated to providing excellent service to families and children with a warm smile",
         award: null
+      }
+    ],
+
+    // Testimonials Section
+    testimonialsTitle: "Testimonials from Distinguished Guests",
+    testimonialsSubtitle: "We're honored to have hosted prominent figures from our Arab world",
+    testimonials: [
+      {
+        name: "Nasser Al Qasabi",
+        title: "Saudi Singer & Composer",
+        image: "assests/ahmed.png",
+        quote: "A unique experience at Halawa Restaurant. The food carries the authentic taste of Arab heritage with a modern and elegant touch. Worth visiting again and again.",
+        rating: 5
+      },
+      {
+        name: "Haifa Wehbe",
+        title: "Lebanese Actress & Singer",
+        image: "assests/fatma.png",
+        quote: "A magical place that combines family warmth and Arab authenticity. The dishes remind me of my childhood in Lebanon, and the service is of the highest level of courtesy and professionalism.",
+        rating: 5
+      },
+      {
+        name: "Abdullah Al Rousheed",
+        title: "Saudi Media Personality",
+        image: "assests/mohamed.png",
+        quote: "In the age of fast food, Halawa Restaurant stands as an oasis for real food. Every bite carries a story from our rich Arab heritage. Thank you for preserving these traditions.",
+        rating: 5
+      },
+      {
+        name: "Ahlam",
+        title: "Emirati Singer",
+        image: "assests/sara.png",
+        quote: "The warmth at Halawa Restaurant is not just in the atmosphere, but in every dish they serve. It makes you feel at home even in a public place. An unforgettable experience.",
+        rating: 5
+      },
+      {
+        name: "Mohammed Al Arifi",
+        title: "Islamic Scholar",
+        image: "assests/ali.png",
+        quote: "A blessed place that preserves family values and authentic Arab traditions. The food is halal and delicious, and the atmosphere is suitable for Muslim families seeking comfort and peace of mind.",
+        rating: 5
+      },
+      {
+        name: "Najwa Karam",
+        title: "Lebanese Singer",
+        image: "assests/lina.png",
+        quote: "When I want to return to my roots, I go to Halawa Restaurant. Every detail reminds me of authentic Lebanon, from the aroma of Arabic coffee to the warmth of genuine Arab hospitality.",
+        rating: 5
       }
     ],
 
     // Contact Section
     contactTitle: "Contact Us",
-    contactAddress: "King Faisal Street, Riyadh, Saudi Arabia",
-    contactPhone: "+966 50 123 4567",
+    contactAddress: "Khilda, Amman, Jordan",
+    contactPhone: "+962 77 123 4567",
     contactHours: "Daily from 8:00 AM to 12:00 AM"
   }
 };
