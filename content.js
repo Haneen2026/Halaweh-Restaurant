@@ -353,6 +353,7 @@ const content = {
     heroDescription: "3 Hours of Warmth, Flavor, and Sweet Company",
     heroStoryText: "Winter tells warm stories… and the aroma of the buffet opens the heart before the appetite.\nAt Halawa Restaurant, we gather the family around a table filled with warmth, laughter, and beautiful memories.\n\nChildren's laughter, loved ones together, and dishes that whisper: \"Savor every bite.\"\nAnd here… the air is purer, with no smoking and no hookah, so every gathering feels relaxed and safe.\n\nAt Halawa, your gathering with us…\nis not just delightful — it's a thousand times more delightful.",
     heroButton: "Book Now",
+    heroPromotion: "A winter experience for 20 JOD per person\nStarting January 20, 2026 – for a limited time",
 
     // About Section
     aboutTitle: "About Our Restaurant",
