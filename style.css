@@ -194,8 +194,13 @@ html[dir="ltr"] .header-content {
 
 .logo {
     height: 60px;
-    width: auto;
+    width: 60px;
+    border-radius: 50%;
+    object-fit: cover;
     transition: all 0.3s ease;
+    display: block;
+    background-color: #FFF8DC;
+    padding: 4px;
 }
 
 .header-buttons {
@@ -2063,6 +2068,7 @@ body.dark-mode .flatpickr-day.next-month-day {
 
     .logo {
         height: 45px;
+        width: 45px;
     }
 
     .header-buttons {
