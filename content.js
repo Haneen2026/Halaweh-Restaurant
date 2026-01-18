@@ -697,7 +697,7 @@ const content = {
       {
         name: "Nasser Al Qasabi",
         title: "Saudi Singer & Composer",
-        image: "assests/Naser.png",
+        image: "assests/naser.png",
         quote: "A unique experience at Halawa Restaurant. The food carries the authentic taste of Arab heritage with a modern and elegant touch. Worth visiting again and again.",
         rating: 5
       },
