@@ -732,7 +732,7 @@ const content = {
       {
         name: "Najwa Karam",
         title: "Lebanese Singer",
-        image: "assests/Najwa.png",
+        image: "assests/najwa.png",
         quote: "When I want to return to my roots, I go to Halawa Restaurant. Every detail reminds me of authentic Lebanon, from the aroma of Arabic coffee to the warmth of genuine Arab hospitality.",
         rating: 5
       }
