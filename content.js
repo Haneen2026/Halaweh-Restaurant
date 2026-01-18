@@ -351,6 +351,11 @@ const content = {
     bookingDateLabel: "التاريخ",
     bookingDateHelper: "التواريخ المتاحة: 22، 23، 24، 29، 30، 31 يناير و 5، 6، 7، 12، 13، 14، 19، 20 فبراير 2026",
     bookingSubmitButton: "تأكيد الحجز",
+    bookingConfirmationTitle: "تم تأكيد حجزك! 🎉",
+    bookingConfirmationMessage: "شكراً لك! تم استلام طلب الحجز الخاص بك. سنتواصل معك قريباً.",
+    bookingTotalPrice: "السعر الإجمالي",
+    bookingPricePerGuest: "دينار للشخص الواحد",
+    bookingCloseButton: "ممتاز",
 
     // Contact Section
     contactTitle: "تواصل معنا",
@@ -358,6 +363,46 @@ const content = {
     contactPhone: "+962 77 123 4567",
     contactHours: "يومياً من 8:00 صباحاً إلى 12:00 منتصف الليل",
 
+    // Footer
+    footerLocationTitle: "الموقع",
+    footerLocationText: "خلدا - عمّان",
+    footerOpenMaps: "افتح الخريطة",
+
+    footerPoliciesTitle: "السياسات",
+    footerPolicyRefund: "الاسترجاع",
+    footerPolicyBooking: "الحجز",
+    footerPolicyCancellation: "الإلغاء",
+    footerPoliciesHint: "اضغط على أي سياسة لقراءتها.",
+
+    footerSupportTitle: "دعم واتساب",
+    footerSupportText: "تحتاج مساعدة سريعة؟ ارسل لنا على واتساب وسنرد عليك.",
+    footerWhatsAppButton: "تواصل عبر واتساب",
+
+    footerShareTitle: "شارك",
+    footerShareText: "شارك الصفحة مع أصدقائك.",
+    footerShareFacebook: "فيسبوك",
+    footerShareInstagram: "إنستغرام",
+    footerShareWhatsApp: "واتساب",
+
+    footerBottomText: "© 2026 حلاوة — جميع الحقوق محفوظة.",
+
+    // Policies content (used in modal)
+    policyRefundTitle: "سياسة الاسترجاع",
+    policyRefundBody:
+      "إذا كان لديك دفع مُسبق لحجز/فعالية: يمكن طلب الاسترجاع عند الإلغاء ضمن المدة المسموحة في سياسة الإلغاء.\nيتم الاسترجاع إلى نفس وسيلة الدفع خلال 5–7 أيام عمل (حسب البنك).\nقد تُستثنى أي رسوم طرف ثالث إن وجدت.",
+    policyBookingTitle: "سياسة الحجز",
+    policyBookingBody:
+      "الحجز يعتمد على توفر المقاعد.\nيرجى الوصول في الموعد المحدد — يتم الاحتفاظ بالطاولة لمدة 15 دقيقة.\nللتأكيد أو التعديل السريع، تواصل معنا عبر واتساب.",
+    policyCancellationTitle: "سياسة الإلغاء",
+    policyCancellationBody:
+      "يمكن الإلغاء أو التعديل قبل الموعد بمدة لا تقل عن 6 ساعات حتى نتيح المقعد لغيرك.\nفي حال عدم الحضور بدون إشعار، قد نحتاج لتأكيد إضافي للحجوزات القادمة.",
+
+    // Footer actions (used in script)
+    footerShareMessage: "خلّينا نلمّها سوا في مطعم حلاوة!",
+    footerLinkCopied: "تم نسخ الرابط.",
+    footerInstagramHint: "تم نسخ الرابط — الصقه في إنستغرام.",
+    footerCopyFailed: "انسخ الرابط يدويًا:",
+    footerWhatsAppPrefill: "مرحباً، أحتاج مساعدة بخصوص الحجز في مطعم حلاوة.",
   },
 
   en: {
@@ -709,11 +754,57 @@ const content = {
     bookingDateLabel: "Date",
     bookingDateHelper: "Available dates: Jan 22, 23, 24, 29, 30, 31 and Feb 5, 6, 7, 12, 13, 14, 19, 20, 2026",
     bookingSubmitButton: "Confirm Booking",
+    bookingConfirmationTitle: "Booking Confirmed! 🎉",
+    bookingConfirmationMessage: "Thank you! Your booking request has been received. We will contact you soon.",
+    bookingTotalPrice: "Total Price",
+    bookingPricePerGuest: "JOD per person",
+    bookingCloseButton: "Great!",
 
     // Contact Section
     contactTitle: "Contact Us",
     contactAddress: "Khilda, Amman, Jordan",
     contactPhone: "+962 77 123 4567",
-    contactHours: "Daily from 8:00 AM to 12:00 AM"
+    contactHours: "Daily from 8:00 AM to 12:00 AM",
+
+    // Footer
+    footerLocationTitle: "Location",
+    footerLocationText: "Khalda, Amman",
+    footerOpenMaps: "Open in Maps",
+
+    footerPoliciesTitle: "Policies",
+    footerPolicyRefund: "Refund",
+    footerPolicyBooking: "Booking",
+    footerPolicyCancellation: "Cancellation",
+    footerPoliciesHint: "Tap a policy to read.",
+
+    footerSupportTitle: "WhatsApp Support",
+    footerSupportText: "Need quick help? Message us on WhatsApp and we’ll reply fast.",
+    footerWhatsAppButton: "WhatsApp Support",
+
+    footerShareTitle: "Share",
+    footerShareText: "Share this page with friends.",
+    footerShareFacebook: "Facebook",
+    footerShareInstagram: "Instagram",
+    footerShareWhatsApp: "WhatsApp",
+
+    footerBottomText: "© 2026 Halawa — All rights reserved.",
+
+    // Policies content (used in modal)
+    policyRefundTitle: "Refund Policy",
+    policyRefundBody:
+      "If there was any prepayment for a booking/event: you can request a refund when cancelling within the allowed time in the Cancellation Policy.\nRefunds go back to the original payment method within 5–7 business days (bank dependent).\nAny third‑party fees (if applicable) may be excluded.",
+    policyBookingTitle: "Booking Policy",
+    policyBookingBody:
+      "Bookings are subject to availability.\nPlease arrive on time — we hold the table for 15 minutes.\nFor quick confirmation or changes, contact us via WhatsApp.",
+    policyCancellationTitle: "Cancellation Policy",
+    policyCancellationBody:
+      "You can cancel or reschedule at least 6 hours before your time so we can offer the seat to others.\nNo‑shows without notice may require extra confirmation for future bookings.",
+
+    // Footer actions (used in script)
+    footerShareMessage: "Let’s meet at Halawa!",
+    footerLinkCopied: "Link copied.",
+    footerInstagramHint: "Link copied — paste it into Instagram.",
+    footerCopyFailed: "Copy this link:",
+    footerWhatsAppPrefill: "Hi! I need help with a booking at Halawa."
   }
 };

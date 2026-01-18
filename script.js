@@ -22,6 +22,7 @@ class LanguageManager {
         setTimeout(() => this.matchAboutImageHeight(), 300);
         this.bindResizeEvent();
         this.initializeDatePicker();
+        initializeFooter();
     }
 
     bindEvents() {
@@ -49,6 +50,8 @@ class LanguageManager {
         this.updateLogo();
         this.updateTeamCarouselArrows();
         this.updateDatePickerLocale();
+        updateBookingModalContent();
+        initializeFooter();
         setTimeout(() => {
             this.matchVideoHeight();
             this.matchAboutImageHeight();
@@ -792,7 +795,28 @@ function initializeBookingForm() {
     bookingFormInitialized = true;
 
     const bookingForm = document.getElementById('bookingForm');
+    const fullNameInput = document.getElementById('fullName');
     const phoneInput = document.getElementById('phoneNumber');
+
+    // Restrict name input to letters and spaces only
+    if (fullNameInput) {
+        fullNameInput.addEventListener('input', (e) => {
+            // Remove any non-letter and non-space characters (allows letters and spaces)
+            e.target.value = e.target.value.replace(/[^a-zA-Z\u0600-\u06FF\s]/g, '');
+        });
+
+        fullNameInput.addEventListener('keypress', (e) => {
+            // Allow letters (English and Arabic), spaces, and control keys
+            const key = e.key;
+            const isLetter = /[a-zA-Z\u0600-\u06FF]/.test(key);
+            const isSpace = key === ' ';
+            const isControlKey = ['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(key);
+            
+            if (!isLetter && !isSpace && !isControlKey) {
+                e.preventDefault();
+            }
+        });
+    }
 
     // Restrict phone input to numbers only
     if (phoneInput) {
@@ -832,7 +856,7 @@ function initializeBookingForm() {
             const formData = {
                 fullName: document.getElementById('fullName').value,
                 phoneNumber: document.getElementById('phoneNumber').value,
-                numberOfGuests: document.getElementById('numberOfGuests').value,
+                numberOfGuests: parseInt(document.getElementById('numberOfGuests').value),
                 mealType: document.getElementById('mealType').value,
                 bookingDate: document.getElementById('bookingDate').value
             };
@@ -840,13 +864,12 @@ function initializeBookingForm() {
             // Here you can add your booking logic (send to server, show confirmation, etc.)
             console.log('Booking submitted:', formData);
             
-            // Show success message (you can customize this)
-            const currentLanguage = localStorage.getItem('language') || 'ar';
-            const successMessage = currentLanguage === 'ar' 
-                ? 'شكراً لك! تم استلام طلب الحجز الخاص بك. سنتواصل معك قريباً.'
-                : 'Thank you! Your booking request has been received. We will contact you soon.';
+            // Calculate total price (number of guests × 20 JD)
+            const pricePerGuest = 20;
+            const totalPrice = formData.numberOfGuests * pricePerGuest;
             
-            alert(successMessage);
+            // Show confirmation modal with price
+            showBookingConfirmationModal(formData.numberOfGuests, totalPrice);
             
             // Reset form
             bookingForm.reset();
@@ -857,5 +880,263 @@ function initializeBookingForm() {
             }
         });
     }
+}
 
+// Booking Confirmation Modal Functions
+function showBookingConfirmationModal(numberOfGuests, totalPrice) {
+    const modalOverlay = document.getElementById('bookingModalOverlay');
+    const currentLanguage = localStorage.getItem('language') || 'ar';
+    const currentContent = content[currentLanguage];
+    
+    if (!modalOverlay) return;
+    
+    // Update modal content
+    document.getElementById('modalTitle').textContent = currentContent.bookingConfirmationTitle;
+    document.getElementById('modalMessage').textContent = currentContent.bookingConfirmationMessage;
+    document.getElementById('numberOfGuestsValue').textContent = numberOfGuests;
+    document.getElementById('pricePerGuest').textContent = currentContent.bookingPricePerGuest;
+    document.getElementById('totalLabel').textContent = currentContent.bookingTotalPrice;
+    document.getElementById('totalAmount').textContent = totalPrice;
+    document.getElementById('modalCloseBtn').textContent = currentContent.bookingCloseButton;
+    
+    // Show modal with animation
+    modalOverlay.classList.add('show');
+    
+    // Prevent body scroll when modal is open
+    document.body.style.overflow = 'hidden';
+    
+    // Add close handlers
+    const closeModal = () => {
+        modalOverlay.classList.remove('show');
+        document.body.style.overflow = '';
+    };
+    
+    // Close button
+    const closeBtn = document.getElementById('modalCloseBtn');
+    if (closeBtn) {
+        closeBtn.onclick = closeModal;
+    }
+    
+    // Close on overlay click
+    modalOverlay.onclick = (e) => {
+        if (e.target === modalOverlay) {
+            closeModal();
+        }
+    };
+    
+    // Close on Escape key
+    const escapeHandler = (e) => {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('show')) {
+            closeModal();
+            document.removeEventListener('keydown', escapeHandler);
+        }
+    };
+    document.addEventListener('keydown', escapeHandler);
+}
+
+// Update modal content when language changes
+function updateBookingModalContent() {
+    const modalOverlay = document.getElementById('bookingModalOverlay');
+    if (!modalOverlay || !modalOverlay.classList.contains('show')) return;
+    
+    const currentLanguage = localStorage.getItem('language') || 'ar';
+    const currentContent = content[currentLanguage];
+    const totalAmount = parseInt(document.getElementById('totalAmount').textContent) || 0;
+    const numberOfGuests = parseInt(document.getElementById('numberOfGuestsValue').textContent) || 0;
+    
+    document.getElementById('modalTitle').textContent = currentContent.bookingConfirmationTitle;
+    document.getElementById('modalMessage').textContent = currentContent.bookingConfirmationMessage;
+    document.getElementById('numberOfGuestsValue').textContent = numberOfGuests;
+    document.getElementById('pricePerGuest').textContent = currentContent.bookingPricePerGuest;
+    document.getElementById('totalLabel').textContent = currentContent.bookingTotalPrice;
+    document.getElementById('modalCloseBtn').textContent = currentContent.bookingCloseButton;
+}
+
+// Footer (Policies + WhatsApp support + Social sharing)
+let footerEventsBound = false;
+let footerToastTimeoutId = null;
+
+function getActiveLanguage() {
+    return localStorage.getItem('language') || 'ar';
+}
+
+function getActiveContent() {
+    return content[getActiveLanguage()];
+}
+
+function normalizePhoneNumberToDigits(phone) {
+    if (!phone) return '';
+    return String(phone).replace(/\D/g, '');
+}
+
+function getShareUrl() {
+    // Avoid sharing internal anchors
+    return window.location.href.split('#')[0];
+}
+
+function openExternalWindow(url) {
+    const w = window.open(url, '_blank');
+    if (w) w.opener = null;
+}
+
+function showFooterToast(message) {
+    const toast = document.getElementById('footerToast');
+    if (!toast) return;
+
+    toast.textContent = message || '';
+    toast.classList.add('show');
+
+    if (footerToastTimeoutId) {
+        clearTimeout(footerToastTimeoutId);
+    }
+    footerToastTimeoutId = setTimeout(() => {
+        toast.classList.remove('show');
+    }, 2600);
+}
+
+async function copyToClipboard(text) {
+    // Modern API
+    if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+        await navigator.clipboard.writeText(text);
+        return;
+    }
+
+    // Fallback
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+}
+
+function updateWhatsAppSupportLink() {
+    const btn = document.getElementById('whatsappSupportBtn');
+    if (!btn) return;
+
+    const current = getActiveContent();
+    const digits = normalizePhoneNumberToDigits(current.contactPhone);
+    const message = current.footerWhatsAppPrefill || '';
+
+    if (!digits) {
+        btn.href = '#';
+        btn.classList.add('disabled');
+        btn.setAttribute('aria-disabled', 'true');
+        return;
+    }
+
+    btn.classList.remove('disabled');
+    btn.removeAttribute('aria-disabled');
+    btn.href = `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
+}
+
+function getPolicyContent(policyType) {
+    const current = getActiveContent();
+    switch (policyType) {
+        case 'refund':
+            return { title: current.policyRefundTitle, body: current.policyRefundBody };
+        case 'booking':
+            return { title: current.policyBookingTitle, body: current.policyBookingBody };
+        case 'cancellation':
+            return { title: current.policyCancellationTitle, body: current.policyCancellationBody };
+        default:
+            return null;
+    }
+}
+
+function openPolicyModal(policyType) {
+    const overlay = document.getElementById('policyModalOverlay');
+    const titleEl = document.getElementById('policyModalTitle');
+    const bodyEl = document.getElementById('policyModalBody');
+
+    if (!overlay || !titleEl || !bodyEl) return;
+
+    const policy = getPolicyContent(policyType);
+    if (!policy) return;
+
+    titleEl.textContent = policy.title || '';
+    bodyEl.textContent = policy.body || '';
+
+    overlay.classList.add('show');
+    overlay.setAttribute('aria-hidden', 'false');
+}
+
+function closePolicyModal() {
+    const overlay = document.getElementById('policyModalOverlay');
+    if (!overlay) return;
+
+    overlay.classList.remove('show');
+    overlay.setAttribute('aria-hidden', 'true');
+}
+
+async function handleShareAction(kind) {
+    const current = getActiveContent();
+    const url = getShareUrl();
+    const message = current.footerShareMessage || document.title || '';
+
+    if (kind === 'facebook') {
+        openExternalWindow(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`);
+        return;
+    }
+
+    if (kind === 'whatsapp') {
+        openExternalWindow(`https://wa.me/?text=${encodeURIComponent(`${message} ${url}`)}`);
+        return;
+    }
+
+    if (kind === 'instagram') {
+        // Instagram doesn't support direct web share of arbitrary URLs,
+        // so we "smart share": copy link then open Instagram.
+        try {
+            await copyToClipboard(url);
+            showFooterToast(current.footerInstagramHint || current.footerLinkCopied || '');
+        } catch (e) {
+            // Last resort: prompt user to copy
+            showFooterToast(current.footerCopyFailed || '');
+            window.prompt(current.footerCopyFailed || 'Copy this link:', url);
+        }
+        openExternalWindow('https://www.instagram.com/');
+    }
+}
+
+function bindFooterEventsOnce() {
+    if (footerEventsBound) return;
+    footerEventsBound = true;
+
+    document.addEventListener('click', (e) => {
+        const policyBtn = e.target.closest('[data-policy]');
+        if (policyBtn) {
+            openPolicyModal(policyBtn.getAttribute('data-policy'));
+            return;
+        }
+
+        const shareBtn = e.target.closest('[data-share]');
+        if (shareBtn) {
+            handleShareAction(shareBtn.getAttribute('data-share'));
+        }
+    });
+
+    const overlay = document.getElementById('policyModalOverlay');
+    if (overlay) {
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closePolicyModal();
+        });
+    }
+
+    const closeBtn = document.getElementById('policyModalCloseBtn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closePolicyModal);
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closePolicyModal();
+    });
+}
+
+function initializeFooter() {
+    updateWhatsAppSupportLink();
+    bindFooterEventsOnce();
 }

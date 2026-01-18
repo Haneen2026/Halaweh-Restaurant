@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مطعم ومقهى عربي - Arabic Restaurant & Cafe</title>
-    <link rel="stylesheet" href="style.css?v=43">
+    <link rel="stylesheet" href="style.css?v=48">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="icon" href="assests/Ar.png" type="image/png">
   </head>
@@ -14,7 +14,15 @@
         <div class="container">
             <div class="header-content">
                 <img src="assests/Ar.png" alt="مطعم ومقهى عربي" class="logo" id="logo">
-                <button class="language-toggle" id="languageToggle">EN</button>
+                <div class="header-buttons">
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                    <button class="color-toggle" id="colorToggle" aria-label="Toggle color scheme">
+                        <span class="color-icon">🎨</span>
+                    </button>
+                    <button class="language-toggle" id="languageToggle">EN</button>
+                </div>
             </div>
         </div>
     </header>
@@ -157,38 +165,122 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact">
+    <!-- Footer -->
+    <footer class="footer" id="footer">
         <div class="container">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <h3>العنوان</h3>
-                    <p data-key="contactAddress"></p>
+            <div class="footer-grid">
+                <!-- Location -->
+                <div class="footer-card footer-location">
+                    <div class="footer-card-title">
+                        <span class="footer-emoji" aria-hidden="true">📍</span>
+                        <h3 data-key="footerLocationTitle"></h3>
+                    </div>
+                    <p class="footer-card-text" data-key="footerLocationText"></p>
+                    <a class="footer-link" href="https://www.google.com/maps/search/?api=1&query=Khalda%20Amman" target="_blank" rel="noopener" data-key="footerOpenMaps"></a>
                 </div>
-                <div class="contact-item">
-                    <h3>الهاتف</h3>
-                    <p data-key="contactPhone"></p>
+
+                <!-- Policies -->
+                <div class="footer-card footer-policies">
+                    <div class="footer-card-title">
+                        <span class="footer-emoji" aria-hidden="true">📜</span>
+                        <h3 data-key="footerPoliciesTitle"></h3>
+                    </div>
+                    <div class="footer-chips" aria-label="Policies">
+                        <button class="footer-chip" type="button" data-policy="refund" data-key="footerPolicyRefund"></button>
+                        <button class="footer-chip" type="button" data-policy="booking" data-key="footerPolicyBooking"></button>
+                        <button class="footer-chip" type="button" data-policy="cancellation" data-key="footerPolicyCancellation"></button>
+                    </div>
+                    <p class="footer-hint" data-key="footerPoliciesHint"></p>
                 </div>
-                <div class="contact-item">
-                    <h3>ساعات العمل</h3>
-                    <p data-key="contactHours"></p>
+
+                <!-- WhatsApp Support -->
+                <div class="footer-card footer-support">
+                    <div class="footer-card-title">
+                        <span class="footer-emoji" aria-hidden="true">💬</span>
+                        <h3 data-key="footerSupportTitle"></h3>
+                    </div>
+                    <p class="footer-card-text" data-key="footerSupportText"></p>
+                    <a class="footer-btn footer-btn-whatsapp" id="whatsappSupportBtn" href="#" target="_blank" rel="noopener">
+                        <span class="footer-btn-icon" aria-hidden="true">WA</span>
+                        <span data-key="footerWhatsAppButton"></span>
+                    </a>
+                </div>
+
+                <!-- Share -->
+                <div class="footer-card footer-share">
+                    <div class="footer-card-title">
+                        <span class="footer-emoji" aria-hidden="true">🔗</span>
+                        <h3 data-key="footerShareTitle"></h3>
+                    </div>
+                    <p class="footer-card-text" data-key="footerShareText"></p>
+                    <div class="footer-social-row" aria-label="Share via social media">
+                        <button class="footer-social footer-social-fb" type="button" data-share="facebook">
+                            <span class="footer-social-icon" aria-hidden="true">f</span>
+                            <span class="footer-social-label" data-key="footerShareFacebook"></span>
+                        </button>
+                        <button class="footer-social footer-social-ig" type="button" data-share="instagram">
+                            <span class="footer-social-icon" aria-hidden="true">ig</span>
+                            <span class="footer-social-label" data-key="footerShareInstagram"></span>
+                        </button>
+                        <button class="footer-social footer-social-wa" type="button" data-share="whatsapp">
+                            <span class="footer-social-icon" aria-hidden="true">wa</span>
+                            <span class="footer-social-label" data-key="footerShareWhatsApp"></span>
+                        </button>
+                    </div>
+                    <p class="footer-toast" id="footerToast" aria-live="polite"></p>
                 </div>
             </div>
+
+            <div class="footer-bottom">
+                <span data-key="footerBottomText"></span>
+            </div>
         </div>
-    </section>
+    </footer>
 
-    <!-- Theme Toggle Buttons -->
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-        <span class="theme-icon">🌙</span>
-    </button>
+    <!-- Policies Modal -->
+    <div class="policy-modal-overlay" id="policyModalOverlay" aria-hidden="true">
+        <div class="policy-modal" role="dialog" aria-modal="true" aria-labelledby="policyModalTitle">
+            <div class="policy-modal-header">
+                <h2 class="policy-modal-title" id="policyModalTitle"></h2>
+                <button class="policy-modal-close" type="button" id="policyModalCloseBtn" aria-label="Close">×</button>
+            </div>
+            <div class="policy-modal-body" id="policyModalBody"></div>
+        </div>
+    </div>
 
-    <button class="color-toggle" id="colorToggle" aria-label="Toggle color scheme">
-        <span class="color-icon">🎨</span>
-    </button>
+    <!-- Booking Confirmation Modal -->
+    <div class="booking-modal-overlay" id="bookingModalOverlay">
+        <div class="booking-modal-container">
+            <div class="booking-modal-content">
+                <div class="modal-header-decoration">
+                    <div class="modal-sparkle modal-sparkle-1">✨</div>
+                    <div class="modal-sparkle modal-sparkle-2">⭐</div>
+                    <div class="modal-sparkle modal-sparkle-3">✨</div>
+                </div>
+                <div class="modal-success-icon">✓</div>
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <p class="modal-message" id="modalMessage"></p>
+                <div class="modal-price-section">
+                    <div class="price-breakdown">
+                        <span class="price-label" id="priceLabel"></span>
+                        <span class="price-value">
+                            <span id="numberOfGuestsValue">0</span> × 20 <span id="pricePerGuest"></span>
+                        </span>
+                    </div>
+                    <div class="price-total">
+                        <span class="total-label" id="totalLabel"></span>
+                        <span class="total-amount" id="totalAmount">0</span>
+                        <span class="currency">JD</span>
+                    </div>
+                </div>
+                <button class="modal-close-btn" id="modalCloseBtn"></button>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="content.js?v=30"></script>
-    <script src="script.js?v=43"></script>
+    <script src="content.js?v=31"></script>
+    <script src="script.js?v=44"></script>
 </body>
 </html>
