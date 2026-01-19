@@ -13,7 +13,7 @@
     <header class="header">
         <div class="container">
             <div class="header-content">
-                <img src="assests/Ar.png" alt="مطعم ومقهى عربي" class="logo" id="logo">
+                <img src="" alt="مطعم ومقهى عربي" class="logo" id="logo" data-key-src="logoSrc" data-key-alt="logoAlt">
                 <div class="header-buttons">
                     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                         <span class="theme-icon">🌙</span>
@@ -39,23 +39,16 @@
             <div class="hero-content">
                 <div class="hero-text-section">
                     <div class="hero-story-wrapper">
-                        <div class="hero-warning-badge">
-                            <div class="warning-icon">⚠️</div>
-                            <div class="warning-content">
-                                <span class="warning-text" data-key="heroWarning"></span>
-                            </div>
-                            <div class="warning-pulse"></div>
-                        </div>
                         <p class="hero-story-text" data-key="heroStoryText"></p>
                     </div>
                     <div class="hero-cta-container">
                         <div class="hero-promotion" data-key="heroPromotion"></div>
-                        <button class="hero-button" data-key="heroButton" onclick="document.getElementById('booking').scrollIntoView({behavior: 'smooth'})"></button>
+                        <button class="hero-button" data-key="heroButton" id="heroBookNowBtn"></button>
                     </div>
                 </div>
                 <div class="hero-video-section">
                     <video class="hero-video" autoplay muted loop playsinline>
-                        <source src="assests/analyzed_video_video_cece81e5601848e497f8d8c1f8bc6f3c_cece81e5601848e497f8d8c1f8bc6f3c_origin.mp4" type="video/mp4">
+                        <source src="" type="video/mp4" data-key-src="heroVideoSrc">
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -245,6 +238,54 @@
                 <button class="policy-modal-close" type="button" id="policyModalCloseBtn" aria-label="Close">×</button>
             </div>
             <div class="policy-modal-body" id="policyModalBody"></div>
+        </div>
+    </div>
+
+    <!-- Booking Form Modal -->
+    <div class="booking-form-modal-overlay" id="bookingFormModalOverlay">
+        <div class="booking-form-modal-container">
+            <div class="booking-form-modal-content">
+                <button class="booking-form-modal-close" id="bookingFormModalCloseBtn" aria-label="Close">×</button>
+                <div class="booking-form-modal-header">
+                    <h2 class="booking-form-modal-title" data-key="bookingTitle"></h2>
+                    <p class="booking-form-modal-subtitle" data-key="bookingSubtitle"></p>
+                </div>
+                <form class="booking-form-modal-form" id="bookingFormModal">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modalFullName" data-key="bookingFullNameLabel">Full Name</label>
+                            <input type="text" id="modalFullName" name="fullName" required data-key-placeholder="bookingFullNamePlaceholder">
+                        </div>
+                        <div class="form-group">
+                            <label for="modalPhoneNumber" data-key="bookingPhoneLabel">Phone Number</label>
+                            <input type="tel" id="modalPhoneNumber" name="phoneNumber" required data-key-placeholder="bookingPhonePlaceholder">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modalNumberOfGuests" data-key="bookingGuestsLabel">Number of Guests</label>
+                            <input type="number" id="modalNumberOfGuests" name="numberOfGuests" min="1" max="20" required data-key-placeholder="bookingGuestsPlaceholder">
+                        </div>
+                        <div class="form-group">
+                            <label for="modalMealType" data-key="bookingMealTypeLabel">Meal Type</label>
+                            <select id="modalMealType" name="mealType" required>
+                                <option value="" data-key="bookingMealTypeSelect">Select meal type</option>
+                                <option value="lunch" data-key="bookingMealTypeLunch">Lunch Buffet</option>
+                                <option value="dinner" data-key="bookingMealTypeDinner">Dinner Buffet</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modalBookingDate" data-key="bookingDateLabel">Date</label>
+                            <input type="text" id="modalBookingDate" name="bookingDate" required readonly>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="booking-submit-btn" data-key="bookingSubmitButton">Confirm Booking</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 

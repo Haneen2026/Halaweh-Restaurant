@@ -50,6 +50,7 @@ class LanguageManager {
         this.updateLogo();
         this.updateTeamCarouselArrows();
         this.updateDatePickerLocale();
+        this.updateModalDatePickerLocale();
         updateBookingModalContent();
         initializeFooter();
         setTimeout(() => {
@@ -91,6 +92,20 @@ class LanguageManager {
             const altKey = element.getAttribute('data-key-alt');
             if (currentContent[srcKey]) {
                 element.src = currentContent[srcKey];
+                
+                // Special handling for video source elements
+                if (element.tagName === 'SOURCE') {
+                    const video = element.closest('video');
+                    if (video) {
+                        video.load(); // Reload video with new source
+                        // Try to play after load (autoplay may be blocked)
+                        video.play().catch(err => {
+                            // Autoplay was prevented, but that's okay
+                            console.log('Video autoplay prevented:', err);
+                        });
+                    }
+                }
+                
                 // Match heights after image loads
                 element.onload = () => {
                     if (element.classList.contains('about-image')) {
@@ -762,6 +777,40 @@ class LanguageManager {
             clickOpens: true
         });
     }
+    
+    updateModalDatePickerLocale() {
+        if (!window.bookingFormModalDatePicker) return;
+        
+        const isRTL = this.currentLanguage === 'ar';
+        const availableDates = [
+            '2026-01-22', '2026-01-23', '2026-01-24', '2026-01-29', '2026-01-30', '2026-01-31',
+            '2026-02-05', '2026-02-06', '2026-02-07', '2026-02-12', '2026-02-13', '2026-02-14',
+            '2026-02-19', '2026-02-20'
+        ];
+        
+        window.bookingFormModalDatePicker.destroy();
+        const dateInput = document.getElementById('modalBookingDate');
+        window.bookingFormModalDatePicker = flatpickr(dateInput, {
+            dateFormat: 'Y-m-d',
+            enable: availableDates,
+            minDate: '2026-01-22',
+            maxDate: '2026-02-20',
+            locale: isRTL ? {
+                firstDayOfWeek: 6,
+                weekdays: {
+                    shorthand: ['أحد', 'إثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'],
+                    longhand: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت']
+                },
+                months: {
+                    shorthand: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+                    longhand: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر']
+                }
+            } : undefined,
+            disableMobile: false,
+            allowInput: false,
+            clickOpens: true
+        });
+    }
 
 }
 
@@ -780,6 +829,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize booking form functionality after a short delay to ensure DOM is fully ready
         setTimeout(() => {
             initializeBookingForm();
+            initializeBookingFormModal();
         }, 100);
     };
     
@@ -880,6 +930,187 @@ function initializeBookingForm() {
             }
         });
     }
+}
+
+// Booking Form Modal Functions
+function showBookingFormModal() {
+    const modalOverlay = document.getElementById('bookingFormModalOverlay');
+    if (!modalOverlay) return;
+    
+    modalOverlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    
+    // Initialize date picker for modal if not already initialized
+    if (!window.bookingFormModalDatePicker) {
+        initializeModalDatePicker();
+    }
+}
+
+function closeBookingFormModal() {
+    const modalOverlay = document.getElementById('bookingFormModalOverlay');
+    if (!modalOverlay) return;
+    
+    modalOverlay.classList.remove('show');
+    document.body.style.overflow = '';
+}
+
+function initializeBookingFormModal() {
+    // Hero button click handler
+    const heroBookNowBtn = document.getElementById('heroBookNowBtn');
+    if (heroBookNowBtn) {
+        heroBookNowBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            showBookingFormModal();
+        });
+    }
+    
+    // Close button handler
+    const closeBtn = document.getElementById('bookingFormModalCloseBtn');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeBookingFormModal();
+        });
+    }
+    
+    // Close on overlay click
+    const modalOverlay = document.getElementById('bookingFormModalOverlay');
+    if (modalOverlay) {
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) {
+                closeBookingFormModal();
+            }
+        });
+    }
+    
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const modalOverlay = document.getElementById('bookingFormModalOverlay');
+            if (modalOverlay && modalOverlay.classList.contains('show')) {
+                closeBookingFormModal();
+            }
+        }
+    });
+    
+    // Initialize modal form submission
+    const modalForm = document.getElementById('bookingFormModal');
+    if (modalForm) {
+        // Apply same input restrictions as main form
+        const modalFullName = document.getElementById('modalFullName');
+        const modalPhone = document.getElementById('modalPhoneNumber');
+        
+        if (modalFullName) {
+            modalFullName.addEventListener('input', (e) => {
+                e.target.value = e.target.value.replace(/[^a-zA-Z\u0600-\u06FF\s]/g, '');
+            });
+            
+            modalFullName.addEventListener('keypress', (e) => {
+                const key = e.key;
+                const isLetter = /[a-zA-Z\u0600-\u06FF]/.test(key);
+                const isSpace = key === ' ';
+                const isControlKey = ['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(key);
+                
+                if (!isLetter && !isSpace && !isControlKey) {
+                    e.preventDefault();
+                }
+            });
+        }
+        
+        if (modalPhone) {
+            modalPhone.addEventListener('input', (e) => {
+                e.target.value = e.target.value.replace(/[^0-9]/g, '');
+            });
+            
+            modalPhone.addEventListener('keypress', (e) => {
+                if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                    e.preventDefault();
+                }
+            });
+        }
+        
+        // Handle form submission
+        modalForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const dateInput = document.getElementById('modalBookingDate');
+            const selectedDate = dateInput.value;
+            
+            if (!selectedDate) {
+                const currentLanguage = localStorage.getItem('language') || 'ar';
+                const errorMessage = currentLanguage === 'ar' 
+                    ? 'يرجى اختيار تاريخ'
+                    : 'Please select a date';
+                
+                alert(errorMessage);
+                dateInput.focus();
+                return;
+            }
+            
+            const formData = {
+                fullName: document.getElementById('modalFullName').value,
+                phoneNumber: document.getElementById('modalPhoneNumber').value,
+                numberOfGuests: parseInt(document.getElementById('modalNumberOfGuests').value),
+                mealType: document.getElementById('modalMealType').value,
+                bookingDate: document.getElementById('modalBookingDate').value
+            };
+            
+            console.log('Booking submitted from modal:', formData);
+            
+            // Calculate total price
+            const pricePerGuest = 20;
+            const totalPrice = formData.numberOfGuests * pricePerGuest;
+            
+            // Close booking form modal
+            closeBookingFormModal();
+            
+            // Show confirmation modal
+            showBookingConfirmationModal(formData.numberOfGuests, totalPrice);
+            
+            // Reset form
+            modalForm.reset();
+            
+            // Clear date picker
+            if (window.bookingFormModalDatePicker) {
+                window.bookingFormModalDatePicker.clear();
+            }
+        });
+    }
+}
+
+function initializeModalDatePicker() {
+    const dateInput = document.getElementById('modalBookingDate');
+    if (!dateInput || typeof flatpickr === 'undefined') return;
+    
+    const availableDates = [
+        '2026-01-22', '2026-01-23', '2026-01-24', '2026-01-29', '2026-01-30', '2026-01-31',
+        '2026-02-05', '2026-02-06', '2026-02-07', '2026-02-12', '2026-02-13', '2026-02-14',
+        '2026-02-19', '2026-02-20'
+    ];
+    
+    const currentLanguage = localStorage.getItem('language') || 'ar';
+    const isRTL = currentLanguage === 'ar';
+    
+    window.bookingFormModalDatePicker = flatpickr(dateInput, {
+        dateFormat: 'Y-m-d',
+        enable: availableDates,
+        minDate: '2026-01-22',
+        maxDate: '2026-02-20',
+        locale: isRTL ? {
+            firstDayOfWeek: 6,
+            weekdays: {
+                shorthand: ['أحد', 'إثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'],
+                longhand: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت']
+            },
+            months: {
+                shorthand: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'],
+                longhand: ['يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر']
+            }
+        } : undefined,
+        disableMobile: false,
+        allowInput: false,
+        clickOpens: true
+    });
 }
 
 // Booking Confirmation Modal Functions

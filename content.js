@@ -2,17 +2,18 @@
 const content = {
   ar: {
     // Header
+    logoSrc: "assests/Ar.png",
     logoAlt: "مطعم ومقهى عربي",
     languageButton: "EN",
 
     // Hero Section
+    heroVideoSrc: "assests/analyzed_video_video_cece81e5601848e497f8d8c1f8bc6f3c_cece81e5601848e497f8d8c1f8bc6f3c_origin.mp4",
     heroTitle: "لمّتكم الدافية تبدأ من حلاوة",
     heroBuffetTimes: "بوفيه الغداء 3:00 مساءً • بوفيه العشاء 8:00 مساءً",
     heroDescription: "3 ساعات من الدفء والمذاق واللمة الحلوة",
-    heroWarning: "المقاعد محدودة 200 كرسي",
     heroStoryText: "الشتا يحكي حكايات دافية… وريحة البوفيه تفتح القلب قبل الشهية.\nفي مطعم حلاوة، بنجمع العيلة حول طاولة مليانة دفء وضحك وذكريات.\n\nضحكات الأطفال، لمّة الأحباب، وأطباق تهمس: استمتع بكل لقمة.\nوهون… الجو أنقى، بلا تدخين ولا أرجيلة، عشان تكتمل اللمة براحة وطمأنينة.\n\nفي حلاوة، لمّتكم معنا…\nمش بس أحلى، أحلى بألف مرة.",
     heroButton: "احجز الآن",
-    heroPromotion: "تجربة شتوية بسعر 20 دينار للشخص\nابتداءً من 20 يناير 2026 –لمدة شهر واحد فقط ",
+    heroPromotion: "تجربة شتوية بسعر 20 دينار للشخص\nابتداءً من 20 يناير وإلى 20 فبراير 2026 - مقاعد محدودة 200 كرسي فقط ",
 
     // About Section
     aboutTitle: "عن مطعمنا",
@@ -407,17 +408,18 @@ const content = {
 
   en: {
     // Header
+    logoSrc: "assests/EN.png",
     logoAlt: "Arabic Restaurant & Cafe",
     languageButton: "عربي",
 
     // Hero Section
+    heroVideoSrc: "assests/analyzed_video_video_cece81e5601848e497f8d8c1f8bc6f3c_cece81e5601848e497f8d8c1f8bc6f3c_origin.mp4",
     heroTitle: "Your Warm Gathering Starts with Sweetness",
     heroBuffetTimes: "Lunch Buffet 3:00 PM • Dinner Buffet 8:00 PM",
     heroDescription: "3 Hours of Warmth, Flavor, and Sweet Company",
-    heroWarning: "Limited seats - 200 chairs",
     heroStoryText: "Winter tells warm stories… and the aroma of the buffet opens the heart before the appetite.\nAt Halawa Restaurant, we gather the family around a table filled with warmth, laughter, and beautiful memories.\n\nChildren's laughter, loved ones together, and dishes that whisper: \"Savor every bite.\"\nAnd here… the air is purer, with no smoking and no hookah, so every gathering feels relaxed and safe.\n\nAt Halawa, your gathering with us…\nis not just delightful — it's a thousand times more delightful.",
     heroButton: "Book Now",
-    heroPromotion: "A winter experience for 20 JOD per person\nStarting January 20, 2026 – for one month only",
+    heroPromotion: "A winter experience for 20 JOD per person\nstarting 20, Jan to 20, Feb of 2026 – 200 Limited chairs",
 
     // About Section
     aboutTitle: "About Our Restaurant",
