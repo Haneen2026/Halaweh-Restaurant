@@ -294,7 +294,7 @@ const content = {
       {
         name: "ناصر القصبي",
         title: "مغني وملحن سعودي",
-        image: "assests/naser.png",
+        image: "assests/Naser.png",
         quote: "تجربة فريدة من نوعها في مطعم حلاوة. الطعام يحمل مذاق التراث العربي الأصيل مع لمسة عصرية راقية. يستحق الزيارة مراراً وتكراراً.",
         rating: 5
       },
@@ -329,7 +329,7 @@ const content = {
       {
         name: "نجوى كرم",
         title: "مغنية لبنانية",
-        image: "assests/najwa.png",
+        image: "assests/Najwa.png",
         quote: "عندما أريد العودة إلى جذوري، أذهب إلى مطعم حلاوة. كل تفصيل يذكرني بلبنان الأصيل، من رائحة القهوة العربية إلى دفء الضيافة العربية الأصيلة.",
         rating: 5
       }
@@ -697,7 +697,7 @@ const content = {
       {
         name: "Nasser Al Qasabi",
         title: "Saudi Singer & Composer",
-        image: "assests/naser.png",
+        image: "assests/Naser.png",
         quote: "A unique experience at Halawa Restaurant. The food carries the authentic taste of Arab heritage with a modern and elegant touch. Worth visiting again and again.",
         rating: 5
       },
@@ -732,7 +732,7 @@ const content = {
       {
         name: "Najwa Karam",
         title: "Lebanese Singer",
-        image: "assests/najwa.png",
+        image: "assests/Najwa.png",
         quote: "When I want to return to my roots, I go to Halawa Restaurant. Every detail reminds me of authentic Lebanon, from the aroma of Arabic coffee to the warmth of genuine Arab hospitality.",
         rating: 5
       }
