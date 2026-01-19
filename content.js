@@ -361,7 +361,7 @@ const content = {
     // Contact Section
     contactTitle: "تواصل معنا",
     contactAddress: "خلدا، عمان، الأردن",
-    contactPhone: "+962 77 123 4567",
+    contactPhone: "+962 78 802 6543",
     contactHours: "يومياً من 8:00 صباحاً إلى 12:00 منتصف الليل",
 
     // Footer
@@ -765,7 +765,7 @@ const content = {
     // Contact Section
     contactTitle: "Contact Us",
     contactAddress: "Khilda, Amman, Jordan",
-    contactPhone: "+962 77 123 4567",
+    contactPhone: "+962 78 802 6543",
     contactHours: "Daily from 8:00 AM to 12:00 AM",
 
     // Footer
