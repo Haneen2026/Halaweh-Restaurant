@@ -5,6 +5,11 @@ const content = {
     logoSrc: "assests/Ar.png",
     logoAlt: "مطعم ومقهى عربي",
     languageButton: "EN",
+    colorModeIcon: "assests/color-mode.png",
+    colorModeIcons: {
+        default: "assests/color-mode.png",
+        warm: "assests/warm-mode.png"
+    },
 
     // Hero Section
     heroVideoSrc: "assests/analyzed_video_video_cece81e5601848e497f8d8c1f8bc6f3c_cece81e5601848e497f8d8c1f8bc6f3c_origin.mp4",
@@ -294,28 +299,28 @@ const content = {
     testimonials: [
       {
         name: "ناصر القصبي",
-        title: "مغني وملحن سعودي",
+        title: "ممثل سعودي",
         image: "assests/Naser.png",
         quote: "تجربة فريدة من نوعها في مطعم حلاوة. الطعام يحمل مذاق التراث العربي الأصيل مع لمسة عصرية راقية. يستحق الزيارة مراراً وتكراراً.",
         rating: 5
       },
       {
-        name: "هيفاء وهبي",
-        title: "ممثلة ومغنية لبنانية",
-        image: "assests/Haifa.png",
+        name: "هياء وعائلتها",
+        title: "",
+        image: "assests/Haya.png",
         quote: "مكان ساحر يجمع بين الدفء العائلي والأصالة العربية. الأطباق تذكرني بطفولتي في لبنان، والخدمة على أعلى مستوى من الكياسة والاحترافية.",
         rating: 5
       },
       {
-        name: "عبدالله الرويشد",
-        title: "إعلامي سعودي",
+        name: "عبدالله وعائلته",
+        title: "",
         image: "assests/Abdullah.png",
         quote: "في زمن الوجبات السريعة، يقف مطعم حلاوة كواحة للطعام الحقيقي. كل لقمة تحمل قصة من تراثنا العربي الغني. شكراً للحفاظ على هذه التقاليد.",
         rating: 5
       },
       {
         name: "أحلام",
-        title: "مغنية إماراتية",
+        title: "",
         image: "assests/Ahlam.png",
         quote: "الدفء في مطعم حلاوة ليس فقط في الأجواء، بل في كل طبق يقدمونه. يشعرك بالعودة إلى المنزل رغم أنك في مكان عام. تجربة لا تُنسى.",
         rating: 5
@@ -329,7 +334,7 @@ const content = {
       },
       {
         name: "نجوى كرم",
-        title: "مغنية لبنانية",
+        title: "",
         image: "assests/Najwa.png",
         quote: "عندما أريد العودة إلى جذوري، أذهب إلى مطعم حلاوة. كل تفصيل يذكرني بلبنان الأصيل، من رائحة القهوة العربية إلى دفء الضيافة العربية الأصيلة.",
         rating: 5
@@ -411,6 +416,11 @@ const content = {
     logoSrc: "assests/EN.png",
     logoAlt: "Arabic Restaurant & Cafe",
     languageButton: "عربي",
+    colorModeIcon: "assests/color-mode.png",
+    colorModeIcons: {
+        default: "assests/color-mode.png",
+        warm: "assests/warm-mode.png"
+    },
 
     // Hero Section
     heroVideoSrc: "assests/analyzed_video_video_cece81e5601848e497f8d8c1f8bc6f3c_cece81e5601848e497f8d8c1f8bc6f3c_origin.mp4",
@@ -698,20 +708,20 @@ const content = {
     testimonials: [
       {
         name: "Nasser Al Qasabi",
-        title: "Saudi Singer & Composer",
+        title: "Saudi actor",
         image: "assests/Naser.png",
         quote: "A unique experience at Halawa Restaurant. The food carries the authentic taste of Arab heritage with a modern and elegant touch. Worth visiting again and again.",
         rating: 5
       },
       {
-        name: "Haifa Wehbe",
-        title: "Lebanese Actress & Singer",
-        image: "assests/Haifa.png",
+        name: "Haya and her family",
+        title: "",
+        image: "assests/Haya.png",
         quote: "A magical place that combines family warmth and Arab authenticity. The dishes remind me of my childhood in Lebanon, and the service is of the highest level of courtesy and professionalism.",
         rating: 5
       },
       {
-        name: "Abdullah Al Rousheed",
+        name: "Abdullah and his family",
         title: "Saudi Media Personality",
         image: "assests/Abdullah.png",
         quote: "In the age of fast food, Halawa Restaurant stands as an oasis for real food. Every bite carries a story from our rich Arab heritage. Thank you for preserving these traditions.",
@@ -719,7 +729,7 @@ const content = {
       },
       {
         name: "Ahlam",
-        title: "Emirati Singer",
+        title: "",
         image: "assests/Ahlam.png",
         quote: "The warmth at Halawa Restaurant is not just in the atmosphere, but in every dish they serve. It makes you feel at home even in a public place. An unforgettable experience.",
         rating: 5
@@ -732,8 +742,8 @@ const content = {
         rating: 5
       },
       {
-        name: "Najwa Karam",
-        title: "Lebanese Singer",
+        name: "Najwa",
+        title: "",
         image: "assests/Najwa.png",
         quote: "When I want to return to my roots, I go to Halawa Restaurant. Every detail reminds me of authentic Lebanon, from the aroma of Arabic coffee to the warmth of genuine Arab hospitality.",
         rating: 5

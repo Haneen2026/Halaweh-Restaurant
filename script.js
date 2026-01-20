@@ -177,6 +177,46 @@ class LanguageManager {
         }
     }
 
+    // Function to fill the last row by repeating items if needed
+    getCompletedDishesArray(dishes) {
+        const cardsPerRow = 3; // Show 3 cards per row
+        const remainder = dishes.length % cardsPerRow;
+        
+        if (remainder === 0) {
+            return dishes; // Already complete rows
+        }
+        
+        const needed = cardsPerRow - remainder;
+        const completedArray = [...dishes];
+        
+        // Add items from the beginning to complete the last row
+        for (let i = 0; i < needed; i++) {
+            completedArray.push(dishes[i]);
+        }
+        
+        return completedArray;
+    }
+
+    // Function to fill the last row by repeating team members if needed
+    getCompletedTeamMembersArray(members) {
+        const cardsPerRow = 3; // Show 3 cards per row
+        const remainder = members.length % cardsPerRow;
+        
+        if (remainder === 0) {
+            return members; // Already complete rows
+        }
+        
+        const needed = cardsPerRow - remainder;
+        const completedArray = [...members];
+        
+        // Add members from the beginning to complete the last row
+        for (let i = 0; i < needed; i++) {
+            completedArray.push(members[i]);
+        }
+        
+        return completedArray;
+    }
+
     populateMenuShowcase() {
         const menuCategoriesContainer = document.getElementById('menuCategories');
         const menuCarouselContainer = document.getElementById('menuCarouselContainer');
@@ -199,13 +239,16 @@ class LanguageManager {
             menuCategoriesContainer.appendChild(categoryButton);
         });
 
-        // Create shared carousel
+        // Create shared carousel with completed rows
         const activeCategory = menuCategories.find(cat => cat.isActive);
         if (activeCategory) {
+            // Calculate how many dishes we need to complete the last row
+            const dishesToShow = this.getCompletedDishesArray(activeCategory.dishes);
+            
             menuCarouselContainer.innerHTML = `
                 <div class="menu-carousel">
                     <div class="menu-carousel-track" data-category="${activeCategory.id}">
-                        ${activeCategory.dishes.map(dish => `
+                        ${dishesToShow.map(dish => `
                             <div class="menu-card">
                                 <img src="${dish.image}" alt="${dish.name}" class="menu-card-image">
                                 <div class="menu-card-content">
@@ -308,10 +351,13 @@ class LanguageManager {
 
         if (!menuCarouselContainer || !category) return;
 
+        // Calculate how many dishes we need to complete the last row
+        const dishesToShow = this.getCompletedDishesArray(category.dishes);
+
         menuCarouselContainer.innerHTML = `
             <div class="menu-carousel">
                 <div class="menu-carousel-track" data-category="${category.id}">
-                    ${category.dishes.map(dish => `
+                    ${dishesToShow.map(dish => `
                         <div class="menu-card">
                             <img src="${dish.image}" alt="${dish.name}" class="menu-card-image">
                             <div class="menu-card-content">
@@ -404,24 +450,6 @@ class LanguageManager {
         }
     }
 
-    updateCarouselButtons() {
-        const track = document.querySelector('.menu-carousel-track[data-category="team"]') || document.querySelector('.menu-carousel-track');
-        const cards = track ? track.querySelectorAll('.menu-card') : [];
-        const carouselContainer = track ? track.closest('.menu-carousel-container') : null;
-        const prevBtn = carouselContainer ? carouselContainer.querySelector('.prev-btn') : document.querySelector('.prev-btn');
-        const nextBtn = carouselContainer ? carouselContainer.querySelector('.next-btn') : document.querySelector('.next-btn');
-
-        // Always enable prev button initially (at position 0)
-        if (prevBtn) prevBtn.disabled = true;
-
-        // Enable/disable next button based on whether there are more cards to show
-        if (nextBtn && cards.length > 2) {
-            nextBtn.disabled = false;
-        } else if (nextBtn) {
-            nextBtn.disabled = true;
-        }
-    }
-
     matchVideoHeight() {
         const textSection = document.querySelector('.hero-text-section');
         const videoSection = document.querySelector('.hero-video-section');
@@ -503,6 +531,15 @@ class LanguageManager {
         }
     }
 
+    updateColorIcon() {
+        const colorIcon = document.querySelector('.color-icon');
+        if (colorIcon) {
+            const currentContent = content[this.currentLanguage];
+            // Always use the default icon for now to prevent disappearing
+            colorIcon.src = currentContent.colorModeIcon;
+        }
+    }
+
     // Color Scheme Functions
     toggleColorScheme() {
         this.currentColorScheme = this.currentColorScheme === 'default' ? 'warm' : 'default';
@@ -517,6 +554,7 @@ class LanguageManager {
         } else {
             body.classList.remove('warm-mode');
         }
+        this.updateColorIcon();
     }
 
     // Team Section - Following menu design pattern with creative adaptations
@@ -526,11 +564,14 @@ class LanguageManager {
 
         const teamMembers = content[this.currentLanguage].teamMembers;
 
+        // Calculate how many team members we need to complete the last row
+        const membersToShow = this.getCompletedTeamMembersArray(teamMembers);
+
         // Create creative team showcase following menu pattern
         teamCarouselContainer.innerHTML = `
             <div class="menu-carousel">
                 <div class="menu-carousel-track" data-category="team">
-                    ${teamMembers.map(member => `
+                    ${membersToShow.map(member => `
                         <div class="menu-card team-member-card">
                             <div class="menu-card-image team-member-image">
                                 <img src="${member.image}" alt="${member.name}" class="team-member-photo">
@@ -883,10 +924,42 @@ function initializeBookingForm() {
         });
     }
 
+    // Add real-time validation for number of guests
+    const guestsInput = document.getElementById('numberOfGuests');
+    if (guestsInput) {
+        guestsInput.addEventListener('input', (e) => {
+            const numberOfGuests = parseInt(e.target.value);
+            if (numberOfGuests > 200) {
+                const currentLanguage = localStorage.getItem('language') || 'ar';
+                const errorMessage = currentLanguage === 'ar' 
+                    ? 'الحد الأقصى للضيوف هو 200 شخص'
+                    : 'Maximum number of guests is 200';
+                
+                alert(errorMessage);
+                e.target.value = 200; // Reset to maximum allowed
+            }
+        });
+    }
+
     // Handle form submission
     if (bookingForm) {
         bookingForm.addEventListener('submit', (e) => {
             e.preventDefault();
+            
+            // Validate number of guests
+            const guestsInput = document.getElementById('numberOfGuests');
+            const numberOfGuests = parseInt(guestsInput.value);
+            
+            if (numberOfGuests > 200) {
+                const currentLanguage = localStorage.getItem('language') || 'ar';
+                const errorMessage = currentLanguage === 'ar' 
+                    ? 'الحد الأقصى للضيوف هو 200 شخص'
+                    : 'Maximum number of guests is 200';
+                
+                alert(errorMessage);
+                guestsInput.focus();
+                return;
+            }
             
             // Validate date before submission (Flatpickr already handles this, but double-check)
             const dateInput = document.getElementById('bookingDate');
@@ -1028,10 +1101,42 @@ function initializeBookingFormModal() {
                 }
             });
         }
+
+        // Add real-time validation for modal number of guests
+        const modalGuestsInput = document.getElementById('modalNumberOfGuests');
+        if (modalGuestsInput) {
+            modalGuestsInput.addEventListener('input', (e) => {
+                const numberOfGuests = parseInt(e.target.value);
+                if (numberOfGuests > 200) {
+                    const currentLanguage = localStorage.getItem('language') || 'ar';
+                    const errorMessage = currentLanguage === 'ar' 
+                        ? 'الحد الأقصى للضيوف هو 200 شخص'
+                        : 'Maximum number of guests is 200';
+                    
+                    alert(errorMessage);
+                    e.target.value = 200; // Reset to maximum allowed
+                }
+            });
+        }
         
         // Handle form submission
         modalForm.addEventListener('submit', (e) => {
             e.preventDefault();
+            
+            // Validate number of guests
+            const guestsInput = document.getElementById('modalNumberOfGuests');
+            const numberOfGuests = parseInt(guestsInput.value);
+            
+            if (numberOfGuests > 200) {
+                const currentLanguage = localStorage.getItem('language') || 'ar';
+                const errorMessage = currentLanguage === 'ar' 
+                    ? 'الحد الأقصى للضيوف هو 200 شخص'
+                    : 'Maximum number of guests is 200';
+                
+                alert(errorMessage);
+                guestsInput.focus();
+                return;
+            }
             
             const dateInput = document.getElementById('modalBookingDate');
             const selectedDate = dateInput.value;
