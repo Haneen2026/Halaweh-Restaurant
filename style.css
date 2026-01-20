@@ -1,3 +1,49 @@
+/* Google Fonts Import */
+@import url('https://fonts.googleapis.com/css2?family=Droid+Arabic+Kufi:wght@400;500;600;700&display=swap');
+
+/* Enhanced animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
 /* Reset and Base Styles */
 * {
     margin: 0;
@@ -6,7 +52,7 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, 'Droid Arabic Kufi', 'Arial Unicode MS', 'Traditional Arabic', 'Arabic Typesetting', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     transition: all 0.3s ease;
@@ -376,6 +422,12 @@ html[dir="ltr"] .hero .container::after {
     text-align: center;
     position: relative;
     z-index: 2;
+    animation: slideInLeft 0.8s ease-out;
+}
+
+/* Remove highlight from hero title in dark mode */
+body.dark-mode .hero-title {
+    text-shadow: none;
 }
 
 .hero-subtitle-combined {
@@ -397,17 +449,17 @@ html[dir="ltr"] .hero .container::after {
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
-    border: 1px solid rgba(210, 105, 30, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    animation: fadeInUp 1s ease-out 0.3s both;
     transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
 }
 
 .hero-subtitle-combined:hover {
+    transform: translateY(-2px);
     box-shadow: 
         0 6px 20px rgba(139, 69, 19, 0.18),
         inset 0 1px 2px rgba(255, 255, 255, 0.9),
         0 0 0 1px rgba(210, 105, 30, 0.2);
-    transform: translateY(-2px);
 }
 
 .hero-buffet-times {
@@ -727,6 +779,21 @@ html[dir="rtl"] .hero-button {
     50% { opacity: 1; transform: scale(1.1); }
 }
 
+/* Dark mode styling for hero promotion */
+body.dark-mode .hero-promotion {
+    color: white;
+    border-color: rgba(212, 175, 55, 0.6);
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(210, 105, 30, 0.25));
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+body.dark-mode.warm-mode .hero-promotion {
+    color: #F5DEB3;
+    border-color: rgba(205, 133, 63, 0.6);
+    background: linear-gradient(135deg, rgba(205, 133, 63, 0.25), rgba(210, 105, 30, 0.25));
+    box-shadow: 0 4px 15px rgba(205, 133, 63, 0.3);
+}
+
 /* RTL adjustments for hero promotion - button first, then promotional box */
 
 html[dir="rtl"] .hero-promotion {
@@ -994,17 +1061,33 @@ html[dir="rtl"] .menu-carousel-track {
     border-radius: 20px;
     box-shadow: 0 8px 25px var(--shadow-color);
     overflow: hidden;
-    transition: all 0.4s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     border: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
     height: 350px;
+    animation: fadeInUp 0.6s ease-out;
 }
 
 .menu-card:hover {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 0 15px 35px rgba(139, 69, 19, 0.2);
+}
+
+.menu-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.menu-card:hover::before {
+    left: 100%;
 }
 
 .menu-card-image {
@@ -1637,20 +1720,55 @@ html[dir="rtl"] .form-group select {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
     border: none;
-    padding: 1rem 3rem;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
     font-size: 1.1rem;
     font-weight: 600;
-    border-radius: 50px;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(210, 105, 30, 0.3);
-    min-width: 200px;
 }
 
 .booking-submit-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(210, 105, 30, 0.4);
-    background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+}
+
+.hero-button {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(210, 105, 30, 0.3);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.hero-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.hero-button:hover::before {
+    left: 100%;
+}
+
+.hero-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(210, 105, 30, 0.4);
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
 }
 
 .booking-submit-btn:active {
@@ -1956,6 +2074,15 @@ body.dark-mode .flatpickr-day.next-month-day {
     background: linear-gradient(135deg, #f8f6f0 0%, #e8dcc0 100%);
     display: block;
     visibility: visible;
+}
+
+.team-subtitle {
+    font-size: 1.2rem;
+    color: #8B4513;
+    margin-top: 1rem;
+    opacity: 0.9;
+    font-weight: 400;
+    text-align: center;
 }
 
 .team-header {

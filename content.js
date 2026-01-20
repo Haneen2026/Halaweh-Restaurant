@@ -333,8 +333,8 @@ const content = {
         rating: 5
       },
       {
-        name: "نجوى كرم",
-        title: "",
+        name: "نجوى ",
+        title: " ",
         image: "assests/Najwa.png",
         quote: "عندما أريد العودة إلى جذوري، أذهب إلى مطعم حلاوة. كل تفصيل يذكرني بلبنان الأصيل، من رائحة القهوة العربية إلى دفء الضيافة العربية الأصيلة.",
         rating: 5
@@ -343,7 +343,7 @@ const content = {
 
     // Booking Section
     bookingTitle: "احجز طاولتك",
-    bookingSubtitle: "احجز طاولتك الآن واستمتع بتجربة طعام لا تُنسى",
+    bookingSubtitle: "احجز طاولتك الآن واستمتع بتجربة طعام لا تُنسى، سعر لا يُضاهي 20 دينار لكل شخص ",
     bookingFullNameLabel: "الاسم الكامل",
     bookingFullNamePlaceholder: "أدخل اسمك الكامل",
     bookingPhoneLabel: "رقم الهاتف",
@@ -752,7 +752,7 @@ const content = {
 
     // Booking Section
     bookingTitle: "Book Your Table",
-    bookingSubtitle: "Reserve your table now and enjoy an unforgettable dining experience",
+    bookingSubtitle: "Reserve your table now and enjoy an unforgettable dining experience, unbeatable price: 20 dinars per person",
     bookingFullNameLabel: "Full Name",
     bookingFullNamePlaceholder: "Enter your full name",
     bookingPhoneLabel: "Phone Number",
