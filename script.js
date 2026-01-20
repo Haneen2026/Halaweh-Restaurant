@@ -1,7 +1,10 @@
 // Language toggle functionality for Arabic Restaurant & Cafe landing page
 class LanguageManager {
     constructor() {
-        this.currentLanguage = localStorage.getItem('language') || 'ar'; // Default to Arabic
+        // Clear any stored language preference to force Arabic as default
+        localStorage.removeItem('language');
+        // Always start with Arabic as default
+        this.currentLanguage = 'ar';
         this.currentTheme = localStorage.getItem('theme') || 'light'; // Default to light
         this.currentColorScheme = localStorage.getItem('colorScheme') || 'default'; // Default to default colors
         this.init();
