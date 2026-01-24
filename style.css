@@ -224,9 +224,9 @@ html[dir="ltr"] {
 
 /* Container */
 .container {
-    max-width: 1200px;
+    max-width: 1400px; /* Increased from 1200px */
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 15px; /* Reduced from 20px */
 }
 
 /* Header */
@@ -411,6 +411,8 @@ html[dir="ltr"] .hero .container::after {
     position: relative;
     z-index: 2;
     min-height: 100%;
+    max-width: 1600px; /* Even wider for hero section */
+    padding: 0 10px; /* Even less padding for hero */
 }
 
 .hero-title {
@@ -551,11 +553,15 @@ html[dir="ltr"] .hero-separator::after {
     position: relative;
     z-index: 2;
     width: 100%;
+    /* Ensure equal column distribution */
+    grid-auto-flow: column;
+    /* Prevent content from shrinking */
+    min-width: 0;
 }
 
 /* Arabic (RTL): Video on left, Text on right */
 html[dir="rtl"] .hero-content {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.0fr 1.0fr; /* Video 1.5 parts, Text 1.5 parts - equal width */
     direction: rtl;
 }
 
@@ -577,15 +583,19 @@ html[dir="rtl"] .hero-story-text {
     direction: rtl;
 }
 
-/* English (LTR): Video on right, Text on left */
+/* English (LTR): Video on left, Text on right (wider) */
 html[dir="ltr"] .hero-content {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 2.5fr; /* Video 2 parts, Text 2.5 parts - both wider */
     direction: ltr;
+    gap: 1rem; /* Reduce gap to bring video closer to left */
 }
 
 html[dir="ltr"] .hero-video-section {
     grid-column: 1;
     grid-row: 1;
+    margin-left: 0; /* Ensure no left margin */
+    padding-left: 0; /* Ensure no left padding */
+    transform: translateX(-10px); /* Move video 10px to the left */
 }
 
 html[dir="ltr"] .hero-text-section {
@@ -593,12 +603,60 @@ html[dir="ltr"] .hero-text-section {
     grid-row: 1;
     text-align: left;
     width: 100%;
+    /* Enhanced styling for wider text container */
+    padding-left: 1rem;
 }
 
 html[dir="ltr"] .hero-story-text {
     text-align: justify;
     text-justify: inter-word;
     direction: ltr;
+    /* Better spacing for wider container */
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+html[dir="ltr"] .hero-cta-container {
+    /* Align button to left for English */
+    justify-content: flex-start;
+}
+
+/* Ensure English hero subtitle matches Arabic styling */
+html[dir="ltr"] .hero-buffet-times {
+    font-size: 1.05rem;
+    color: #D2691E;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.9);
+    position: relative;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0;
+}
+
+html[dir="ltr"] .hero-separator {
+    font-size: 1.3rem;
+    color: #CD853F;
+    opacity: 0.5;
+    font-weight: 300;
+    padding: 0 0.75rem;
+    position: relative;
+    line-height: 1;
+}
+
+html[dir="ltr"] .hero-description {
+    font-size: 1.05rem;
+    color: #5C4033;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+    position: relative;
+    font-style: italic;
+    letter-spacing: 0.3px;
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0;
+    line-height: 1.5;
 }
 
 .hero-text-section {
@@ -632,6 +690,10 @@ html[dir="ltr"] .hero-story-text {
     overflow: hidden;
     text-align: justify;
     text-justify: inter-word;
+    /* Ensure proper width behavior */
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
 }
 
 .hero-story-text::before {
@@ -683,8 +745,10 @@ html[dir="ltr"] .hero-story-text {
     z-index: 2;
     display: flex;
     align-items: stretch;
+    min-width: 0; /* Allow shrinking within grid */
 }
 
+/* Hero Video Responsive Improvements */
 .hero-video {
     width: 100%;
     height: auto;
@@ -695,6 +759,41 @@ html[dir="ltr"] .hero-story-text {
     position: relative;
     z-index: 2;
     display: block;
+    /* Ensure video maintains aspect ratio */
+    aspect-ratio: 16/9;
+    /* Fallback for browsers that don't support aspect-ratio */
+    @supports not (aspect-ratio: 16/9) {
+        height: 400px;
+    }
+}
+
+/* Hero Content Responsive Grid Improvements */
+.hero-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+    margin-top: 1.5rem;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    /* Ensure proper containment */
+    contain: layout style;
+}
+
+/* Hero Text Section Improvements */
+.hero-text-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    min-width: 0; /* Allow shrinking within grid */
+    box-sizing: border-box;
+    position: relative;
+    /* Prevent content overflow */
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
 }
 
 .hero-button {
@@ -929,7 +1028,7 @@ html[dir="ltr"] .about-text {
 
 /* Menu Showcase Section */
 .menu-showcase {
-    background: var(--menu-bg);
+    background: linear-gradient(135deg, #faf8f5 0%, #f5f0e8 50%, #faf8f5 100%);
     padding: 80px 0;
     position: relative;
     overflow: hidden;
@@ -942,8 +1041,17 @@ html[dir="ltr"] .about-text {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(ellipse 800px 600px at 20% 30%, rgba(210, 105, 30, 0.08) 0%, transparent 50%);
+    background: 
+        radial-gradient(ellipse 800px 600px at 20% 30%, rgba(210, 105, 30, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 600px 400px at 80% 70%, rgba(139, 69, 19, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 400px 300px at 50% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 50%);
     pointer-events: none;
+    animation: menuShowcaseGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes menuShowcaseGlow {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
 }
 
 .menu-showcase-header {
@@ -995,12 +1103,40 @@ html[dir="ltr"] .about-text {
     color: var(--accent-color);
     margin-bottom: 2rem;
     padding: 1rem 2rem;
-    background: rgba(255, 255, 255, 0.8);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 245, 240, 0.9) 100%);
     border-radius: 50px;
-    box-shadow: 0 4px 15px var(--shadow-color);
-    transition: all 0.4s ease;
+    box-shadow: 
+        0 4px 15px rgba(139, 69, 19, 0.15),
+        inset 0 1px 2px rgba(255, 255, 255, 0.8),
+        0 0 0 1px rgba(210, 105, 30, 0.2);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     z-index: 3;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.menu-category-name::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50px;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.menu-category:hover .menu-category-name {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 20px rgba(139, 69, 19, 0.25),
+        inset 0 1px 2px rgba(255, 255, 255, 0.9),
+        0 0 0 1px rgba(210, 105, 30, 0.3);
+    border-color: rgba(210, 105, 30, 0.4);
 }
 
 body.warm-mode .menu-category-name {
@@ -1015,8 +1151,16 @@ body.dark-mode .menu-category-name {
 .menu-category.active .menu-category-name {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     color: white;
-    box-shadow: 0 6px 25px rgba(210, 105, 30, 0.3);
-    transform: translateY(-5px);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 
+        0 8px 25px rgba(139, 69, 19, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.3),
+        0 0 0 2px rgba(255, 255, 255, 0.5);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.menu-category.active .menu-category-name::before {
+    opacity: 1;
 }
 
 .menu-category.active .menu-category-name::after {
@@ -1057,22 +1201,20 @@ html[dir="rtl"] .menu-carousel-track {
 
 .menu-card {
     flex: 0 0 250px;
-    background: var(--card-bg);
+    background: linear-gradient(145deg, #ffffff 0%, #faf8f5 100%);
     border-radius: 20px;
-    box-shadow: 0 8px 25px var(--shadow-color);
+    box-shadow: 
+        0 8px 25px rgba(139, 69, 19, 0.12),
+        inset 0 1px 2px rgba(255, 255, 255, 0.9),
+        0 0 0 1px rgba(210, 105, 30, 0.1);
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(210, 105, 30, 0.15);
     display: flex;
     flex-direction: column;
     height: 350px;
     animation: fadeInUp 0.6s ease-out;
-}
-
-.menu-card:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 15px 35px rgba(139, 69, 19, 0.2);
 }
 
 .menu-card::before {
@@ -1082,8 +1224,17 @@ html[dir="rtl"] .menu-carousel-track {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
-    transition: left 0.5s ease;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.15), transparent);
+    transition: left 0.6s ease;
+}
+
+.menu-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+        0 15px 35px rgba(139, 69, 19, 0.2),
+        inset 0 1px 2px rgba(255, 255, 255, 0.95),
+        0 0 0 1px rgba(210, 105, 30, 0.2);
+    border-color: rgba(210, 105, 30, 0.3);
 }
 
 .menu-card:hover::before {
@@ -1137,23 +1288,51 @@ body.warm-mode .team-image {
     position: absolute;
     top: 12px;
     right: 12px;
-    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
     color: #8b7355;
     padding: 0.5rem 0.75rem;
     border-radius: 20px;
     font-size: 0.75rem;
     font-weight: 600;
-    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
-    border: 2px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 
+        0 4px 12px rgba(255, 215, 0, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.8),
+        0 0 0 1px rgba(255, 215, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.9);
+    animation: awardShine 3s ease-in-out infinite;
+    backdrop-filter: blur(2px);
+}
+
+@keyframes awardShine {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 
+            0 4px 12px rgba(255, 215, 0, 0.4),
+            inset 0 1px 2px rgba(255, 255, 255, 0.8),
+            0 0 0 1px rgba(255, 215, 0, 0.3);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 
+            0 6px 16px rgba(255, 215, 0, 0.6),
+            inset 0 1px 2px rgba(255, 255, 255, 0.9),
+            0 0 0 1px rgba(255, 215, 0, 0.5);
+    }
 }
 
 .team-role {
     font-size: 0.85rem;
-    color: #a09075;
-    font-weight: 500;
+    color: #d4af37;
+    font-weight: 600;
     margin-bottom: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+    background: linear-gradient(135deg, #d4af37 0%, #f4e4bc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(1px 1px 2px rgba(212, 175, 55, 0.3));
 }
 
 .team-bio {
@@ -1166,6 +1345,9 @@ body.warm-mode .team-image {
     align-items: flex-end;
     justify-content: center;
     padding-top: 0.5rem;
+    text-align: center;
+    font-style: italic;
+    opacity: 0.9;
 }
 
 .menu-card-title {
@@ -1836,10 +2018,349 @@ body.dark-mode .flatpickr-day.next-month-day {
     line-height: 1.0;
 }
 
+/* Large Desktop Styles - 1400px and above */
+@media (min-width: 1400px) {
+    .hero {
+        padding: 80px 0 50px;
+    }
+    
+    .hero-title {
+        font-size: 2.8rem;
+        margin-bottom: 2rem;
+    }
+    
+    .hero-subtitle-combined {
+        max-width: 1000px;
+        padding: 1.2rem 2.5rem;
+        gap: 1.2rem 2rem;
+        margin-bottom: 2.5rem;
+    }
+    
+    .hero-buffet-times,
+    .hero-description {
+        font-size: 1.2rem;
+    }
+    
+    .hero-story-text {
+        font-size: 1.25rem;
+        line-height: 2.2;
+        padding: 2.5rem 3rem;
+        border-radius: 25px;
+        border-width: 4px;
+    }
+    
+    /* Arabic large desktop: video on left, text on right */
+    html[dir="rtl"] .hero-content {
+        grid-template-columns: 2fr 2fr; /* Video 2 parts, Text 2 parts - equal width */
+    }
+    
+    /* English large desktop: video on left, wider text on right */
+    html[dir="ltr"] .hero-content {
+        grid-template-columns: 2.5fr 3fr; /* Video 2.5 parts, Text 3 parts - both much wider */
+        gap: 1.5rem; /* Reduce gap to bring video closer to left */
+    }
+    
+    html[dir="ltr"] .hero-video-section {
+        margin-left: 0; /* Ensure no left margin on large screens */
+        padding-left: 0; /* Ensure no left padding on large screens */
+        transform: translateX(-15px); /* Move video 15px to the left on large screens */
+    }
+    
+    html[dir="ltr"] .hero-text-section {
+        padding-left: 2rem; /* More padding on large screens */
+    }
+    
+    .hero-promotion {
+        max-width: 480px;
+        min-width: 420px;
+        font-size: 1rem;
+        padding: 0.9rem 2.5rem;
+        border-radius: 18px;
+    }
+    
+    .hero-content {
+        gap: 3rem;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    /* Enhance decorative elements for large screens */
+    .hero .container::before {
+        width: 120px;
+        height: 120px;
+        top: 25px;
+        right: 25px;
+        border-width: 3px;
+    }
+    
+    .hero .container::after {
+        width: 100px;
+        height: 100px;
+        bottom: 25px;
+        left: 25px;
+        border-width: 2px;
+    }
+}
+
 /* Responsive Design */
+/* Medium Tablet Styles - 900px and below */
+@media (max-width: 900px) {
+    .hero {
+        padding: 70px 0 40px;
+    }
+    
+    .hero-title {
+        font-size: 1.9rem;
+        margin-bottom: 1.1rem;
+    }
+    
+    .hero-subtitle-combined {
+        padding: 0.85rem 1.6rem;
+        gap: 0.8rem 1rem;
+    }
+    
+    .hero-story-text {
+        font-size: 1.02rem;
+        line-height: 1.9;
+        padding: 1.6rem 2rem;
+    }
+    
+    .hero-content {
+        gap: 1.6rem;
+    }
+    
+    .hero-promotion {
+        max-width: 350px;
+        min-width: 320px;
+        font-size: 0.82rem;
+        padding: 0.65rem 1.6rem;
+    }
+    
+    .hero-button {
+        font-size: 0.95rem;
+        padding: 0.7rem 1.8rem;
+        min-height: 46px;
+    }
+    
+    /* Start transitioning to flexbox on medium tablets */
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.6rem;
+        align-items: stretch;
+    }
+    
+    .hero-text-section {
+        order: 1;
+        text-align: center;
+    }
+    
+    .hero-video-section {
+        order: 2;
+        height: auto;
+    }
+}
+
+/* Medium Tablet Styles - 900px and below */
+@media (max-width: 900px) {
+    /* Enhanced carousel responsiveness for medium tablets */
+    .menu-carousel {
+        max-width: 750px;
+        padding: 0.5rem 0 1.6rem;
+    }
+
+    .menu-carousel-track {
+        gap: 1.2rem;
+    }
+
+    .menu-card {
+        flex: 0 0 230px;
+        height: 325px; /* Increased height for text */
+    }
+
+    .menu-card-image {
+        height: 165px; /* Reduced image height */
+    }
+
+    .menu-card-content {
+        padding: 0.85rem 0.85rem 1.1rem; /* Adjusted padding */
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .team-image-container {
+        height: 130px; /* Reduced team image height */
+        margin-bottom: 0.7rem;
+    }
+
+    .team-image {
+        width: 90px;
+        height: 90px;
+        border-width: 2px;
+    }
+
+    .team-carousel-nav .menu-carousel-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+    }
+}
+
+/* Tablet Styles - 1024px and below */
+@media (max-width: 1024px) {
+    .hero {
+        padding: 50px 0 35px;
+    }
+    
+    /* Enhanced carousel responsiveness for tablets */
+    .menu-carousel {
+        max-width: 800px;
+        padding: 0.5rem 0 1.8rem;
+    }
+
+    .menu-carousel-track {
+        gap: 1.5rem;
+    }
+
+    .menu-card {
+        flex: 0 0 240px;
+        height: 330px; /* Increased height for text */
+    }
+
+    .menu-card-image {
+        height: 170px; /* Reduced image height */
+    }
+
+    .menu-card-content {
+        padding: 0.9rem 0.9rem 1.2rem; /* Adjusted padding */
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .team-image-container {
+        height: 140px; /* Reduced team image height */
+        margin-bottom: 0.8rem;
+    }
+
+    .team-image {
+        width: 100px;
+        height: 100px;
+        border-width: 3px;
+    }
+
+    .team-carousel-nav .menu-carousel-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 17px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+        margin-bottom: 1.2rem;
+    }
+    
+    .hero-subtitle-combined {
+        max-width: 100%;
+        padding: 0.9rem 1.8rem;
+        gap: 0.9rem 1.2rem;
+    }
+    
+    .hero-story-text {
+        font-size: 1.05rem;
+        padding: 1.8rem 2.2rem;
+    }
+    
+    .hero-content {
+        gap: 1.8rem;
+    }
+    
+    .hero-promotion {
+        max-width: 380px;
+        min-width: 340px;
+        font-size: 0.85rem;
+        padding: 0.7rem 1.8rem;
+    }
+    
+    /* Adjust decorative elements for tablets */
+    .hero .container::before {
+        width: 80px;
+        height: 80px;
+        top: 15px;
+        right: 15px;
+    }
+    
+    .hero .container::after {
+        width: 60px;
+        height: 60px;
+        bottom: 15px;
+        left: 15px;
+    }
+}
+
 @media (max-width: 768px) {
     html {
         scroll-padding-top: 80px;
+    }
+
+    /* Enhanced carousel responsiveness for mobile */
+    .menu-carousel {
+        max-width: 100%;
+        padding: 0.5rem 0 1.5rem;
+    }
+
+    .menu-carousel-track {
+        gap: 1rem;
+    }
+
+    .menu-card {
+        flex: 0 0 280px; /* Slightly wider for mobile */
+        height: 320px; /* Increased height for text */
+    }
+
+    .menu-card-image {
+        height: 160px; /* Reduced image height */
+    }
+
+    .menu-card-content {
+        padding: 0.8rem 0.8rem 1rem; /* Reduced padding */
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .team-image-container {
+        height: 120px; /* Reduced team image height */
+        margin-bottom: 0.5rem;
+    }
+
+    .team-image {
+        width: 80px;
+        height: 80px;
+        border-width: 2px;
+    }
+
+    .team-carousel-nav {
+        position: relative;
+        top: auto;
+        left: auto;
+        right: auto;
+        transform: none;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1rem;
+        padding: 0 2rem;
+    }
+
+    .team-carousel-nav .menu-carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
     }
 
     .hero-title {
@@ -1882,29 +2403,23 @@ body.dark-mode .flatpickr-day.next-month-day {
     }
 
     .hero-content {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
         gap: 1.5rem;
-        align-items: start;
+        align-items: stretch;
     }
 
     .hero-video-section {
         height: auto;
+        order: 2;
     }
 
     .hero-video {
         height: 250px;
     }
 
-    html[dir="rtl"] .hero-video-section,
-    html[dir="ltr"] .hero-video-section {
-        grid-column: 1;
+    .hero-text-section {
         order: 1;
-    }
-
-    html[dir="rtl"] .hero-text-section,
-    html[dir="ltr"] .hero-text-section {
-        grid-column: 1;
-        order: 2;
         text-align: center;
     }
 
@@ -1942,6 +2457,21 @@ body.dark-mode .flatpickr-day.next-month-day {
         max-width: 300px;
         min-height: 48px;
         padding: 0.75rem 1.5rem;
+    }
+    
+    /* Further adjust decorative elements for mobile */
+    .hero .container::before {
+        width: 60px;
+        height: 60px;
+        top: 10px;
+        right: 10px;
+    }
+    
+    .hero .container::after {
+        width: 50px;
+        height: 50px;
+        bottom: 10px;
+        left: 10px;
     }
 
     .section-title {
@@ -2071,7 +2601,7 @@ body.dark-mode .flatpickr-day.next-month-day {
 /* Team Section Styles */
 .team {
     padding: 80px 0;
-    background: linear-gradient(135deg, #f8f6f0 0%, #e8dcc0 100%);
+    background: linear-gradient(135deg, #F4E4BC 0%, #E8D5B7 50%, #F4E4BC 100%);
     display: block;
     visibility: visible;
 }
@@ -2082,7 +2612,6 @@ body.dark-mode .flatpickr-day.next-month-day {
     margin-top: 1rem;
     opacity: 0.9;
     font-weight: 400;
-    text-align: center;
 }
 
 .team-header {
@@ -2091,10 +2620,30 @@ body.dark-mode .flatpickr-day.next-month-day {
 }
 
 .team-header .section-title {
-    color: #8b7355;
+    color: var(--accent-color);
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.team-header .section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #D2691E;
+    margin: 10px auto;
+}
+
+/* Force team subtitle to match testimonials exactly */
+.team .team-header .team-subtitle {
+    font-size: 1.2rem !important;
+    color: #8B4513 !important;
+    margin-top: 1rem !important;
+    opacity: 0.9 !important;
+    font-weight: 400 !important;
+    text-align: center !important;
 }
 
 .team-subtitle {
@@ -2103,7 +2652,6 @@ body.dark-mode .flatpickr-day.next-month-day {
     margin-top: 1rem !important;
     opacity: 0.9 !important;
     font-weight: 400 !important;
-    text-align: center !important;
 }
 
 .team-carousel-container {
@@ -2377,7 +2925,11 @@ html[dir="rtl"] .team-info {
     }
 
     .team-subtitle {
-        font-size: 1rem;
+        font-size: 1.2rem;
+        color: #8B4513;
+        margin-top: 1rem;
+        opacity: 0.9;
+        font-weight: 400;
     }
 
     .team-card {
@@ -2411,6 +2963,55 @@ html[dir="rtl"] .team-info {
 
 /* Mobile Styles */
 
+    /* Enhanced carousel responsiveness for small mobile */
+    .menu-carousel {
+        max-width: 100%;
+        padding: 0.5rem 0 1rem;
+    }
+
+    .menu-carousel-track {
+        gap: 0.75rem;
+    }
+
+    .menu-card {
+        flex: 0 0 260px; /* Optimized for small screens */
+        height: 300px; /* Increased height for text */
+    }
+
+    .menu-card-image {
+        height: 150px; /* Reduced image height */
+    }
+
+    .menu-card-content {
+        padding: 0.7rem 0.7rem 0.9rem; /* Reduced padding */
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    .team-image-container {
+        height: 110px; /* Reduced team image height */
+        margin-bottom: 0.5rem;
+    }
+
+    .team-image {
+        width: 70px;
+        height: 70px;
+        border-width: 2px;
+    }
+
+    .team-carousel-nav {
+        padding: 0 1rem;
+        gap: 0.75rem;
+    }
+
+    .team-carousel-nav .menu-carousel-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 14px;
+    }
+
     .container {
         padding: 0 15px;
     }
@@ -2423,46 +3024,132 @@ html[dir="rtl"] .team-info {
     }
 
     .hero {
-        padding: 70px 0 40px;
+        padding: 60px 0 35px;
+        min-height: auto;
+    }
+    
+    .hero::before {
+        background: 
+            radial-gradient(ellipse 400px 300px at 20% 30%, rgba(210, 105, 30, 0.08) 0%, transparent 50%),
+            radial-gradient(ellipse 350px 250px at 80% 70%, rgba(255, 218, 185, 0.12) 0%, transparent 50%),
+            radial-gradient(ellipse 450px 350px at 50% 50%, rgba(205, 133, 63, 0.06) 0%, transparent 60%);
+    }
+    
+    /* Ensure flexbox layout for small mobile */
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: stretch;
+    }
+    
+    .hero-text-section {
+        order: 1;
+        text-align: center;
+    }
+    
+    .hero-video-section {
+        order: 2;
+        height: auto;
+        margin-bottom: 1rem;
     }
 
     .hero-title {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        line-height: 1.3;
     }
 
     .hero-subtitle-combined {
-        padding: 0.6rem 1.2rem;
-        gap: 0.6rem;
-        border-radius: 25px;
+        padding: 0.8rem 1rem;
+        gap: 0.5rem;
+        border-radius: 20px;
+        margin-bottom: 1.5rem;
     }
 
     .hero-buffet-times {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+        line-height: 1.4;
     }
 
     .hero-description {
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+    
+    .hero-separator {
         font-size: 0.85rem;
+        padding: 0.3rem 0;
     }
 
     .hero-story-text {
         font-size: 0.9rem;
-        line-height: 1.75;
-        padding: 1.5rem;
-        border-radius: 15px;
+        line-height: 1.7;
+        padding: 1.2rem 1rem;
+        border-radius: 12px;
         border-width: 2px;
+        margin-bottom: 1rem;
     }
-
-    .hero-separator {
-        font-size: 0.9rem;
-        padding: 0.4rem 0;
+    
+    .hero-story-text::before {
+        height: 3px;
     }
-
-    .hero-video-section {
-        height: auto;
+    
+    .hero-story-text::after {
+        width: 30px;
+        height: 30px;
+        bottom: -15px;
+        right: -15px;
     }
 
     .hero-video {
-        height: 160px;
+        height: 180px;
+        border-radius: 8px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.5), 0 3px 10px rgba(0,0,0,0.3);
+    }
+    
+    .hero-cta-container {
+        gap: 0.5rem;
+        margin-top: 0.8rem;
+    }
+    
+    .hero-promotion {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        line-height: 1.3;
+        border-radius: 12px;
+        border-width: 1px;
+    }
+    
+    .hero-promotion::before {
+        font-size: 1rem;
+        top: -6px;
+        right: -6px;
+    }
+    
+    .hero-promotion::after {
+        font-size: 0.9rem;
+        bottom: -6px;
+        left: -6px;
+    }
+    
+    .hero-button {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+        min-height: 44px;
+        border-radius: 4px;
+    }
+    
+    /* Hide decorative elements on very small screens */
+    .hero .container::before,
+    .hero .container::after {
+        display: none;
+    }
+    
+    /* Adjust hero background animations for mobile */
+    .hero::after {
+        opacity: 0.3;
+        animation-duration: 60s;
     }
 
     .menu-showcase {
@@ -3651,4 +4338,17 @@ html[dir="ltr"] .footer-social-label {
     white-space: pre-line;
     line-height: 1.8;
     font-size: 1rem;
+}
+
+/* FINAL OVERRIDE: Force team subtitle to match testimonials exactly */
+section.team .team-header .team-subtitle {
+    font-size: 1.2rem !important;
+    color: #8B4513 !important;
+    margin-top: 1rem !important;
+    opacity: 0.9 !important;
+    font-weight: 400 !important;
+    text-align: center !important;
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
 }

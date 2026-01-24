@@ -1,10 +1,9 @@
 // Language toggle functionality for Arabic Restaurant & Cafe landing page
 class LanguageManager {
     constructor() {
-        // Clear any stored language preference to force Arabic as default
-        localStorage.removeItem('language');
-        // Always start with Arabic as default
-        this.currentLanguage = 'ar';
+        // Check for stored language preference, default to Arabic if not set
+        const storedLanguage = localStorage.getItem('language');
+        this.currentLanguage = storedLanguage || 'ar';
         this.currentTheme = localStorage.getItem('theme') || 'light'; // Default to light
         this.currentColorScheme = localStorage.getItem('colorScheme') || 'default'; // Default to default colors
         this.init();
@@ -26,6 +25,34 @@ class LanguageManager {
         this.bindResizeEvent();
         this.initializeDatePicker();
         initializeFooter();
+        
+        // Debug hero section localization
+        this.debugHeroLocalization();
+    }
+    
+    debugHeroLocalization() {
+        const heroElements = {
+            heroTitle: document.querySelector('.hero-title'),
+            heroBuffetTimes: document.querySelector('.hero-buffet-times'),
+            heroDescription: document.querySelector('.hero-description'),
+            heroStoryText: document.querySelector('.hero-story-text'),
+            heroButton: document.querySelector('.hero-button'),
+            heroPromotion: document.querySelector('.hero-promotion')
+        };
+        
+        console.log('Hero Localization Debug:', {
+            currentLanguage: this.currentLanguage,
+            contentAvailable: !!content[this.currentLanguage],
+            elements: Object.keys(heroElements).reduce((acc, key) => {
+                acc[key] = {
+                    element: !!heroElements[key],
+                    dataKey: heroElements[key]?.getAttribute('data-key'),
+                    content: heroElements[key]?.textContent,
+                    expectedContent: content[this.currentLanguage]?.[key]
+                };
+                return acc;
+            }, {})
+        });
     }
 
     bindEvents() {
@@ -48,6 +75,7 @@ class LanguageManager {
     toggleLanguage() {
         this.currentLanguage = this.currentLanguage === 'ar' ? 'en' : 'ar';
         localStorage.setItem('language', this.currentLanguage);
+        console.log('Language toggled to:', this.currentLanguage);
         this.updateContent();
         this.updateDirection();
         this.updateLogo();
@@ -60,16 +88,26 @@ class LanguageManager {
             this.matchVideoHeight();
             this.matchAboutImageHeight();
         }, 200);
+        
+        // Debug after language change
+        setTimeout(() => this.debugHeroLocalization(), 300);
     }
 
     updateContent() {
         const currentContent = content[this.currentLanguage];
+        
+        if (!currentContent) {
+            console.error('Content not found for language:', this.currentLanguage);
+            return;
+        }
 
         // Update elements with data-key attributes
         document.querySelectorAll('[data-key]').forEach(element => {
             const key = element.getAttribute('data-key');
             if (currentContent[key]) {
                 element.textContent = currentContent[key];
+            } else {
+                console.warn('Content key not found:', key, 'for language:', this.currentLanguage);
             }
         });
 
@@ -78,6 +116,8 @@ class LanguageManager {
             const key = element.getAttribute('data-key-placeholder');
             if (currentContent[key]) {
                 element.placeholder = currentContent[key];
+            } else {
+                console.warn('Placeholder key not found:', key, 'for language:', this.currentLanguage);
             }
         });
 
@@ -86,6 +126,8 @@ class LanguageManager {
             const key = option.getAttribute('data-key');
             if (currentContent[key]) {
                 option.textContent = currentContent[key];
+            } else {
+                console.warn('Option key not found:', key, 'for language:', this.currentLanguage);
             }
         });
 
@@ -115,6 +157,8 @@ class LanguageManager {
                         this.matchAboutImageHeight();
                     }
                 };
+            } else {
+                console.warn('Source key not found:', srcKey, 'for language:', this.currentLanguage);
             }
             if (altKey && currentContent[altKey]) {
                 element.alt = currentContent[altKey];
