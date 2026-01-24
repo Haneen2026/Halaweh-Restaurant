@@ -455,11 +455,20 @@ class LanguageManager {
 
         if (!track || cards.length === 0) return;
 
-        const cardWidth = cards[0].offsetWidth + 16; // 16px gap (reduced gap)
-        const cardsToShow = 3; // Always show 3 cards
-        const scrollAmount = cardWidth * cardsToShow; // Scroll by 2 cards at a time
+        // Determine cards to show based on screen width
+        const screenWidth = window.innerWidth;
+        let cardsToShow = 3; // Default for desktop
+        
+        if (screenWidth <= 1024) {
+            cardsToShow = 1; // Tablet and mobile show 1 card
+        } else if (screenWidth <= 1400) {
+            cardsToShow = 2; // Medium desktop show 2 cards
+        }
 
-        // Get current position (how many sets of 2 cards we've scrolled)
+        const cardWidth = cards[0].offsetWidth + (screenWidth <= 768 ? 0 : 16); // Remove gap on mobile
+        const scrollAmount = cardWidth * cardsToShow;
+
+        // Get current position
         let currentPosition = 0;
         if (track.style.transform) {
             const transformValue = parseFloat(track.style.transform.match(/translateX\(([^)]+)\)/)[1]);
@@ -467,27 +476,23 @@ class LanguageManager {
         }
 
         if (isNext) {
-            // Calculate max position (total cards - cards to show, divided by cards per scroll)
             const maxPosition = Math.ceil(cards.length / cardsToShow) - 1;
             currentPosition = Math.min(currentPosition + 1, maxPosition);
         } else {
             currentPosition = Math.max(currentPosition - 1, 0);
         }
 
-        // In RTL, we need to reverse the direction of movement
         const translateX = isRTL ? (currentPosition * scrollAmount) : -(currentPosition * scrollAmount);
         track.style.transform = `translateX(${translateX}px)`;
 
-        // Update button states - different logic for team carousel
+        // Update button states
         if (isTeamCarousel) {
-            // For team carousel, use team-specific button selectors
             const teamPrevBtn = document.getElementById('teamPrevBtn');
             const teamNextBtn = document.getElementById('teamNextBtn');
 
             if (teamPrevBtn) teamPrevBtn.disabled = currentPosition <= 0;
             if (teamNextBtn) teamNextBtn.disabled = currentPosition >= Math.ceil(cards.length / cardsToShow) - 1;
         } else {
-            // For menu carousel, use existing logic
             const carouselContainer = track.closest('.menu-carousel-container');
             const prevBtn = carouselContainer ? carouselContainer.querySelector('.prev-btn') : document.querySelector('.prev-btn');
             const nextBtn = carouselContainer ? carouselContainer.querySelector('.next-btn') : document.querySelector('.next-btn');
@@ -712,8 +717,17 @@ class LanguageManager {
 
         if (!track || cards.length === 0) return;
 
-        const cardsToShow = 3; // number of cards to scroll at a time
-        const cardWidth = cards[0].offsetWidth + 16; // 16px gap
+        // Determine cards to show based on screen width
+        const screenWidth = window.innerWidth;
+        let cardsToShow = 2; // Default for desktop (team shows 2 cards)
+        
+        if (screenWidth <= 1024) {
+            cardsToShow = 1; // Tablet and mobile show 1 card
+        } else if (screenWidth <= 1400) {
+            cardsToShow = 1; // Medium desktop also show 1 card for team
+        }
+
+        const cardWidth = cards[0].offsetWidth + (screenWidth <= 768 ? 0 : 16); // Remove gap on mobile
         const scrollAmount = cardWidth * cardsToShow;
 
         let currentPosition = 0;
@@ -744,8 +758,17 @@ class LanguageManager {
 
         if (!track || !cards.length) return;
 
-        const cardsToShow = 3;
-        const cardWidth = cards[0].offsetWidth + 16;
+        // Determine cards to show based on screen width
+        const screenWidth = window.innerWidth;
+        let cardsToShow = 2; // Default for desktop (team shows 2 cards)
+        
+        if (screenWidth <= 1024) {
+            cardsToShow = 1; // Tablet and mobile show 1 card
+        } else if (screenWidth <= 1400) {
+            cardsToShow = 1; // Medium desktop also show 1 card for team
+        }
+
+        const cardWidth = cards[0].offsetWidth + (screenWidth <= 768 ? 0 : 16);
         const scrollAmount = cardWidth * cardsToShow;
 
         let currentPosition = 0;
