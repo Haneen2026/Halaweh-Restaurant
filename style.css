@@ -213,9 +213,12 @@ body.dark-mode.warm-mode .logo {
     transform: rotate(15deg);
 }
 
-/* Arabic (RTL) Styles */
-html[dir="rtl"] {
-    direction: rtl;
+/* Arabic (RTL): Text shadow for embossed effect on headings */
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3 {
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.15), 
+                 -1px -1px 1px rgba(255, 255, 255, 0.3);
 }
 
 html[dir="ltr"] {
@@ -2764,9 +2767,9 @@ body.dark-mode .flatpickr-day.next-month-day {
         gap: 0; /* Remove gap for mobile */
     }
 
-    .menu-card {
-        flex: 0 0 280px; /* Match container width */
-        height: 320px; /* Increased height for text */
+    .team-card {
+        flex: 0 0 260px; /* Optimized for small screens */
+        height: 380px !important; /* Increased height for text - override other styles */
     }
 
     .menu-card-image {
@@ -2781,15 +2784,12 @@ body.dark-mode .flatpickr-day.next-month-day {
         justify-content: flex-start;
     }
 
-    .team-image-container {
-        height: 120px; /* Reduced team image height */
-        margin-bottom: 0.5rem;
+    .team-member-image {
+        padding: 0.3rem; /* Further reduced padding for tablet */
     }
 
-    .team-image {
-        width: 80px;
-        height: 80px;
-        border-width: 2px;
+    .menu-card-image {
+        height: 100px; /* Reduced for team section */
     }
 
     .team-carousel-nav {
@@ -2812,11 +2812,13 @@ body.dark-mode .flatpickr-day.next-month-day {
 
     .hero-title {
         font-size: 1.8rem;
+        order: 0; /* Move title to top on mobile */
+        margin-bottom: 1rem;
     }
 
     .hero-subtitle-combined {
-        flex-direction: column;
-        gap: 0.75rem;
+        order: 1; /* Move subtitle to top on mobile */
+        margin-bottom: 1.5rem;
         padding: 0.75rem 1.5rem;
         border-radius: 30px;
     }
@@ -2899,7 +2901,9 @@ body.dark-mode .flatpickr-day.next-month-day {
 
     html[dir="rtl"] .hero-button,
     html[dir="ltr"] .hero-button {
-        align-self: center;
+        align-self: center !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
         width: 100%;
         max-width: 300px;
         min-height: 48px;
@@ -2971,9 +2975,9 @@ body.dark-mode .flatpickr-day.next-month-day {
         max-width: 300px; /* 1 card for tablet */
     }
 
-    .menu-card {
-        flex: 0 0 220px;
-        height: 320px;
+    .team-card {
+        flex: 0 0 220px; /* Increased from 220px to prevent overlap */
+        height: 380px !important; /* Increased height for text - override other styles */
     }
 
     .team-image-container {
@@ -3145,7 +3149,7 @@ body.dark-mode .flatpickr-day.next-month-day {
 
 .team-image-container {
     position: relative;
-    height: 160px;
+    height: 120px; /* Reduced from 160px to match 100px photo + padding */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3162,15 +3166,15 @@ body.dark-mode .flatpickr-day.next-month-day {
     position: relative;
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
     border-radius: 50% 50% 0 0; /* Top rounded, bottom straight */
-    padding: 1rem;
+    padding: 0.5rem; /* Reduced padding */
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .team-member-photo {
-    width: 140px;
-    height: 140px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     object-position: center top;
     border-radius: 50%;
@@ -3231,8 +3235,8 @@ body.dark-mode .flatpickr-day.next-month-day {
 }
 
 .team-image {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
     object-position: center top;
     border-radius: 50%;
@@ -3381,7 +3385,7 @@ html[dir="rtl"] .team-info {
 
     .team-card {
         flex: 0 0 260px; /* 1 card for tablet */
-        height: 320px;
+        height: 380px;
     }
 
     .team-carousel {
@@ -3427,7 +3431,7 @@ html[dir="rtl"] .team-info {
 
     .menu-card {
         flex: 0 0 260px; /* Optimized for small screens */
-        height: 300px; /* Increased height for text */
+        height: 380px; /* Increased height for text */
     }
 
     .menu-card-image {
@@ -3442,15 +3446,12 @@ html[dir="rtl"] .team-info {
         justify-content: flex-start;
     }
 
-    .team-image-container {
-        height: 110px; /* Reduced team image height */
-        margin-bottom: 0.5rem;
+    .team-member-image {
+        padding: 0.25rem; /* Minimal padding for mobile */
     }
 
-    .team-image {
-        width: 70px;
-        height: 70px;
-        border-width: 2px;
+    .menu-card-image {
+        height: 85px; /* Further reduced for mobile team section */
     }
 
     .team-carousel-nav {
@@ -3487,12 +3488,12 @@ html[dir="rtl"] .team-info {
             radial-gradient(ellipse 450px 350px at 50% 50%, rgba(205, 133, 63, 0.06) 0%, transparent 60%);
     }
     
-    /* Ensure flexbox layout for small mobile */
     .hero-content {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
         align-items: stretch;
+        order: 2; /* Move hero content after title/subtitle on mobile */
     }
     
     .hero-text-section {
