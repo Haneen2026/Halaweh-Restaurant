@@ -1426,7 +1426,8 @@ html[dir="rtl"] .menu-carousel-track {
     border: 1px solid rgba(210, 105, 30, 0.15);
     display: flex;
     flex-direction: column;
-    height: 350px;
+    height: auto;
+    min-height: 340px;
     animation: fadeInUp 0.6s ease-out;
 }
 
@@ -1462,12 +1463,12 @@ html[dir="rtl"] .menu-carousel-track {
 }
 
 .menu-card-content {
-    padding: 1rem 1rem 1.5rem;
+    padding: 0.75rem 1rem 1rem;
     text-align: center;
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 /* Team card styles within menu carousel structure */
@@ -1693,9 +1694,9 @@ html[dir="rtl"] .team-carousel-nav .next-btn {
 
 .team-member-photo {
     width: 100% !important;
-    height: 180px !important;
+    height: 220px !important;
     object-fit: cover;
-    object-position: center top;
+    object-position: center 20%;
     border-radius: 12px;
     border: 3px solid rgba(212, 175, 55, 0.2);
     transition: all 0.3s ease;
@@ -1732,7 +1733,7 @@ html[dir="rtl"] .team-carousel-nav .next-btn {
 
 .team-member-info {
     background: linear-gradient(135deg, #fefefe 0%, #f8f6f0 100%);
-    padding: 1.5rem !important;
+    padding: 1rem 1.25rem 1.25rem !important;
     border-radius: 0 0 15px 15px;
     border-top: 1px solid rgba(212, 175, 55, 0.1);
     position: relative;
@@ -1740,9 +1741,9 @@ html[dir="rtl"] .team-carousel-nav .next-btn {
 
 .team-member-name {
     color: #8b7355 !important;
-    font-size: 1.3rem !important;
+    font-size: 1.2rem !important;
     font-weight: 700 !important;
-    margin-bottom: 0.5rem !important;
+    margin-bottom: 0.4rem !important;
     text-align: center;
     position: relative;
     display: inline-block;
@@ -1769,24 +1770,24 @@ html[dir="rtl"] .team-carousel-nav .next-btn {
 
 .team-member-role {
     color: #a09075 !important;
-    font-size: 0.9rem !important;
+    font-size: 0.85rem !important;
     font-weight: 600 !important;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 0.75rem !important;
+    margin-bottom: 0.5rem !important;
     text-align: center;
     background: rgba(212, 175, 55, 0.1);
-    padding: 0.3rem 0.8rem;
+    padding: 0.25rem 0.6rem;
     border-radius: 20px;
     display: inline-block;
-    margin: 0 auto 0.75rem auto !important;
+    margin: 0 auto 0.5rem auto !important;
     border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .team-member-bio {
     color: #6b5b45 !important;
-    font-size: 0.85rem !important;
-    line-height: 1.5 !important;
+    font-size: 0.8rem !important;
+    line-height: 1.45 !important;
     text-align: center;
     font-style: italic;
     margin: 0 !important;
@@ -2626,7 +2627,8 @@ body.dark-mode .flatpickr-day.next-month-day {
 
     .menu-card {
         flex: 0 0 230px;
-        height: 325px; /* Increased height for text */
+        height: auto;
+        min-height: 325px;
     }
 
     .menu-card-image {
@@ -2677,7 +2679,8 @@ body.dark-mode .flatpickr-day.next-month-day {
 
     .menu-card {
         flex: 0 0 240px;
-        height: 330px; /* Increased height for text */
+        height: auto;
+        min-height: 330px;
     }
 
     .menu-card-image {
@@ -2769,7 +2772,8 @@ body.dark-mode .flatpickr-day.next-month-day {
 
     .team-card {
         flex: 0 0 260px; /* Optimized for small screens */
-        height: 380px !important; /* Increased height for text - override other styles */
+        height: auto;
+        min-height: 380px;
     }
 
     .menu-card-image {
@@ -2790,6 +2794,58 @@ body.dark-mode .flatpickr-day.next-month-day {
 
     .menu-card-image {
         height: 100px; /* Reduced for team section */
+    }
+
+    /* Team carousel tablet fixes - ensure one card per slide */
+    #teamCarouselContainer .menu-carousel {
+        max-width: 300px;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+    #teamCarouselContainer .menu-carousel-track {
+        gap: 0;
+    }
+
+    #teamCarouselContainer .team-member-card,
+    #teamCarouselContainer .menu-card.team-member-card {
+        flex: 0 0 300px;
+        width: 300px;
+        min-width: 300px;
+        max-width: 300px;
+        height: auto;
+        min-height: 400px;
+    }
+
+    /* Ensure team member image stays at top on tablet */
+    #teamCarouselContainer .team-member-image,
+    #teamCarouselContainer .menu-card-image.team-member-image {
+        height: 200px;
+        padding: 0.5rem 0.5rem 0;
+        order: -1;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #teamCarouselContainer .team-member-photo {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: contain;
+        object-position: center center;
+        border-radius: 10px;
+    }
+
+    /* Ensure content stays below image on tablet */
+    #teamCarouselContainer .team-member-content,
+    #teamCarouselContainer .menu-card-content.team-member-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 1rem;
+        order: 1;
     }
 
     .team-carousel-nav {
@@ -2977,7 +3033,8 @@ body.dark-mode .flatpickr-day.next-month-day {
 
     .team-card {
         flex: 0 0 220px; /* Increased from 220px to prevent overlap */
-        height: 380px !important; /* Increased height for text - override other styles */
+        height: auto;
+        min-height: 380px;
     }
 
     .team-image-container {
@@ -3385,7 +3442,8 @@ html[dir="rtl"] .team-info {
 
     .team-card {
         flex: 0 0 260px; /* 1 card for tablet */
-        height: 380px;
+        height: auto;
+        min-height: 380px;
     }
 
     .team-carousel {
@@ -3431,7 +3489,8 @@ html[dir="rtl"] .team-info {
 
     .menu-card {
         flex: 0 0 260px; /* Optimized for small screens */
-        height: 380px; /* Increased height for text */
+        height: auto;
+        min-height: 380px;
     }
 
     .menu-card-image {
@@ -3463,6 +3522,173 @@ html[dir="rtl"] .team-info {
         width: 35px;
         height: 35px;
         font-size: 14px;
+    }
+
+    /* Team carousel mobile fixes - ensure one card per slide */
+    #teamCarouselContainer .menu-carousel {
+        max-width: 300px;
+        margin: 0 auto;
+        overflow: hidden;
+        padding: 0.5rem 0;
+    }
+
+    #teamCarouselContainer .menu-carousel-track {
+        gap: 0;
+    }
+
+    #teamCarouselContainer .team-member-card,
+    #teamCarouselContainer .menu-card.team-member-card {
+        flex: 0 0 300px;
+        width: 300px;
+        min-width: 300px;
+        max-width: 300px;
+        height: auto;
+        min-height: 380px;
+        border-radius: 20px;
+        background: linear-gradient(145deg, #fffdfa 0%, #fff8f0 100%);
+        border: 2px solid rgba(212, 175, 55, 0.3);
+        box-shadow: 
+            0 8px 30px rgba(139, 115, 85, 0.15),
+            0 2px 8px rgba(139, 115, 85, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Enhanced gradient border effect */
+    #teamCarouselContainer .team-member-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #d4af37, #f4e4bc, #d4af37, #f4e4bc, #d4af37);
+        background-size: 200% 100%;
+        border-radius: 20px 20px 0 0;
+    }
+
+    /* Ensure team member image stays at top with enhanced styling */
+    #teamCarouselContainer .team-member-image,
+    #teamCarouselContainer .menu-card-image.team-member-image {
+        height: 180px;
+        padding: 0.75rem;
+        order: -1;
+        flex-shrink: 0;
+        background: linear-gradient(135deg, rgba(210, 105, 30, 0.05) 0%, rgba(212, 175, 55, 0.1) 100%);
+        border-radius: 20px 20px 0 0;
+        position: relative;
+    }
+
+    #teamCarouselContainer .team-member-photo {
+        height: 100% !important;
+        width: 100% !important;
+        object-fit: contain;
+        object-position: center center;
+        border-radius: 12px;
+        border: 3px solid rgba(255, 255, 255, 0.9);
+        box-shadow: 0 4px 15px rgba(139, 115, 85, 0.2);
+    }
+
+    /* Enhanced award badge for mobile */
+    #teamCarouselContainer .team-member-award {
+        top: 12px;
+        right: 12px;
+        padding: 0.35rem 0.65rem;
+        font-size: 0.7rem;
+        border-radius: 15px;
+        box-shadow: 0 3px 10px rgba(255, 215, 0, 0.4);
+        border: 2px solid rgba(255, 255, 255, 0.95);
+        z-index: 10;
+    }
+
+    /* Ensure content stays below image with enhanced styling */
+    #teamCarouselContainer .team-member-content,
+    #teamCarouselContainer .menu-card-content.team-member-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 0.75rem 1rem;
+        order: 1;
+        background: transparent;
+    }
+
+    /* Enhanced typography for mobile team cards */
+    #teamCarouselContainer .team-member-name {
+        font-size: 1.15rem !important;
+        font-weight: 700 !important;
+        margin-bottom: 0.6rem !important;
+        text-align: center;
+        color: #6b5b45 !important;
+        letter-spacing: 0.3px;
+    }
+
+    #teamCarouselContainer .team-member-name::after {
+        content: '';
+        display: block;
+        width: 50px;
+        height: 2px;
+        background: linear-gradient(90deg, #d4af37, #f4e4bc, #d4af37);
+        margin: 0.6rem auto 0;
+        border-radius: 2px;
+    }
+
+    #teamCarouselContainer .team-member-role {
+        font-size: 0.8rem !important;
+        font-weight: 600 !important;
+        margin-bottom: 0.75rem !important;
+        padding: 0.35rem 1rem;
+        background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(210, 105, 30, 0.1) 100%);
+        border: 1px solid rgba(212, 175, 55, 0.25);
+        border-radius: 25px;
+        color: #8b7355 !important;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        align-self: center;
+    }
+
+    #teamCarouselContainer .team-member-bio {
+        font-size: 0.9rem !important;
+        line-height: 1.6 !important;
+        color: #7a6a55 !important;
+        text-align: center;
+        font-style: italic;
+        padding: 0 0.5rem;
+    }
+
+    /* Dark mode adjustments for mobile team cards */
+    body.dark-mode #teamCarouselContainer .team-member-card {
+        background: linear-gradient(145deg, #3a2a1e 0%, #2a1a12 100%);
+        border-color: rgba(205, 133, 63, 0.3);
+        box-shadow: 
+            0 8px 30px rgba(0, 0, 0, 0.4),
+            0 2px 8px rgba(0, 0, 0, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    body.dark-mode #teamCarouselContainer .team-member-image {
+        background: linear-gradient(135deg, rgba(205, 133, 63, 0.1) 0%, rgba(139, 69, 19, 0.15) 100%);
+    }
+
+    body.dark-mode #teamCarouselContainer .team-member-photo {
+        border-color: rgba(205, 133, 63, 0.4);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark-mode #teamCarouselContainer .team-member-name {
+        color: #f5deb3 !important;
+    }
+
+    body.dark-mode #teamCarouselContainer .team-member-role {
+        background: linear-gradient(135deg, rgba(205, 133, 63, 0.2) 0%, rgba(139, 69, 19, 0.15) 100%);
+        border-color: rgba(205, 133, 63, 0.3);
+        color: #deb887 !important;
+    }
+
+    body.dark-mode #teamCarouselContainer .team-member-bio {
+        color: #d4c4a8 !important;
     }
 
     .container {
@@ -3635,7 +3861,8 @@ html[dir="rtl"] .team-info {
 
     .menu-card {
         flex: 0 0 200px;
-        height: 290px;
+        height: auto;
+        min-height: 290px;
     }
 
     .team-image-container {
