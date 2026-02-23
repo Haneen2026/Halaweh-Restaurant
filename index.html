@@ -126,9 +126,13 @@
                         <label for="fullName" data-key="bookingFullNameLabel">Full Name</label>
                         <input type="text" id="fullName" name="fullName" required data-key-placeholder="bookingFullNamePlaceholder">
                     </div>
-                    <div class="form-group">
+                    <div class="form-group phone-input-group">
                         <label for="phoneNumber" data-key="bookingPhoneLabel">Phone Number</label>
-                        <input type="tel" id="phoneNumber" name="phoneNumber" required data-key-placeholder="bookingPhonePlaceholder">
+                        <div class="phone-input-wrapper">
+                            <span class="phone-prefix">009627</span>
+                            <input type="tel" id="phoneNumber" name="phoneNumber" maxlength="8" required data-key-placeholder="bookingPhonePlaceholder">
+                        </div>
+                        <div class="phone-error" id="phoneError"></div>
                     </div>
                 </div>
                 <div class="form-row">
@@ -261,9 +265,13 @@
                             <label for="modalFullName" data-key="bookingFullNameLabel">Full Name</label>
                             <input type="text" id="modalFullName" name="fullName" required data-key-placeholder="bookingFullNamePlaceholder">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group phone-input-group">
                             <label for="modalPhoneNumber" data-key="bookingPhoneLabel">Phone Number</label>
-                            <input type="tel" id="modalPhoneNumber" name="phoneNumber" required data-key-placeholder="bookingPhonePlaceholder">
+                            <div class="phone-input-wrapper">
+                                <span class="phone-prefix">009627</span>
+                                <input type="tel" id="modalPhoneNumber" name="phoneNumber" maxlength="8" required data-key-placeholder="bookingPhonePlaceholder">
+                            </div>
+                            <div class="phone-error" id="modalPhoneError"></div>
                         </div>
                     </div>
                     <div class="form-row">

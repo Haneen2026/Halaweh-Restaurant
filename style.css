@@ -1899,6 +1899,78 @@ html[dir="rtl"] .flatpickr-days {
     padding-right: 2.5rem;
 }
 
+/* Phone Input Styles */
+.phone-input-group {
+    position: relative;
+}
+
+.phone-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--bg-color);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.phone-input-wrapper:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(210, 105, 30, 0.1);
+}
+
+.phone-prefix {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    padding: 0.75rem 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border-right: 2px solid var(--border-color);
+    min-width: fit-content;
+    user-select: none;
+    pointer-events: none;
+}
+
+.phone-input-wrapper input {
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0.75rem 1rem !important;
+    font-size: 1rem;
+    font-family: inherit;
+    background: transparent !important;
+    color: var(--text-color);
+    outline: none;
+    flex: 1;
+}
+
+.phone-input-wrapper input::placeholder {
+    color: rgba(139, 69, 19, 0.5);
+}
+
+.phone-error {
+    color: #dc3545;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    font-weight: 500;
+    display: none;
+}
+
+.phone-error.show {
+    display: block;
+    animation: fadeInUp 0.3s ease;
+}
+
+/* RTL adjustments for phone input */
+html[dir="rtl"] .phone-prefix {
+    border-right: none;
+    border-left: 2px solid var(--border-color);
+}
+
+html[dir="rtl"] .phone-input-wrapper {
+    flex-direction: row-reverse;
+}
+
 body.dark-mode .form-group select {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23e0e0e0' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
 }

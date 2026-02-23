@@ -984,6 +984,9 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const languageManager = new LanguageManager();
         
+        // Initialize phone validation
+        initializePhoneValidation();
+        
         // Initialize booking form functionality after a short delay to ensure DOM is fully ready
         setTimeout(() => {
             initializeBookingForm();
@@ -996,6 +999,84 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Booking form functionality
 let bookingFormInitialized = false;
+
+function initializePhoneValidation() {
+    // Phone validation function
+    function validatePhoneInput(input, errorElement) {
+        const value = input.value.trim();
+        const currentLanguage = localStorage.getItem('language') || 'ar';
+        const currentContent = content[currentLanguage];
+        
+        // Clear previous error
+        errorElement.classList.remove('show');
+        
+        // Check if exactly 8 digits
+        if (value.length !== 8 || !/^\d{8}$/.test(value)) {
+            errorElement.textContent = currentContent.phoneValidationError;
+            errorElement.classList.add('show');
+            input.style.borderColor = '#dc3545';
+            return false;
+        }
+        
+        // Valid input
+        input.style.borderColor = '';
+        return true;
+    }
+    
+    // Main booking form phone validation
+    const phoneInput = document.getElementById('phoneNumber');
+    const phoneError = document.getElementById('phoneError');
+    
+    if (phoneInput && phoneError) {
+        // Real-time validation
+        phoneInput.addEventListener('input', () => {
+            // Only allow digits
+            phoneInput.value = phoneInput.value.replace(/[^0-9]/g, '');
+            
+            // Validate if user has entered something
+            if (phoneInput.value.length > 0) {
+                validatePhoneInput(phoneInput, phoneError);
+            } else {
+                phoneError.classList.remove('show');
+                phoneInput.style.borderColor = '';
+            }
+        });
+        
+        // Prevent non-numeric input
+        phoneInput.addEventListener('keypress', (e) => {
+            if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                e.preventDefault();
+            }
+        });
+    }
+    
+    // Modal form phone validation
+    const modalPhoneInput = document.getElementById('modalPhoneNumber');
+    const modalPhoneError = document.getElementById('modalPhoneError');
+    
+    if (modalPhoneInput && modalPhoneError) {
+        // Real-time validation
+        modalPhoneInput.addEventListener('input', () => {
+            // Only allow digits
+            modalPhoneInput.value = modalPhoneInput.value.replace(/[^0-9]/g, '');
+            
+            // Validate if user has entered something
+            if (modalPhoneInput.value.length > 0) {
+                validatePhoneInput(modalPhoneInput, modalPhoneError);
+            } else {
+                modalPhoneError.classList.remove('show');
+                modalPhoneInput.style.borderColor = '';
+            }
+        });
+        
+        // Prevent non-numeric input
+        modalPhoneInput.addEventListener('keypress', (e) => {
+            if (!/[0-9]/.test(e.key) && !['Backspace', 'Delete', 'Tab', 'Enter', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+                e.preventDefault();
+            }
+        });
+    }
+}
 
 function initializeBookingForm() {
     // Prevent duplicate initialization
@@ -1078,6 +1159,15 @@ function initializeBookingForm() {
                 return;
             }
             
+            // Validate phone number
+            const phoneInput = document.getElementById('phoneNumber');
+            const phoneError = document.getElementById('phoneError');
+            
+            if (!validatePhoneInput(phoneInput, phoneError)) {
+                phoneInput.focus();
+                return;
+            }
+            
             // Validate date before submission (Flatpickr already handles this, but double-check)
             const dateInput = document.getElementById('bookingDate');
             const selectedDate = dateInput.value;
@@ -1095,7 +1185,7 @@ function initializeBookingForm() {
             
             const formData = {
                 fullName: document.getElementById('fullName').value,
-                phoneNumber: document.getElementById('phoneNumber').value,
+                phoneNumber: '009627' + document.getElementById('phoneNumber').value,
                 numberOfGuests: parseInt(document.getElementById('numberOfGuests').value),
                 mealType: document.getElementById('mealType').value,
                 bookingDate: document.getElementById('bookingDate').value
@@ -1255,6 +1345,15 @@ function initializeBookingFormModal() {
                 return;
             }
             
+            // Validate phone number
+            const modalPhoneInput = document.getElementById('modalPhoneNumber');
+            const modalPhoneError = document.getElementById('modalPhoneError');
+            
+            if (!validatePhoneInput(modalPhoneInput, modalPhoneError)) {
+                modalPhoneInput.focus();
+                return;
+            }
+            
             const dateInput = document.getElementById('modalBookingDate');
             const selectedDate = dateInput.value;
             
@@ -1271,7 +1370,7 @@ function initializeBookingFormModal() {
             
             const formData = {
                 fullName: document.getElementById('modalFullName').value,
-                phoneNumber: document.getElementById('modalPhoneNumber').value,
+                phoneNumber: '009627' + document.getElementById('modalPhoneNumber').value,
                 numberOfGuests: parseInt(document.getElementById('modalNumberOfGuests').value),
                 mealType: document.getElementById('modalMealType').value,
                 bookingDate: document.getElementById('modalBookingDate').value
