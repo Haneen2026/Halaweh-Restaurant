@@ -1009,29 +1009,29 @@ document.addEventListener('DOMContentLoaded', () => {
 // Booking form functionality
 let bookingFormInitialized = false;
 
-function initializePhoneValidation() {
-    // Phone validation function
-    function validatePhoneInput(input, errorElement) {
-        const value = input.value.trim();
-        const currentLanguage = localStorage.getItem('language') || 'ar';
-        const currentContent = content[currentLanguage];
-        
-        // Clear previous error
-        errorElement.classList.remove('show');
-        
-        // Check if exactly 8 digits
-        if (value.length !== 8 || !/^\d{8}$/.test(value)) {
-            errorElement.textContent = currentContent.phoneValidationError;
-            errorElement.classList.add('show');
-            input.style.borderColor = '#dc3545';
-            return false;
-        }
-        
-        // Valid input
-        input.style.borderColor = '';
-        return true;
+// Global phone validation function
+function validatePhoneInput(input, errorElement) {
+    const value = input.value.trim();
+    const currentLanguage = localStorage.getItem('language') || 'ar';
+    const currentContent = content[currentLanguage];
+    
+    // Clear previous error
+    errorElement.classList.remove('show');
+    
+    // Check if exactly 8 digits
+    if (value.length !== 8 || !/^\d{8}$/.test(value)) {
+        errorElement.textContent = currentContent.phoneValidationError;
+        errorElement.classList.add('show');
+        input.style.borderColor = '#dc3545';
+        return false;
     }
     
+    // Valid input
+    input.style.borderColor = '';
+    return true;
+}
+
+function initializePhoneValidation() {
     // Main booking form phone validation
     const phoneInput = document.getElementById('phoneNumber');
     const phoneError = document.getElementById('phoneError');
