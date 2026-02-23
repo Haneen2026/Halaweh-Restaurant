@@ -842,23 +842,21 @@ class LanguageManager {
         const dateInput = document.getElementById('bookingDate');
         if (!dateInput || typeof flatpickr === 'undefined') return;
 
-        // Available dates: Jan 22, 23, 24, 29, 30, 31 and Feb 5, 6, 7, 12, 13, 14, 19, 20
-        const availableDates = [
-            '2026-01-22',
-            '2026-01-23',
-            '2026-01-24',
-            '2026-01-29',
-            '2026-01-30',
-            '2026-01-31',
-            '2026-02-05',
-            '2026-02-06',
-            '2026-02-07',
-            '2026-02-12',
-            '2026-02-13',
-            '2026-02-14',
-            '2026-02-19',
-            '2026-02-20'
-        ];
+        // Function to check if a date is selectable (Thursday, Friday, or Saturday in 2026 and not before today)
+        const isDateSelectable = (date) => {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Set to start of day for accurate comparison
+            
+            // Check if date is in 2026
+            if (date.getFullYear() !== 2026) return false;
+            
+            // Check if date is before today
+            if (date < today) return false;
+            
+            // Check if day is Thursday (4), Friday (5), or Saturday (6)
+            const dayOfWeek = date.getDay();
+            return dayOfWeek === 4 || dayOfWeek === 5 || dayOfWeek === 6;
+        };
 
         const isRTL = this.currentLanguage === 'ar';
         
@@ -870,9 +868,9 @@ class LanguageManager {
         // Initialize Flatpickr
         window.bookingDatePicker = flatpickr(dateInput, {
             dateFormat: 'Y-m-d',
-            enable: availableDates,
-            minDate: '2026-01-22',
-            maxDate: '2026-02-20',
+            enable: [isDateSelectable],
+            minDate: 'today',
+            maxDate: '2026-12-31',
             locale: isRTL ? {
                 firstDayOfWeek: 6,
                 weekdays: {
@@ -894,31 +892,31 @@ class LanguageManager {
         if (!window.bookingDatePicker) return;
         
         const isRTL = this.currentLanguage === 'ar';
-        const availableDates = [
-            '2026-01-22',
-            '2026-01-23',
-            '2026-01-24',
-            '2026-01-29',
-            '2026-01-30',
-            '2026-01-31',
-            '2026-02-05',
-            '2026-02-06',
-            '2026-02-07',
-            '2026-02-12',
-            '2026-02-13',
-            '2026-02-14',
-            '2026-02-19',
-            '2026-02-20'
-        ];
+        
+        // Function to check if a date is selectable (Thursday, Friday, or Saturday in 2026 and not before today)
+        const isDateSelectable = (date) => {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Set to start of day for accurate comparison
+            
+            // Check if date is in 2026
+            if (date.getFullYear() !== 2026) return false;
+            
+            // Check if date is before today
+            if (date < today) return false;
+            
+            // Check if day is Thursday (4), Friday (5), or Saturday (6)
+            const dayOfWeek = date.getDay();
+            return dayOfWeek === 4 || dayOfWeek === 5 || dayOfWeek === 6;
+        };
 
         // Re-initialize with new locale
         window.bookingDatePicker.destroy();
         const dateInput = document.getElementById('bookingDate');
         window.bookingDatePicker = flatpickr(dateInput, {
             dateFormat: 'Y-m-d',
-            enable: availableDates,
-            minDate: '2026-01-22',
-            maxDate: '2026-02-20',
+            enable: [isDateSelectable],
+            minDate: 'today',
+            maxDate: '2026-12-31',
             locale: isRTL ? {
                 firstDayOfWeek: 6,
                 weekdays: {
@@ -940,19 +938,30 @@ class LanguageManager {
         if (!window.bookingFormModalDatePicker) return;
         
         const isRTL = this.currentLanguage === 'ar';
-        const availableDates = [
-            '2026-01-22', '2026-01-23', '2026-01-24', '2026-01-29', '2026-01-30', '2026-01-31',
-            '2026-02-05', '2026-02-06', '2026-02-07', '2026-02-12', '2026-02-13', '2026-02-14',
-            '2026-02-19', '2026-02-20'
-        ];
+        
+        // Function to check if a date is selectable (Thursday, Friday, or Saturday in 2026 and not before today)
+        const isDateSelectable = (date) => {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0); // Set to start of day for accurate comparison
+            
+            // Check if date is in 2026
+            if (date.getFullYear() !== 2026) return false;
+            
+            // Check if date is before today
+            if (date < today) return false;
+            
+            // Check if day is Thursday (4), Friday (5), or Saturday (6)
+            const dayOfWeek = date.getDay();
+            return dayOfWeek === 4 || dayOfWeek === 5 || dayOfWeek === 6;
+        };
         
         window.bookingFormModalDatePicker.destroy();
         const dateInput = document.getElementById('modalBookingDate');
         window.bookingFormModalDatePicker = flatpickr(dateInput, {
             dateFormat: 'Y-m-d',
-            enable: availableDates,
-            minDate: '2026-01-22',
-            maxDate: '2026-02-20',
+            enable: [isDateSelectable],
+            minDate: 'today',
+            maxDate: '2026-12-31',
             locale: isRTL ? {
                 firstDayOfWeek: 6,
                 weekdays: {
@@ -1403,20 +1412,30 @@ function initializeModalDatePicker() {
     const dateInput = document.getElementById('modalBookingDate');
     if (!dateInput || typeof flatpickr === 'undefined') return;
     
-    const availableDates = [
-        '2026-01-22', '2026-01-23', '2026-01-24', '2026-01-29', '2026-01-30', '2026-01-31',
-        '2026-02-05', '2026-02-06', '2026-02-07', '2026-02-12', '2026-02-13', '2026-02-14',
-        '2026-02-19', '2026-02-20'
-    ];
+    // Function to check if a date is selectable (Thursday, Friday, or Saturday in 2026 and not before today)
+    const isDateSelectable = (date) => {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0); // Set to start of day for accurate comparison
+        
+        // Check if date is in 2026
+        if (date.getFullYear() !== 2026) return false;
+        
+        // Check if date is before today
+        if (date < today) return false;
+        
+        // Check if day is Thursday (4), Friday (5), or Saturday (6)
+        const dayOfWeek = date.getDay();
+        return dayOfWeek === 4 || dayOfWeek === 5 || dayOfWeek === 6;
+    };
     
     const currentLanguage = localStorage.getItem('language') || 'ar';
     const isRTL = currentLanguage === 'ar';
     
     window.bookingFormModalDatePicker = flatpickr(dateInput, {
         dateFormat: 'Y-m-d',
-        enable: availableDates,
-        minDate: '2026-01-22',
-        maxDate: '2026-02-20',
+        enable: [isDateSelectable],
+        minDate: 'today',
+        maxDate: '2026-12-31',
         locale: isRTL ? {
             firstDayOfWeek: 6,
             weekdays: {
