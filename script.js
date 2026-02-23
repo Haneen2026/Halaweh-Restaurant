@@ -271,20 +271,53 @@ class LanguageManager {
         if (!menuCategoriesContainer || !menuCarouselContainer) return;
 
         const menuCategories = content[this.currentLanguage].menuCategories;
+        const isSmallScreen = window.innerWidth <= 768;
 
-        // Create category buttons
+        // Clear existing content
         menuCategoriesContainer.innerHTML = '';
-        menuCategories.forEach(category => {
-            const categoryButton = document.createElement('div');
-            categoryButton.className = `menu-category ${category.isActive ? 'active' : ''}`;
-            categoryButton.dataset.categoryId = category.id;
 
-            categoryButton.innerHTML = `
-                <div class="menu-category-name">${category.name}</div>
-            `;
+        if (isSmallScreen) {
+            // Create dropdown for small screens
+            menuCategoriesContainer.className = 'menu-categories-dropdown';
+            
+            const dropdown = document.createElement('select');
+            dropdown.className = 'menu-category-dropdown';
+            dropdown.id = 'menuCategoryDropdown';
+            
+            // Add category options
+            menuCategories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category.id;
+                option.textContent = category.name;
+                option.selected = category.isActive;
+                dropdown.appendChild(option);
+            });
+            
+            menuCategoriesContainer.appendChild(dropdown);
+            
+            // Add change event listener
+            dropdown.addEventListener('change', (e) => {
+                this.setActiveCategory(e.target.value);
+            });
+        } else {
+            // Create horizontal category buttons for larger screens
+            menuCategoriesContainer.className = 'menu-categories';
+            
+            menuCategories.forEach(category => {
+                const categoryButton = document.createElement('div');
+                categoryButton.className = `menu-category ${category.isActive ? 'active' : ''}`;
+                categoryButton.dataset.categoryId = category.id;
 
-            menuCategoriesContainer.appendChild(categoryButton);
-        });
+                categoryButton.innerHTML = `
+                    <div class="menu-category-name">${category.name}</div>
+                `;
+
+                menuCategoriesContainer.appendChild(categoryButton);
+            });
+            
+            // Re-bind click events for horizontal buttons
+            this.bindMenuShowcaseEvents();
+        }
 
         // Create shared carousel with completed rows
         const activeCategory = menuCategories.find(cat => cat.isActive);
@@ -315,7 +348,7 @@ class LanguageManager {
             `;
         }
 
-        this.bindMenuShowcaseEvents();
+        this.bindCarouselNavigation();
         setTimeout(() => this.updateCarouselButtons(), 100);
     }
 
@@ -564,6 +597,8 @@ class LanguageManager {
             resizeTimeout = setTimeout(() => {
                 this.matchVideoHeight();
                 this.matchAboutImageHeight();
+                // Re-render menu showcase to handle responsive layout changes
+                this.populateMenuShowcase();
             }, 250);
         });
     }

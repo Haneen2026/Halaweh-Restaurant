@@ -2552,6 +2552,73 @@ body.dark-mode .flatpickr-day.next-month-day {
         left: 25px;
         border-width: 2px;
     }
+
+    /* Large Desktop Team Card Fixes - Prevent overlapping */
+    #teamCarouselContainer .menu-card.team-member-card {
+        min-height: 380px;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    #teamCarouselContainer .team-member-image {
+        height: 160px;
+        min-height: 160px;
+        max-height: 160px;
+        flex-shrink: 0;
+        flex-grow: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem;
+        overflow: hidden;
+        position: relative;
+    }
+
+    #teamCarouselContainer .team-member-photo {
+        width: 130px;
+        height: 130px;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        object-position: center top;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    #teamCarouselContainer .team-member-content {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 1.25rem 1.25rem 0.5rem;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    #teamCarouselContainer .team-member-name {
+        margin-bottom: 0.6rem;
+        line-height: 1.3;
+        flex-shrink: 0;
+    }
+
+    #teamCarouselContainer .team-member-role {
+        margin-bottom: 0.75rem;
+        flex-shrink: 0;
+    }
+
+    #teamCarouselContainer .team-member-bio {
+        margin: 0;
+        line-height: 1.5;
+        flex: 1 1 auto;
+        overflow: hidden;
+    }
+
+    #teamCarouselContainer .team-member-award {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        z-index: 10;
+    }
 }
 
 /* Responsive Design */
@@ -3206,11 +3273,13 @@ body.dark-mode .flatpickr-day.next-month-day {
 
 .team-image-container {
     position: relative;
-    height: 120px; /* Reduced from 160px to match 100px photo + padding */
+    height: auto;
+    min-height: 160px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1rem;
+    padding: 1rem 0;
 }
 
 /* Creative Team Member Cards - Following menu design with personality */
@@ -3223,21 +3292,25 @@ body.dark-mode .flatpickr-day.next-month-day {
     position: relative;
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
     border-radius: 50% 50% 0 0; /* Top rounded, bottom straight */
-    padding: 0.5rem; /* Reduced padding */
+    padding: 0.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    height: auto;
+    min-height: 120px;
 }
 
 .team-member-photo {
     width: 100px;
     height: 100px;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
     object-position: center top;
     border-radius: 50%;
     border: 4px solid white;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    flex-shrink: 0;
 }
 
 .team-member-card:hover .team-member-photo {
@@ -3262,30 +3335,32 @@ body.dark-mode .flatpickr-day.next-month-day {
 }
 
 .team-member-content {
-    padding: 1.5rem;
+    padding: 1.25rem 1.25rem 0.5rem;
     text-align: center;
     background: var(--card-background);
+    position: relative;
+    z-index: 1;
 }
 
 .team-member-name {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.6rem;
     color: var(--text-color);
     position: relative;
 }
 
 .team-member-role {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--primary-color);
     font-weight: 500;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .team-member-bio {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: var(--text-muted);
     line-height: 1.5;
     margin: 0;
@@ -3324,12 +3399,14 @@ body.warm-mode .team-image {
 }
 
 .team-info {
-    padding: 0 1rem 1.5rem;
+    padding: 0 1rem 1rem;
     text-align: center;
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    position: relative;
+    z-index: 1;
 }
 
 .team-name {
@@ -3610,14 +3687,14 @@ html[dir="rtl"] .team-info {
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        padding: 0.75rem 1rem;
+        padding: 1rem 1rem 0.5rem;
         order: 1;
         background: transparent;
     }
 
     /* Enhanced typography for mobile team cards */
     #teamCarouselContainer .team-member-name {
-        font-size: 1.15rem !important;
+        font-size: 1.2rem !important;
         font-weight: 700 !important;
         margin-bottom: 0.6rem !important;
         text-align: center;
@@ -3636,7 +3713,7 @@ html[dir="rtl"] .team-info {
     }
 
     #teamCarouselContainer .team-member-role {
-        font-size: 0.8rem !important;
+        font-size: 0.9rem !important;
         font-weight: 600 !important;
         margin-bottom: 0.75rem !important;
         padding: 0.35rem 1rem;
@@ -3650,8 +3727,8 @@ html[dir="rtl"] .team-info {
     }
 
     #teamCarouselContainer .team-member-bio {
-        font-size: 0.9rem !important;
-        line-height: 1.6 !important;
+        font-size: 0.95rem !important;
+        line-height: 1.5 !important;
         color: #7a6a55 !important;
         text-align: center;
         font-style: italic;
@@ -3840,9 +3917,134 @@ html[dir="rtl"] .team-info {
     }
 
     .menu-categories {
-        flex-direction: column;
-        gap: 0.75rem;
-        align-items: center;
+        position: relative;
+        z-index: 2;
+        display: none; /* Hide horizontal categories on mobile */
+    }
+
+    /* Mobile dropdown menu categories */
+    .menu-categories-dropdown {
+        position: relative;
+        z-index: 2;
+        margin-bottom: 1rem;
+        display: block; /* Show dropdown on mobile */
+    }
+
+    .menu-categories-dropdown select {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+        display: block;
+        padding: 1.2rem 2.5rem;
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #fff;
+        background: linear-gradient(135deg, #D2691E 0%, #CD853F 50%, #D2691E 100%);
+        border: 3px solid #8B4513;
+        border-radius: 15px;
+        box-shadow: 
+            0 8px 25px rgba(139, 69, 19, 0.4),
+            0 0 0 2px rgba(255, 215, 0, 0.3),
+            inset 0 2px 4px rgba(255, 255, 255, 0.2);
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        appearance: none;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .menu-categories-dropdown select::after {
+        content: '›';
+        position: absolute;
+        right: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 1.5rem;
+        color: #fff;
+        font-weight: 700;
+        pointer-events: none;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .menu-categories-dropdown select::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .menu-categories-dropdown select:hover {
+        background: linear-gradient(135deg, #CD853F 0%, #DAA520 50%, #CD853F 100%);
+        border-color: #8B4513;
+        transform: translateY(-2px);
+        box-shadow: 
+            0 12px 35px rgba(139, 69, 19, 0.5),
+            0 0 0 3px rgba(255, 215, 0, 0.4),
+            inset 0 3px 6px rgba(255, 255, 255, 0.3);
+    }
+
+    .menu-categories-dropdown select:hover::before {
+        left: 100%;
+    }
+
+    .menu-categories-dropdown select:focus {
+        outline: none;
+        border-color: #FFD700;
+        box-shadow: 
+            0 12px 35px rgba(139, 69, 19, 0.5),
+            0 0 0 4px rgba(255, 215, 0, 0.4),
+            inset 0 3px 6px rgba(255, 255, 255, 0.3);
+    }
+
+    .menu-categories-dropdown select option {
+        background: linear-gradient(135deg, #D2691E 0%, #8B4513 100%);
+        color: #fff;
+        padding: 1rem;
+        font-weight: 600;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Dark mode dropdown - enhanced */
+    body.dark-mode .menu-categories-dropdown select {
+        background: linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #000000 100%);
+        border-color: #333333;
+        box-shadow: 
+            0 8px 25px rgba(0, 0, 0, 0.9),
+            0 0 0 2px rgba(255, 255, 255, 0.1),
+            inset 0 2px 4px rgba(255, 255, 255, 0.05);
+    }
+
+    body.dark-mode .menu-categories-dropdown select::after {
+        color: #ffffff;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    }
+
+    body.dark-mode .menu-categories-dropdown select:hover {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+        border-color: #666666;
+        box-shadow: 
+            0 12px 35px rgba(0, 0, 0, 0.9),
+            0 0 0 3px rgba(102, 102, 102, 0.3),
+            inset 0 3px 6px rgba(255, 255, 255, 0.1);
+    }
+
+    body.dark-mode .menu-categories-dropdown select:focus {
+        border-color: #777777;
+        box-shadow: 
+            0 12px 35px rgba(0, 0, 0, 0.9),
+            0 0 0 4px rgba(255, 255, 255, 0.2),
+            inset 0 3px 6px rgba(255, 255, 255, 0.1);
+    }
+
+    body.dark-mode .menu-categories-dropdown select option {
+        background: #000000;
+        color: #ffffff;
+        font-weight: 600;
     }
 
     .menu-category {
