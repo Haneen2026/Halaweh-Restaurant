@@ -363,7 +363,7 @@ const content = {
     bookingConfirmationMessage: "شكراً لك! تم استلام طلب الحجز الخاص بك. سنتواصل معك قريباً.",
     bookingTotalPrice: "السعر الإجمالي",
     bookingPricePerGuest: "دينار للشخص الواحد",
-    bookingCloseButton: "ممتاز",
+    bookingCloseButton: "تم",
 
     // Contact Section
     contactTitle: "تواصل معنا",
@@ -774,7 +774,7 @@ const content = {
     bookingConfirmationMessage: "Thank you! Your booking request has been received. We will contact you soon.",
     bookingTotalPrice: "Total Price",
     bookingPricePerGuest: "JOD per person",
-    bookingCloseButton: "Great!",
+    bookingCloseButton: "Done",
 
     // Contact Section
     contactTitle: "Contact Us",
