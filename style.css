@@ -1177,6 +1177,211 @@ body.dark-mode .menu-category-name {
     border-top: 15px solid #CD853F;
 }
 
+/* Dark Mode Styles for Menu Showcase Section */
+body.dark-mode .menu-showcase {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #1a1a1a 100%);
+    position: relative;
+}
+
+body.dark-mode .menu-showcase::before {
+    background: 
+        radial-gradient(ellipse 800px 600px at 20% 30%, rgba(212, 105, 30, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 600px 400px at 80% 70%, rgba(139, 69, 19, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 400px 300px at 50% 20%, rgba(255, 215, 0, 0.08) 0%, transparent 50%);
+}
+
+body.dark-mode .menu-showcase-subtitle {
+    color: #CD853F;
+    opacity: 0.9;
+}
+
+body.dark-mode .menu-category-name {
+    background: rgba(42, 42, 42, 0.95);
+    color: var(--text-color);
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.1),
+        0 0 0 1px rgba(212, 105, 30, 0.3);
+}
+
+body.dark-mode .menu-category:hover .menu-category-name {
+    background: rgba(58, 58, 58, 0.95);
+    box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.15),
+        0 0 0 1px rgba(212, 105, 30, 0.4);
+    border-color: rgba(212, 105, 30, 0.5);
+}
+
+body.dark-mode .menu-category.active .menu-category-name {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2),
+        0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+body.dark-mode .menu-category.active .menu-category-name::after {
+    border-top-color: var(--secondary-color);
+}
+
+/* Dark + Warm Mode Styles for Menu Showcase */
+body.dark-mode.warm-mode .menu-showcase {
+    background: linear-gradient(135deg, #2F1B14 0%, #3a2a1e 50%, #2F1B14 100%);
+}
+
+body.dark-mode.warm-mode .menu-showcase::before {
+    background: 
+        radial-gradient(ellipse 800px 600px at 20% 30%, rgba(205, 92, 92, 0.18) 0%, transparent 50%),
+        radial-gradient(ellipse 600px 400px at 80% 70%, rgba(139, 69, 19, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 400px 300px at 50% 20%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+}
+
+body.dark-mode.warm-mode .menu-showcase-subtitle {
+    color: #DEB887;
+    opacity: 0.9;
+}
+
+body.dark-mode.warm-mode .menu-category-name {
+    background: rgba(58, 42, 30, 0.95);
+    color: var(--text-color);
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.1),
+        0 0 0 1px rgba(205, 133, 63, 0.4);
+}
+
+body.dark-mode.warm-mode .menu-category:hover .menu-category-name {
+    background: rgba(74, 54, 38, 0.95);
+    box-shadow: 
+        0 6px 20px rgba(0, 0, 0, 0.5),
+        inset 0 1px 2px rgba(255, 255, 255, 0.15),
+        0 0 0 1px rgba(205, 133, 63, 0.5);
+    border-color: rgba(205, 133, 63, 0.6);
+}
+
+body.dark-mode.warm-mode .menu-category.active .menu-category-name {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.5),
+        inset 0 1px 2px rgba(255, 255, 255, 0.25),
+        0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+body.dark-mode.warm-mode .menu-category.active .menu-category-name::after {
+    border-top-color: var(--secondary-color);
+}
+
+/* Dark Mode Styles for Menu Cards */
+body.dark-mode .menu-card {
+    background: linear-gradient(145deg, #2a2a2a 0%, #333333 100%);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.1),
+        0 0 0 1px rgba(212, 105, 30, 0.2);
+    border: 1px solid rgba(212, 105, 30, 0.25);
+}
+
+body.dark-mode .menu-card::before {
+    background: linear-gradient(90deg, transparent, rgba(212, 105, 30, 0.2), transparent);
+}
+
+body.dark-mode .menu-card:hover {
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.5),
+        inset 0 1px 2px rgba(255, 255, 255, 0.15),
+        0 0 0 1px rgba(212, 105, 30, 0.3);
+    border-color: rgba(212, 105, 30, 0.4);
+}
+
+body.dark-mode .menu-card-title {
+    color: var(--text-color);
+}
+
+body.dark-mode .menu-card-ingredients {
+    color: rgba(224, 224, 224, 0.8);
+}
+
+body.dark-mode .menu-card-ingredients li {
+    color: rgba(224, 224, 224, 0.8);
+}
+
+/* Dark + Warm Mode Styles for Menu Cards */
+body.dark-mode.warm-mode .menu-card {
+    background: linear-gradient(145deg, #3a2a1e 0%, #4a3a2e 100%);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.5),
+        inset 0 1px 2px rgba(255, 255, 255, 0.1),
+        0 0 0 1px rgba(205, 133, 63, 0.25);
+    border: 1px solid rgba(205, 133, 63, 0.3);
+}
+
+body.dark-mode.warm-mode .menu-card::before {
+    background: linear-gradient(90deg, transparent, rgba(205, 133, 63, 0.25), transparent);
+}
+
+body.dark-mode.warm-mode .menu-card:hover {
+    box-shadow: 
+        0 15px 35px rgba(0, 0, 0, 0.6),
+        inset 0 1px 2px rgba(255, 255, 255, 0.15),
+        0 0 0 1px rgba(205, 133, 63, 0.4);
+    border-color: rgba(205, 133, 63, 0.5);
+}
+
+body.dark-mode.warm-mode .menu-card-title {
+    color: var(--text-color);
+}
+
+body.dark-mode.warm-mode .menu-card-ingredients {
+    color: rgba(245, 222, 179, 0.8);
+}
+
+body.dark-mode.warm-mode .menu-card-ingredients li {
+    color: rgba(245, 222, 179, 0.8);
+}
+
+/* Dark Mode Styles for Carousel Navigation */
+body.dark-mode .menu-carousel-btn {
+    background: rgba(42, 42, 42, 0.9);
+    border: 2px solid rgba(212, 105, 30, 0.4);
+    color: #CD853F;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .menu-carousel-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .menu-carousel-btn:disabled {
+    background: rgba(42, 42, 42, 0.5);
+    border-color: rgba(212, 105, 30, 0.2);
+    color: rgba(224, 224, 224, 0.4);
+}
+
+/* Dark + Warm Mode Styles for Carousel Navigation */
+body.dark-mode.warm-mode .menu-carousel-btn {
+    background: rgba(58, 42, 30, 0.9);
+    border: 2px solid rgba(205, 133, 63, 0.4);
+    color: #DEB887;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode.warm-mode .menu-carousel-btn:hover {
+    background: var(--primary-color);
+    color: white;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode.warm-mode .menu-carousel-btn:disabled {
+    background: rgba(58, 42, 30, 0.5);
+    border-color: rgba(205, 133, 63, 0.2);
+    color: rgba(245, 222, 179, 0.4);
+}
+
 .menu-carousel {
     position: relative;
     overflow: hidden;
@@ -1986,6 +2191,10 @@ body.dark-mode.warm-mode .flatpickr-day:not(.flatpickr-disabled):not(.prev-month
 body.dark-mode.warm-mode .flatpickr-day.selected {
     background: var(--primary-color) !important;
     color: white !important;
+}
+
+body.dark-mode.warm-mode .flatpickr-day.selected::after {
+    border-top-color: var(--secondary-color);
 }
 
 /* Weekday headers in dark mode */
