@@ -1185,6 +1185,16 @@ body.dark-mode .menu-category-name {
     margin: 0 auto;
 }
 
+/* RTL carousel adjustments */
+html[dir="rtl"] .menu-carousel {
+    overflow: hidden; /* Ensure proper overflow handling in RTL */
+    direction: rtl; /* Set container direction to RTL */
+}
+
+html[dir="rtl"] .menu-carousel-track {
+    flex-direction: row; /* Ensure horizontal layout in RTL */
+}
+
 .menu-carousel-track {
     display: flex;
     gap: 2rem;
@@ -1192,11 +1202,6 @@ body.dark-mode .menu-category-name {
     padding: 0;
     width: fit-content;
     margin: 0 auto;
-}
-
-/* RTL carousel adjustments */
-html[dir="rtl"] .menu-carousel-track {
-    direction: ltr; /* Keep track LTR for proper transform calculations */
 }
 
 .menu-card {
@@ -1421,6 +1426,17 @@ body.warm-mode .menu-card-ingredients li {
 /* RTL carousel button adjustments */
 html[dir="rtl"] .menu-carousel-nav {
     direction: rtl;
+}
+
+/* Position arrows outside the carousel - RTL adjustments */
+html[dir="rtl"] .team-carousel-nav .prev-btn {
+    margin-right: -25px;
+    margin-left: 0;
+}
+
+html[dir="rtl"] .team-carousel-nav .next-btn {
+    margin-left: -25px;
+    margin-right: 0;
 }
 
 /* 🎨 Creative Team Member Adaptations - Inspired by Menu Design */

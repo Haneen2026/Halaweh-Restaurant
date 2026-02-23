@@ -224,7 +224,7 @@ class LanguageManager {
         }
     }
 
-    // Function to fill the last row by repeating items if needed
+    // Function to fill the last row by repeating items if needed (both languages)
     getCompletedDishesArray(dishes) {
         const cardsPerRow = 3; // Show 3 cards per row
         const remainder = dishes.length % cardsPerRow;
@@ -244,7 +244,7 @@ class LanguageManager {
         return completedArray;
     }
 
-    // Function to fill the last row by repeating team members if needed
+    // Function to fill the last row by repeating team members if needed (both languages)
     getCompletedTeamMembersArray(members) {
         const cardsPerRow = 3; // Show 3 cards per row
         const remainder = members.length % cardsPerRow;
@@ -362,7 +362,12 @@ class LanguageManager {
             // Detect if this button belongs to team carousel
             const isTeamCarousel = btn.closest('.team-carousel-container') !== null || 
                                    btn.closest('.team-carousel-nav') !== null;
-            this.navigateCarousel(isNext, isTeamCarousel);
+            
+            if (isTeamCarousel) {
+                this.navigateTeamCarousel(isNext ? 'next' : 'prev');
+            } else {
+                this.navigateCarousel(isNext, false);
+            }
         };
         
         // Use event delegation on document
@@ -472,17 +477,21 @@ class LanguageManager {
         let currentPosition = 0;
         if (track.style.transform) {
             const transformValue = parseFloat(track.style.transform.match(/translateX\(([^)]+)\)/)[1]);
+            // For RTL, the transform value is positive, for LTR it's negative
             currentPosition = Math.abs(transformValue) / scrollAmount;
         }
 
+        // Calculate new position
+        let newPosition;
         if (isNext) {
             const maxPosition = Math.ceil(cards.length / cardsToShow) - 1;
-            currentPosition = Math.min(currentPosition + 1, maxPosition);
+            newPosition = Math.min(currentPosition + 1, maxPosition);
         } else {
-            currentPosition = Math.max(currentPosition - 1, 0);
+            newPosition = Math.max(currentPosition - 1, 0);
         }
 
-        const translateX = isRTL ? (currentPosition * scrollAmount) : -(currentPosition * scrollAmount);
+        // Apply transform based on direction
+        const translateX = isRTL ? (newPosition * scrollAmount) : -(newPosition * scrollAmount);
         track.style.transform = `translateX(${translateX}px)`;
 
         // Update button states
@@ -490,15 +499,15 @@ class LanguageManager {
             const teamPrevBtn = document.getElementById('teamPrevBtn');
             const teamNextBtn = document.getElementById('teamNextBtn');
 
-            if (teamPrevBtn) teamPrevBtn.disabled = currentPosition <= 0;
-            if (teamNextBtn) teamNextBtn.disabled = currentPosition >= Math.ceil(cards.length / cardsToShow) - 1;
+            if (teamPrevBtn) teamPrevBtn.disabled = newPosition <= 0;
+            if (teamNextBtn) teamNextBtn.disabled = newPosition >= Math.ceil(cards.length / cardsToShow) - 1;
         } else {
             const carouselContainer = track.closest('.menu-carousel-container');
             const prevBtn = carouselContainer ? carouselContainer.querySelector('.prev-btn') : document.querySelector('.prev-btn');
             const nextBtn = carouselContainer ? carouselContainer.querySelector('.next-btn') : document.querySelector('.next-btn');
 
-            if (prevBtn) prevBtn.disabled = currentPosition <= 0;
-            if (nextBtn) nextBtn.disabled = currentPosition >= Math.ceil(cards.length / cardsToShow) - 1;
+            if (prevBtn) prevBtn.disabled = newPosition <= 0;
+            if (nextBtn) nextBtn.disabled = newPosition >= Math.ceil(cards.length / cardsToShow) - 1;
         }
     }
 
@@ -711,8 +720,8 @@ class LanguageManager {
     }
 
     navigateTeamCarousel(direction) {
-        const track = document.getElementById('teamCarouselTrack');
-        const cards = track ? track.querySelectorAll('.team-card') : [];
+        const track = document.querySelector('.menu-carousel-track[data-category="team"]');
+        const cards = track ? track.querySelectorAll('.menu-card') : [];
         const isRTL = document.documentElement.getAttribute('dir') === 'rtl';
 
         if (!track || cards.length === 0) return;
@@ -730,6 +739,52 @@ class LanguageManager {
         const cardWidth = cards[0].offsetWidth + (screenWidth <= 768 ? 0 : 16); // Remove gap on mobile
         const scrollAmount = cardWidth * cardsToShow;
 
+        // Get current position
+        let currentPosition = 0;
+        if (track.style.transform) {
+            const transformValue = parseFloat(track.style.transform.match(/translateX\(([^)]+)\)/)[1]);
+            // For RTL, transform value is positive, for LTR it's negative
+            currentPosition = Math.abs(transformValue) / scrollAmount;
+        }
+
+        // Calculate new position
+        let newPosition;
+        if (direction === 'next') {
+            const maxPosition = Math.ceil(cards.length / cardsToShow) - 1;
+            newPosition = Math.min(currentPosition + 1, maxPosition);
+        } else {
+            newPosition = Math.max(currentPosition - 1, 0);
+        }
+
+        // Apply transform based on direction
+        const translateX = isRTL ? (newPosition * scrollAmount) : -(newPosition * scrollAmount);
+        track.style.transform = `translateX(${translateX}px)`;
+
+        this.updateTeamCarouselButtons();
+    }
+
+    updateCarouselButtons() {
+        const track = document.querySelector('.menu-carousel-track:not([data-category="team"])');
+        const cards = track ? track.querySelectorAll('.menu-card') : [];
+        const carouselContainer = document.querySelector('.menu-carousel-container');
+        const prevBtn = carouselContainer ? carouselContainer.querySelector('.prev-btn') : document.querySelector('.prev-btn');
+        const nextBtn = carouselContainer ? carouselContainer.querySelector('.next-btn') : document.querySelector('.next-btn');
+
+        if (!track || !cards.length || !prevBtn || !nextBtn) return;
+
+        // Determine cards to show based on screen width
+        const screenWidth = window.innerWidth;
+        let cardsToShow = 3; // Default for desktop
+        
+        if (screenWidth <= 1024) {
+            cardsToShow = 1; // Tablet and mobile show 1 card
+        } else if (screenWidth <= 1400) {
+            cardsToShow = 2; // Medium desktop show 2 cards
+        }
+
+        const cardWidth = cards[0].offsetWidth + (screenWidth <= 768 ? 0 : 16);
+        const scrollAmount = cardWidth * cardsToShow;
+
         let currentPosition = 0;
         if (track.style.transform) {
             const transformValue = parseFloat(track.style.transform.match(/translateX\(([^)]+)\)/)[1]);
@@ -738,21 +793,13 @@ class LanguageManager {
 
         const maxPosition = Math.ceil(cards.length / cardsToShow) - 1;
 
-        if (direction === 'next') {
-            currentPosition = Math.min(currentPosition + 1, maxPosition);
-        } else {
-            currentPosition = Math.max(currentPosition - 1, 0);
-        }
-
-        const translateX = isRTL ? currentPosition * scrollAmount : -currentPosition * scrollAmount;
-        track.style.transform = `translateX(${translateX}px)`;
-
-        this.updateTeamCarouselButtons();
+        prevBtn.disabled = currentPosition <= 0;
+        nextBtn.disabled = currentPosition >= maxPosition;
     }
 
     updateTeamCarouselButtons() {
-        const track = document.getElementById('teamCarouselTrack');
-        const cards = track ? track.querySelectorAll('.team-card') : [];
+        const track = document.querySelector('.menu-carousel-track[data-category="team"]');
+        const cards = track ? track.querySelectorAll('.menu-card') : [];
         const teamPrevBtn = document.getElementById('teamPrevBtn');
         const teamNextBtn = document.getElementById('teamNextBtn');
 
