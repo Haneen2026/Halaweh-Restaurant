@@ -1808,6 +1808,39 @@ html[dir="rtl"] .team-carousel-nav .next-btn {
     background: var(--card-bg);
 }
 
+/* Ensure solid background for all calendar components */
+.flatpickr-calendar .flatpickr-month,
+.flatpickr-calendar .flatpickr-weekdays,
+.flatpickr-calendar .flatpickr-days,
+.flatpickr-calendar .flatpickr-innerContainer {
+    background: var(--card-bg);
+}
+
+/* Calendar header background */
+.flatpickr-calendar .flatpickr-month {
+    background: var(--card-bg);
+    border-radius: 15px 15px 0 0;
+}
+
+/* Weekdays background */
+.flatpickr-calendar .flatpickr-weekdays {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Days container background */
+.flatpickr-calendar .flatpickr-days {
+    background: var(--card-bg);
+    border-radius: 0 0 15px 15px;
+}
+
+/* Time picker background (if used) */
+.flatpickr-calendar .flatpickr-time {
+    background: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    border-radius: 0 0 15px 15px;
+}
+
 .flatpickr-day {
     border-radius: 8px;
     transition: all 0.2s ease;
@@ -1856,6 +1889,123 @@ html[dir="rtl"] .team-carousel-nav .next-btn {
 
 .flatpickr-day:not(.flatpickr-disabled):not(.prev-month-day):not(.next-month-day).selected::before {
     display: none;
+}
+
+/* Dark Mode Flatpickr Improvements */
+body.dark-mode .flatpickr-calendar {
+    background: var(--card-bg) !important;
+    border-color: var(--border-color);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+body.dark-mode .flatpickr-calendar .flatpickr-month,
+body.dark-mode .flatpickr-calendar .flatpickr-weekdays,
+body.dark-mode .flatpickr-calendar .flatpickr-days,
+body.dark-mode .flatpickr-calendar .flatpickr-innerContainer,
+body.dark-mode .flatpickr-calendar .flatpickr-time {
+    background: var(--card-bg) !important;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+body.dark-mode .flatpickr-day.flatpickr-disabled,
+body.dark-mode .flatpickr-day.prev-month-day,
+body.dark-mode .flatpickr-day.next-month-day {
+    color: rgba(224, 224, 224, 0.3) !important;
+}
+
+body.dark-mode .flatpickr-day:not(.flatpickr-disabled):not(.prev-month-day):not(.next-month-day) {
+    color: var(--text-color) !important;
+}
+
+body.dark-mode .flatpickr-day:not(.flatpickr-disabled):not(.prev-month-day):not(.next-month-day):hover {
+    background: rgba(210, 105, 30, 0.2);
+}
+
+body.dark-mode .flatpickr-day.selected {
+    background: #D2691E !important;
+    color: white !important;
+}
+
+/* Warm Mode Flatpickr Improvements */
+body.warm-mode .flatpickr-calendar {
+    background: var(--card-bg) !important;
+}
+
+body.warm-mode .flatpickr-calendar .flatpickr-month,
+body.warm-mode .flatpickr-calendar .flatpickr-weekdays,
+body.warm-mode .flatpickr-calendar .flatpickr-days,
+body.warm-mode .flatpickr-calendar .flatpickr-innerContainer,
+body.warm-mode .flatpickr-calendar .flatpickr-time {
+    background: var(--card-bg) !important;
+}
+
+body.warm-mode .flatpickr-day:not(.flatpickr-disabled):not(.prev-month-day):not(.next-month-day)::before {
+    border-color: var(--primary-color);
+}
+
+body.warm-mode .flatpickr-day:not(.flatpickr-disabled):not(.prev-month-day):not(.next-month-day):hover {
+    background: rgba(184, 134, 11, 0.1);
+    border-color: var(--primary-color);
+}
+
+body.warm-mode .flatpickr-day.selected {
+    background: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* Dark + Warm Mode Flatpickr Improvements */
+body.dark-mode.warm-mode .flatpickr-calendar {
+    background: var(--card-bg) !important;
+    border-color: var(--border-color);
+}
+
+body.dark-mode.warm-mode .flatpickr-calendar .flatpickr-month,
+body.dark-mode.warm-mode .flatpickr-calendar .flatpickr-weekdays,
+body.dark-mode.warm-mode .flatpickr-calendar .flatpickr-days,
+body.dark-mode.warm-mode .flatpickr-calendar .flatpickr-innerContainer,
+body.dark-mode.warm-mode .flatpickr-calendar .flatpickr-time {
+    background: var(--card-bg) !important;
+}
+
+body.dark-mode.warm-mode .flatpickr-day.flatpickr-disabled,
+body.dark-mode.warm-mode .flatpickr-day.prev-month-day,
+body.dark-mode.warm-mode .flatpickr-day.next-month-day {
+    color: rgba(245, 222, 179, 0.3) !important;
+}
+
+body.dark-mode.warm-mode .flatpickr-day:not(.flatpickr-disabled):not(.prev-month-day):not(.next-month-day)::before {
+    border-color: var(--primary-color);
+}
+
+body.dark-mode.warm-mode .flatpickr-day:not(.flatpickr-disabled):not(.prev-month-day):not(.next-month-day):hover {
+    background: rgba(205, 92, 92, 0.2);
+}
+
+body.dark-mode.warm-mode .flatpickr-day.selected {
+    background: var(--primary-color) !important;
+    color: white !important;
+}
+
+/* Weekday headers in dark mode */
+body.dark-mode .flatpickr-weekday {
+    color: var(--text-color) !important;
+}
+
+body.dark-mode.warm-mode .flatpickr-weekday {
+    color: var(--text-color) !important;
+}
+
+/* Month and year navigation in dark mode */
+body.dark-mode .flatpickr-month,
+body.dark-mode .flatpickr-current-month {
+    color: var(--text-color) !important;
+}
+
+body.dark-mode.warm-mode .flatpickr-month,
+body.dark-mode.warm-mode .flatpickr-current-month {
+    color: var(--text-color) !important;
 }
 
 /* RTL Support for Flatpickr */
