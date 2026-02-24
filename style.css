@@ -3926,16 +3926,16 @@ html[dir="rtl"] .team-info {
     .menu-categories-dropdown {
         position: relative;
         z-index: 2;
-        margin-bottom: 1rem;
+        margin: 0 auto 1rem;
+        width: 100%;
+        max-width: 320px;
         display: block; /* Show dropdown on mobile */
     }
 
     .menu-categories-dropdown select {
         width: 100%;
-        max-width: 320px;
-        margin: 0 auto;
         display: block;
-        padding: 1.2rem 2.5rem;
+        padding: 1.2rem 3.5rem 1.2rem 1.5rem;
         font-size: 1.15rem;
         font-weight: 700;
         color: #fff;
@@ -3954,17 +3954,18 @@ html[dir="rtl"] .team-info {
         overflow: hidden;
     }
 
-    .menu-categories-dropdown select::after {
-        content: '›';
+    .menu-categories-dropdown::after {
+        content: '▼';
         position: absolute;
         right: 1.5rem;
         top: 50%;
         transform: translateY(-50%);
-        font-size: 1.5rem;
+        font-size: 0.8rem;
         color: #fff;
         font-weight: 700;
         pointer-events: none;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        z-index: 10;
     }
 
     .menu-categories-dropdown select::before {
